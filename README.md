@@ -78,6 +78,29 @@ Záznam každého běhu nese revizi článku, model orákula **i revizi jádra**
 (`mereni/<datum>-<sha>.json`) — bez té třetí vypadá změna jádra jako
 nestabilní měření.
 
+## Historický korpus conBondu2 (krok 4)
+
+```bash
+python cb-korpus.py --vet 40 --dvakrat --json mereni/korpus-2026-08-15.json
+```
+
+Korpus se klonuje do `data/` (mimo git, CC BY‑SA) a v záznamu je jeho
+**revize** — je zmražený, takže na rozdíl od Wikipedie se měřicí nula
+mezi běhy nepohne. 22 dokumentů, ke kterým existuje ruční zlatá sada,
+836 vět:
+
+```
+PTÁ SE 656 · NEPŘEČTENO 149 · ZAPSÁNO 26 · CHYBA 5 · ODMÍTNUTO 0
+
+ručně psané soubory   4 dok ·  74 vět · ZAPSÁNO 24 (32 %)   · NEPŘEČTENO   0
+encyklopedické články 18 dok · 762 vět · ZAPSÁNO  2 (0,3 %) · NEPŘEČTENO 149
+```
+
+Dva běhy nad touž revizí korpusu i jádra vrátily **shodné počty ve všech
+vrstvách**. Zlatá sada projde celá (135 položek včetně 9 `unsure`
+a 2 `clarify`) a končí zatím na `U` — báze je prázdná, takže je to
+měřicí nula, ne skóre.
+
 ## Kde co je
 
 | soubor | co v něm je |
@@ -87,6 +110,8 @@ nestabilní měření.
 | `MAPOVANI.md` | návrh mapování starého měření na conBond4 (k revizi) |
 | `nalezy/` | spustitelné reprodukce nálezů |
 | `mereni/` | záznamy běhů |
+| `cb-wiki.py` | měření nad živou Wikipedií (rozšíření) |
+| `cb-korpus.py` | měření nad zmraženým korpusem conBondu2 (základ) |
 
 ## Co tu vědomě není
 

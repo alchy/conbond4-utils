@@ -23,6 +23,140 @@ Reprodukovat ho podle `d6782cb` nejde a záznam to přiznává příznakem
 
 ---
 
+## N‑5 · Vymyšlená věta a encyklopedická próza jsou dva různé světy — s čísly
+
+Krok 4, běh nad **historickým korpusem conBondu2** (`cb-korpus.py`,
+záznam `mereni/korpus-2026-08-15.json`):
+
+| co | hodnota |
+|---|---|
+| korpus | `github.com/alchy/conBond2@418d7f7` |
+| jádro | `f681902 2026-08-15 14:21` (+dirty:d40d977d) |
+| dokumentů | 22 (ke kterým existuje ruční zlatá sada) |
+| vět | 836, strop 40 na dokument · neměřeno 3045 řádků nad stropem |
+| stavy | `PTÁ SE 656 · NEPŘEČTENO 149 · ZAPSÁNO 26 · CHYBA 5 · ODMÍTNUTO 0` |
+| determinismus | dva běhy nad touž revizí: **shoda ve stavech i ve všech vrstvách** |
+
+**Poprvé se něco zapsalo — a je vidět kde.** Rozdíl mezi ručně psanými
+soubory conBondu2 a staženými články není nuance, je to řád:
+
+| skupina | dokumentů | vět | ZAPSÁNO | PTÁ SE | NEPŘEČTENO | CHYBA |
+|---|---|---|---|---|---|---|
+| ručně psané (`rodina_novákovi`, `poznámky_domácnost`, `příroda_česká`, `fyzika_gravitace`) | 4 | 74 | **24 (32 %)** | 50 | 0 | 0 |
+| encyklopedické články | 18 | 762 | **2 (0,3 %)** | 606 | 149 | 5 |
+
+Tvrzení z README *„vymyšlené věty a encyklopedická próza jsou dva různé
+světy"* tím přestává být dojem. A protože se v obou skupinách měřilo
+**touž cestou a týmž stropem**, není to výběrem.
+
+### Tvar vstupu vysvětlí dvě třetiny „nepřečteného"
+
+Vrstva `tvar` (označit, nemazat — podmínky Reviewera splněny: původní
+řádek je v záznamu, pravidlo je obecné, nic nezmizelo ze jmenovatele):
+
+```
+tvar          ZAPSÁNO   PTÁ SE   NEPŘEČTENO   CHYBA   celkem
+věta               26      576           50       0      652
+bez slovesa         0       50           48       5      103
+nadpis              0       13           48       0       61
+položka             0       15            2       0       17
+popiska             0        2            1       0        3
+```
+
+Ze 149 `NEPŘEČTENO` je **jen 50 skutečných vět**; zbylých 99 jsou nadpisy,
+odrážky a fragmenty bez slovesa. Bez téhle osy by report tvrdil, že
+systém nepřečte 17,8 % vstupu, zatímco na větách je to **6,0 %** — a ten
+rozdíl není zpřesnění čísla, je to jiný nález. Zbylých 50 se rozpadá na
+`rozbor` 17 · `kolize_rolí` 16 · `role_nenalezena` 12 · `morfologie` 5.
+
+### Zlatá sada: 135 položek, a co z toho plyne
+
+Celá, včetně 9 `unsure` a 2 `clarify`. Výsledek je jednotný: **všech 135
+otázek skončí `U`**.
+
+```
+answer   111  →  U        splněno   0 z 111
+unsure    13  →  U        splněno  13 z 13
+clarify    2  →  U        splněno   2 z 2
+bez režimu 9  →  U
+```
+
+**A tady je past, na kterou upozorňuju sám na sebe:** `unsure 13 z 13`
+a `clarify 2 z 2` vypadá jako úspěch a **není to úspěch**. Báze je
+prázdná, takže `U` vyjde na cokoli — systém neprošel proto, že by poznal
+svou mez, ale proto, že nezná nic. Dokud se nezačne zapisovat, je tenhle
+řádek **měřicí nula, ne skóre**, a kdo by ho citoval jako „mlčení
+funguje", tvrdí víc, než záznam ukazuje.
+
+---
+
+## N‑6 · Rozbor rozuměl × špatné čtení × chybí znalost — jde je rozeznat
+
+Reviewerova podmínka: z reportu musí jít poznat, o kterou ze tří vad jde.
+`nalezy/cteni_vs_inference.py` to počítá **ze záznamu, bez nového běhu** —
+porovná roli ve čtení s tím, jak týž token označil rozbor:
+
+```
+jádro nedotáhlo            644   77,0 %
+nepřečteno                 149   17,8 %
+zapsáno                     26    3,1 %
+kandidát na špatné čtení    12    1,4 %
+nerozhodnuto                 5    0,6 %
+```
+
+Ověřený příklad špatného čtení — role jsou prohozené a je to vidět
+z rozboru, ne z dojmu:
+
+```
+Antarktidu spravuje přibližně 30 zemí, …
+
+  čtení:  spravovat(co: země, kdo: antarktida)
+  rozbor: Antarktidu/PROPN/obj→2   zemí/NOUN/nsubj→2
+```
+
+Proti tomu „jádro nedotáhlo" vypadá takhle — čtení s rozborem **sedí**
+a uvázlo se až o patro výš:
+
+```
+Celý život pracoval jako učitel dějepisu na gymnáziu, …
+
+  čtení:  pracovat(Acc: celý_život, kde: gymnázium, kdo: pracovat)
+  uvázlo: role + kvantifikace
+```
+
+**Kategorie se jmenuje „kandidát" schválně.** Párování jde přes tvar
+a lemma a čeština je ohýbá („∀jezdecký_kůň" se s tokenem „koně"
+nespáruje), takže z dvanácti kandidátů obstály ruční kontrolou **čtyři**;
+zbytek byla vada párování, ne špatné čtení. Číslo, které si nikdo
+neprošel, by tvrdilo víc, než ukazuje — proto je v skriptu `--vse`, kde
+jdou všechny projít.
+
+Za zmínku stojí, co ty čtyři ověřené případy spojuje: dva z nich mají
+v roli **zkratku** („kdo: mj.", „co: mj."). Je to malá třída, ale ostrá.
+
+---
+
+## N‑7 · Dělič vět a rozbor se u pěti vět neshodly
+
+`CHYBA 5` z běhu nad korpusem není výpadek služby. Je to tohle:
+
+```
+text 'Inž. Fabry– generální technický ředitel R.U.R.,' nese 2 vět,
+ale rozbor umí jednu
+```
+
+Segmentace (`oracle.segment`) vrátí jako jednu větu text, který `parse`
+téhož orákula rozdělí na dvě. Obojí dělá **táž služba a týž model**, což
+je přesně to nastavení, které tuhle situaci vylučovat mělo. Spouštěčem
+jsou zkratky s tečkou (`Inž.`, `R.U.R.`, `mj.`) a uvozovky nalepené na
+slovo.
+
+Je to hlášené hlasitě a nic se nezapisuje, takže to není tichá ztráta —
+ale je to nález na hranici mezi parserem a jádrem a stojí za rozhodnutí,
+na které straně se má řešit. Souvisí to se zkratkami v rolích z N‑6.
+
+---
+
 ## N‑1 · Patro shody čísla zahazuje gramatické české věty — BLOCKER
 
 **Reprodukce:** `python nalezy/shoda_cisla.py --korpus`

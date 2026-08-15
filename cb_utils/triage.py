@@ -64,6 +64,23 @@ class Result:
     #: opravuje; druh říká CO — a bez něj splyne dvacet vět shozených
     #: dvojznačným rysem s devíti, kde shoda opravdu neplatí.
     kind: str = ""
+    #: Stopa kaskády: **které patro co zahodilo**, doslova. Bez ní se
+    #: z reportu nedá zjistit, proč věta skončila, jak skončila, jinak
+    #: než zopakováním celého běhu — a to je přesně to, co report má
+    #: ušetřit.
+    trace: tuple[str, ...] = ()
+    #: Otázka, kterou jádro položilo. Prázdná neznamená „nemá otázku",
+    #: znamená „neptalo se".
+    question: str = ""
+    #: `QueryStatus` u tázací věty — `A` / `N` / `U` / `CONFLICT`.
+    #: Prázdné u oznamovací: **stav dotazu a stav čtení jsou dvě různé
+    #: osy** a slít je do jednoho čísla by znamenalo ztratit obojí.
+    status: str = ""
+    #: Rozbor v podobě `tvar/UPOS/deprel`, aby šlo z reportu porovnat
+    #: čtení s větou, aniž se rozbor pouští znovu. Tady se pozná
+    #: „rozbor vyrobil špatné čtení" od „rozbor rozuměl, jádro to
+    #: neumělo použít".
+    parse: tuple[str, ...] = ()
 
     def render(self) -> str:
         gap = f" ({self.open_questions}×?)" if self.open_questions else ""
@@ -81,6 +98,26 @@ def _first(lines: tuple[str, ...], *prefixes: str) -> str:
         if stripped.startswith(prefixes):
             return stripped
     return ""
+
+
+def parse_of(sentence: str, oracle: UDPipeOracle) -> tuple[str, ...]:
+    """Rozbor jako `tvar/UPOS/deprel→hlava`, bez rysů.
+
+    Do záznamu patří proto, že bez něj nejde z reportu poznat **špatné
+    čtení** od chybějící schopnosti: predikace „kdo: inflace" je vidět
+    jako vadná teprve vedle rozboru, kde `inflace` visí jako `obj`.
+    Rysy se sem nedávají — je jich moc a to podstatné z nich nese stopa
+    kaskády, která je cituje sama.
+    """
+    try:
+        utterance = oracle.parse(sentence)
+    except OracleError:
+        return ()
+    if not utterance.readings:
+        return ()
+    return tuple(
+        f"{t.form}/{t.upos}/{t.deprel}→{t.head}" for t in utterance.readings[0].tokens
+    )
 
 
 def triage(sentence: str, oracle: UDPipeOracle) -> Result:
@@ -110,16 +147,23 @@ def triage(sentence: str, oracle: UDPipeOracle) -> Result:
         refused=bool(_first(lines, "✗")),
         error="",
     )
+    common = {
+        "trace": tuple(result.trace),
+        "question": question,
+        "status": result.status.value if result.status is not None else "",
+        "parse": parse_of(sentence, oracle),
+    }
     if result.statement_id:
-        return Result(sentence, Verdict.WRITTEN, reading, "", 0, (), "", "")
+        return Result(sentence, Verdict.WRITTEN, reading, "", 0, (), "", "",
+                      **common)
     if _first(lines, "✗"):
         return Result(sentence, Verdict.REFUSED, reading, d.reason,
-                      open_questions, d.layers, d.sole, d.kind)
+                      open_questions, d.layers, d.sole, d.kind, **common)
     if result.predication is None:
         return Result(sentence, Verdict.UNREAD, reading, d.reason,
-                      open_questions, d.layers, d.sole, d.kind)
+                      open_questions, d.layers, d.sole, d.kind, **common)
     return Result(sentence, Verdict.ASKS, reading, d.reason,
-                  open_questions, d.layers, d.sole, d.kind)
+                  open_questions, d.layers, d.sole, d.kind, **common)
 
 
 def sentences_of(text: str, oracle: UDPipeOracle) -> tuple[str, ...]:
