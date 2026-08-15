@@ -1,0 +1,107 @@
+"""Co si conBond4 s větou počne — MĚŘENO, ne odhadnuto.
+
+Každá věta jde přes `Session.utter` ve VLASTNÍM sezení, takže se výsledky
+neovlivňují navzájem. Vrací se pět stavů, které se nesmí slít:
+
+| stav | znamená |
+|---|---|
+| `ZAPSÁNO` | přečteno a uloženo do báze — kandidát na doménu |
+| `PTÁ SE` | přečteno neúplně, systém se ptá — taky kandidát, jen s tahem |
+| `NEPŘEČTENO` | 0 čtení; patro řeklo proč |
+| `ODMÍTNUTO` | čtení bylo, ale zápis se odmítl (kruh, ireflexivita…) |
+| `CHYBA` | parser nebo služba selhaly |
+
+**Nic se nevybírá za člověka.** Skript netvrdí, která věta „je dobrá do
+sady" — doména je rozhodnutí, ne výstup filtru. Tohle jen říká, kde
+dnes systém stojí, a to je materiál k rozhodnutí.
+"""
+
+from __future__ import annotations
+
+import sys
+from dataclasses import dataclass
+from enum import Enum
+from pathlib import Path
+
+CONBOND4 = Path(__file__).resolve().parent.parent.parent / "conbond4"
+if str(CONBOND4) not in sys.path:  # pragma: no cover — cesta k jádru
+    sys.path.insert(0, str(CONBOND4))
+
+from core_semantics.oracle import OracleError, SegmentationError, UDPipeOracle
+from core_semantics.session import Session
+import core_semantics.tests.golden as golden
+
+
+class Verdict(Enum):
+    WRITTEN = "ZAPSÁNO"
+    ASKS = "PTÁ SE"
+    UNREAD = "NEPŘEČTENO"
+    REFUSED = "ODMÍTNUTO"
+    ERROR = "CHYBA"
+
+
+@dataclass(frozen=True, slots=True)
+class Result:
+    sentence: str
+    verdict: Verdict
+    reading: str
+    detail: str
+    #: Kolik věcí systém u té věty NEVÍ — čekající kvantifikátory plus
+    #: nepojmenované tvary. **Je to počítané, ne odhadnuté**: „složitost"
+    #: se tady neměří délkou ani počtem čárek, ale tím, na kolik otázek
+    #: by člověk musel odpovědět, než se věta zapíše. Nula znamená
+    #: „zapsalo se to samo".
+    open_questions: int = 0
+
+    def render(self) -> str:
+        gap = f" ({self.open_questions}×?)" if self.open_questions else ""
+        head = f"[{self.verdict.value:11}]{gap} {self.sentence}"
+        body = f"\n              {self.reading}" if self.reading else ""
+        tail = f"\n              {self.detail}" if self.detail else ""
+        return head + body + tail
+
+
+def _first(lines: tuple[str, ...], *prefixes: str) -> str:
+    for line in lines:
+        stripped = line.strip()
+        if stripped.startswith(prefixes):
+            return stripped
+    return ""
+
+
+def triage(sentence: str, oracle: UDPipeOracle) -> Result:
+    """Jedna věta, jedno čerstvé sezení."""
+    session = Session(lexicon=golden.golden_lexicon())
+    try:
+        result = session.utter(sentence, oracle)
+    except SegmentationError as error:
+        return Result(sentence, Verdict.ERROR, "", f"víc vět: {error}")
+    except OracleError as error:
+        return Result(sentence, Verdict.ERROR, "", str(error))
+    lines = tuple(result.lines)
+    reading = _first(lines, "✓ přečteno", "◐ přečteno", "→ NEVÍM, jak")
+    open_questions = sum(1 for line in lines if "CHYBÍ:" in line or "NEZAKOTVENO:" in line)
+    if result.statement_id:
+        return Result(sentence, Verdict.WRITTEN, reading, "", 0)
+    refusal = _first(lines, "✗")
+    if refusal:
+        return Result(sentence, Verdict.REFUSED, reading, refusal, open_questions)
+    if result.predication is None:
+        why = _first(lines, "[PROČ:", "? Tuhle větu")
+        return Result(sentence, Verdict.UNREAD, reading, why, open_questions)
+    return Result(
+        sentence,
+        Verdict.ASKS,
+        reading,
+        (result.question or "")[:160],
+        open_questions,
+    )
+
+
+def sentences_of(text: str, oracle: UDPipeOracle) -> tuple[str, ...]:
+    """Rozdělení na věty dělá TÁŽ služba, která pak větu rozebírá.
+
+    Vlastní dělič by se s parserem rozešel — a to je přesně ten druh
+    tichého rozdílu, který se pozná až na výsledcích.
+    """
+    return tuple(u.text for u in oracle.segment(text))

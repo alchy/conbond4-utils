@@ -1,0 +1,4 @@
+# Zadne zavislosti navic.
+# Stahovani jde pres urllib ze standardni knihovny,
+# rozbor pres bezici sluzbu cb-udpipe (viz conbond4-deps),
+# jadro se hleda jako sourozenecky adresar conbond4/.

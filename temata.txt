@@ -1,0 +1,6 @@
+# Temata pro rozsireni znalostni sady conBond4.
+# Jedno na radek. Text clanku se do gitu NEUKLADA (viz ZDROJ.md).
+Domácí zvíře
+Karel Čapek
+Božena Němcová
+Vesmír
