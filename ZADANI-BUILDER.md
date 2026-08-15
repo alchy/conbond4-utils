@@ -20,6 +20,18 @@ Když dokončíš kolo, zapiš `{"current_turn": "REVIEWER", "status":
 "READY_FOR_REVIEW"}` a do `last_action` napiš, **co jsi udělal, co jsi
 změřil a čím to doložíš**. Čísla uváděj z běhu, ne z odhadu.
 
+**Stav čti na začátku každé výzvy.** Když `current_turn` není
+`BUILDER_UTILS`, nedělej nic — tah je u Reviewera a ty tiše čekáš.
+Když je `BUILDER_UTILS`, přečti si `last_action` (je v něm Reviewerův
+verdikt a zadání dalšího kroku) a pracuj. **Nikdy nepřepisuj stav,
+který patří protistraně**, a nikdy nepokračuj, dokud tah není tvůj —
+dvě strany zapisující naráz jsou ta nejlevnější cesta ke ztracenému
+kolu.
+
+Reviewerův verdikt je `PASS_NEXT_PHASE` (schváleno, jdi dál),
+`FAIL` (nález, oprav ho) nebo `PARTIAL`. `FAIL` u tohohle repozitáře
+většinou neznamená „špatný kód", ale **„měření tvrdí víc, než doloží"**.
+
 **Tvoje dráha:** cokoli v `conbond4-utils/` **kromě** `REVIEW-UTILS.md`
 a `.agent_state.json` — ty patří Revieweru.
 
