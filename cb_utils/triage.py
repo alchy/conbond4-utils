@@ -31,6 +31,8 @@ from core_semantics.oracle import OracleError, SegmentationError, UDPipeOracle
 from core_semantics.session import Session
 import core_semantics.tests.golden as golden
 
+from cb_utils.diagnose import Diagnosis, diagnose
+
 
 class Verdict(Enum):
     WRITTEN = "ZAPSÁNO"
@@ -52,10 +54,16 @@ class Result:
     #: by člověk musel odpovědět, než se věta zapíše. Nula znamená
     #: „zapsalo se to samo".
     open_questions: int = 0
+    #: Ve KTERÉ VRSTVĚ věta uvázla. Prázdné u zapsané věty.
+    layers: tuple[str, ...] = ()
+    #: Jediná vrstva, nebo prázdno — věta, která uvázla JEN na jedné
+    #: věci, ukazuje přesnou hranici schopnosti a je nejcennější.
+    sole: str = ""
 
     def render(self) -> str:
         gap = f" ({self.open_questions}×?)" if self.open_questions else ""
-        head = f"[{self.verdict.value:11}]{gap} {self.sentence}"
+        what = f" {{{'+'.join(self.layers)}}}" if self.layers else ""
+        head = f"[{self.verdict.value:11}]{gap}{what} {self.sentence}"
         body = f"\n              {self.reading}" if self.reading else ""
         tail = f"\n              {self.detail}" if self.detail else ""
         return head + body + tail
@@ -75,27 +83,35 @@ def triage(sentence: str, oracle: UDPipeOracle) -> Result:
     try:
         result = session.utter(sentence, oracle)
     except SegmentationError as error:
-        return Result(sentence, Verdict.ERROR, "", f"víc vět: {error}")
+        d = diagnose(lines=(), question="", read=False, written=False,
+                     refused=False, error=f"{error}")
+        return Result(sentence, Verdict.ERROR, "", d.reason, 0, d.layers, d.sole)
     except OracleError as error:
-        return Result(sentence, Verdict.ERROR, "", str(error))
+        d = diagnose(lines=(), question="", read=False, written=False,
+                     refused=False, error=str(error))
+        return Result(sentence, Verdict.ERROR, "", d.reason, 0, d.layers, d.sole)
     lines = tuple(result.lines)
     reading = _first(lines, "✓ přečteno", "◐ přečteno", "→ NEVÍM, jak")
     open_questions = sum(1 for line in lines if "CHYBÍ:" in line or "NEZAKOTVENO:" in line)
-    if result.statement_id:
-        return Result(sentence, Verdict.WRITTEN, reading, "", 0)
-    refusal = _first(lines, "✗")
-    if refusal:
-        return Result(sentence, Verdict.REFUSED, reading, refusal, open_questions)
-    if result.predication is None:
-        why = _first(lines, "[PROČ:", "? Tuhle větu")
-        return Result(sentence, Verdict.UNREAD, reading, why, open_questions)
-    return Result(
-        sentence,
-        Verdict.ASKS,
-        reading,
-        (result.question or "")[:160],
-        open_questions,
+    question = result.question or ""
+    d = diagnose(
+        lines=lines,
+        question=question,
+        read=result.predication is not None,
+        written=bool(result.statement_id),
+        refused=bool(_first(lines, "✗")),
+        error="",
     )
+    if result.statement_id:
+        return Result(sentence, Verdict.WRITTEN, reading, "", 0, (), "")
+    if _first(lines, "✗"):
+        return Result(sentence, Verdict.REFUSED, reading, d.reason,
+                      open_questions, d.layers, d.sole)
+    if result.predication is None:
+        return Result(sentence, Verdict.UNREAD, reading, d.reason,
+                      open_questions, d.layers, d.sole)
+    return Result(sentence, Verdict.ASKS, reading, d.reason,
+                  open_questions, d.layers, d.sole)
 
 
 def sentences_of(text: str, oracle: UDPipeOracle) -> tuple[str, ...]:
