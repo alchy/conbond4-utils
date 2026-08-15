@@ -23,6 +23,98 @@ Reprodukovat ho podle `d6782cb` nejde a záznam to přiznává příznakem
 
 ---
 
+## N‑8 · Otázka počítaná jako nula — OPRAVENO, a přibyl šestý stav
+
+Nález Revieweru, potvrzený a opravený. Když kaskádě po patrech zbylo víc
+kandidátních čtení, jádro se **ptá**:
+
+```
+Čtu to jako: mít(co:zub, kdo:∀dospělý_pes) / mít(co:∀dospělý_pes, kdo:zub)
+             — které z toho?
+```
+
+Měření to počítalo jako `NEPŘEČTENO` s `open_questions = 0`, tedy stejně
+jako větu, které systém nerozumí a mlčí. **Dva různé znalostní stavy
+splynuly do jednoho čísla** — přesně to, co tenhle repozitář hlídá.
+
+Rozsah: 7 vět korpusu a **7 ze 135 položek zlaté sady**, mezi nimi hned
+první (*„Kolik zubů má dospělý pes?"*).
+
+**Přibyl šestý stav `DVOJZNAČNÉ`, a je to vědomé rozhodnutí.** Pět stavů
+bylo v zadání, ale pět bylo rozhodnutí, ne dogma. „Větě nerozumím" je mez
+schopnosti a opravuje se v generátoru nebo v patrech; „rozumím jí dvěma
+způsoby a ptám se kterým" je **položená otázka**, tedy tah dialogu, a
+opravuje se odpovědí nebo naučeným vzorem. Slít je znamená ztratit obojí.
+`DVOJZNAČNÉ` se přitom **neslévá ani s `PTÁ SE`**: tam čtení jedno je
+a chybí mu doplnění, tady jich je víc a chybí volba.
+
+**Kde `open_questions = 0` zůstává správně.** Ve 124 větách jádro taky
+mluví, ale říká *„Tuhle větu přečíst neumím: přísudek „Působil" nemá ani
+jeden člen, který bych uměl pojmenovat"* — to je **vysvětlení, ne
+otázka**: není na co odpovědět, rozbor sám neprošel. Nula otevřených
+věcí je tam poctivá a celý text důvodu je v záznamu. Rozdíl proti N‑8 je
+právě v tom, že u dvojznačnosti se odpovědět **dá** („které z toho?").
+
+**Zrušeno zkracování.** `reason` se ořezával na 160 znaků, takže z věty
+s pěti otevřenými věcmi zbyla ze záznamu jedna. Nezkracuje se nic a vedle
+textu jde do záznamu **strukturovaný seznam** `questions` — dva běhy se
+tím porovnají položkou po položce, ne součtem. Opakování téže otázky přes
+kandidátní čtení se slučuje: pro člověka je to jedna otázka.
+
+---
+
+## N‑9 · Přeměřeno nad čistou revizí jádra — šest vět se přestalo zapisovat
+
+W‑U1 uzavřená: pracovní strom jádra byl čistý, měření běželo nad
+`056dc61`. Záznam `mereni/korpus-2026-08-15-b.json`, týž korpus
+(`conBond2@418d7f7`), týž model, 836 vět.
+
+| | běh #92 (`f681902` +dirty) | běh #107+ (`056dc61`, čistý) |
+|---|---|---|
+| `ZAPSÁNO` | 26 | **31** |
+| `PTÁ SE` | 656 | 669 |
+| `DVOJZNAČNÉ` | — (splývalo s `NEPŘEČTENO`) | 7 |
+| `NEPŘEČTENO` | 149 | **124** |
+| `CHYBA` | 5 | 5 |
+| `NEPŘEČTENO` na skutečných větách | 50 | **27** |
+
+Determinismus drží i po přidání šestého stavu: dva běhy nad `056dc61`
+vrátily shodné počty ve stavech i ve všech vrstvách.
+
+**Šest vět, které Reviewer předpověděl, potvrzeno — všech šest**
+(`nalezy/diff_behu.py`, přechod `ZAPSÁNO → PTÁ SE`):
+
+```
+» Babička bydlí v Táboře.            » Josef bydlí v Písku.
+» Klíče od chaty visí v předsíni.    » Marie slaví narozeniny v květnu.
+» Rodina Novákových bydlí v Kolíně.  » Vltava se vlévá do Labe u Mělníka.
+
+  důvod: Nevím, co znamená „v+Loc/Geo“ — je to tvar, ne význam
+```
+
+Je to **vědomé zpřísnění, ne regrese**: W‑62 zakázalo zapsat fakt s rolí
+pojmenovanou tvarem, a `v+Loc` je tvar. Historický korpus tu vadu
+obsahoval taky, takže se oprava jádra potvrdila **na datech mimo
+Wikipedii** — k tomu ten korpus je.
+
+**Kde se moje číslo rozešlo s Reviewerovým odhadem a proč.** Čekal
+`ZAPSÁNO` kolem 20; naměřeno **31**. Obojí sedí: 20 je počet vět, které
+se zapisovaly předtím i teď, a k nim přibylo **11 nově zapsaných** —
+měřím nad `056dc61`, tedy o pár kol dál než jeho průchod. Přehled
+přechodů:
+
+```
+NEPŘEČTENO → PTÁ SE       18        PTÁ SE     → ZAPSÁNO   11
+NEPŘEČTENO → DVOJZNAČNÉ    7        ZAPSÁNO    → PTÁ SE      6
+```
+
+Nově zapsané jsou mimo jiné *„Einstein zformuloval obecnou teorii
+relativity."*, *„Krkonoše jsou pohoří na severu Čech."* a *„Antarktida je
+pátým největším kontinentem…"* — tedy encyklopedická próza, ne jen ručně
+psané věty.
+
+---
+
 ## N‑5 · Vymyšlená věta a encyklopedická próza jsou dva různé světy — s čísly
 
 Krok 4, běh nad **historickým korpusem conBondu2** (`cb-korpus.py`,

@@ -36,8 +36,30 @@ from core_semantics.oracle import UDPipeOracle  # noqa: E402
 JEDNA_ZMINKA = ("flat",)
 
 
+def _temata(zaznam: Path) -> tuple[str, ...]:
+    data = json.loads(zaznam.read_text(encoding="utf-8"))
+    return tuple(sorted(str(t.get("title")) for t in data.get("topics", ())))
+
+
 def _zaznamy() -> list[Path]:
-    return sorted(_KORPUS.glob("*.json"), key=lambda p: p.stat().st_mtime)
+    """Záznamy TÉHOŽ MĚŘENÍ, seřazené podle času.
+
+    **Čas nestačí a stálo mě to jedno chybné hlášení.** Ve `mereni/`
+    přibyl záznam z jiné sady (historická data conBond2/3) a „poslední
+    dva podle času“ na něj sáhly: srovnávaly se dva různé korpusy, takže
+    každá věta vyšla jako ZMĚNA a rozdíl 32/32 vypadal jako výsledek.
+    Je to potřetí táž rodina chyby — kategorie vybraná podle něčeho, co
+    o ní nic neříká (nejdřív abeceda, pak čas).
+
+    Filtruje se proto podle TÉMAT: srovnávat jde jen měření nad touž
+    sadou. Kdyby se sada vědomě změnila, tenhle skript raději nenajde
+    dvojici, než aby ohlásil rozdíl mezi jablkem a hruškou.
+    """
+    podle_casu = sorted(_KORPUS.glob("*.json"), key=lambda p: p.stat().st_mtime)
+    if not podle_casu:
+        return []
+    sada = _temata(podle_casu[-1])
+    return [z for z in podle_casu if _temata(z) == sada]
 
 
 def _stavy(zaznam: Path) -> dict[str, dict[str, object]]:
@@ -152,6 +174,30 @@ def main() -> int:
     # a ptá se pořád, jen se ptá o někom jiném. Kdyby se hlásil jen
     # verdikt, vyšlo by z celého kola „0“ a vypadalo by to, že se
     # nestalo nic.
+    # NABÍDKA (W‑55). Třetí patro měření, a bez něj by tohle kolo vyšlo
+    # jako nula: W‑55 nemění ani verdikt, ani čtení — mění to, CO SYSTÉM
+    # O VĚTĚ ŘEKNE.
+    #
+    # ČTE SE Z KASKÁDY, NE ZE ZÁZNAMU, a je to nutné: `cb-wiki.py` ukládá
+    # `reason` zkrácený na ~160 znaků, takže u vět s dlouhou otázkou se
+    # nabídka do záznamu vůbec nevejde. Ze záznamu by vyšlo 2, z kaskády
+    # vychází 13 — a to první číslo by neměřilo jádro, ale délku pole.
+    from core_semantics.session import Session
+    from core_semantics.tests import golden
+
+    print("\nNABÍDKA „titul tvrdí“ (čteno z kaskády, ne ze záznamu):")
+    s_nabidka = []
+    for text in po:
+        session = Session(lexicon=golden.golden_lexicon())
+        try:
+            vysledek = session.utter(text, oracle)
+        except Exception:  # noqa: BLE001 — nerozebratelná věta se přeskočí
+            continue
+        if vysledek.question and "členství vedle věty" in vysledek.question:
+            s_nabidka.append(text)
+    print(f"  vět, u kterých systém OHLÁSÍ tvrzení titulu: {len(s_nabidka)}")
+    print(f"  z toho uvnitř rodiny: {len([t for t in s_nabidka if t in {d[0] for d in dotcene}])}")
+
     print("\nZMĚNA ČTENÍ (ne verdiktu):")
     zmena_cteni = [
         d

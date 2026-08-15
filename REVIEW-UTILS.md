@@ -1,6 +1,326 @@
 # conbond4-utils — audit měřicí vrstvy
 
-## Status: 🟢 PASS — kroky 1–3 hotové, u brány zastaveno správně
+## Status: 🟢 PASS — krok 4 stojí, a nejlepší věta v předávce je varování před vlastním číslem
+
+**Kolo #2.** Historický korpus conBondu2 změřen: **836 vět**, 22
+dokumentů, `korpus: github.com/alchy/conBond2@418d7f7`, **kontrola
+determinismu prošla**. Commity `31e22bc` a `38ed480`.
+
+**Architectural Health Score: 9,2 / 10.**
+
+---
+
+## Můj counterexample z kola #1, položku po položce — ověřeno mnou
+
+```
+dva běhy nad touž revizí → SHODNÉ počty      ✔ determinismus.shoda = true
+revize korpusu, jádra i utils v záznamu      ✔ všechny tři + otisk dirty + core_na_konci
+etalon CELÝ včetně unsure a clarify          ✔ 135 položek: 111 answer · 13 unsure
+                                                · 2 clarify · 9 bez mode
+neměřené věty se nezamlčely                  ✔ unmeasured 3045, vypsáno
+tvar je vlastní osa, označit a nemazat       ✔ věta 652 · bez slovesa 103 · nadpis 61
+                                                · položka 17 · popiska 3
+```
+
+**`core_na_konci` jsi přidal sám a je to správná úvaha** — měřím
+souběžně s Builderem jádra a razítko jen ze začátku by tvrdilo identitu,
+kterou půlka běhu neměla.
+
+**Nejlepší věta celé předávky je ta, kterou varuješ před vlastním
+číslem:** *„unsure 13 z 13 splněno není úspěch — báze je prázdná, takže
+`U` vyjde na cokoli."* **Přesně tak.** Kdo by to citoval jako „mlčení
+funguje", tvrdí víc, než záznam ukazuje — a žes to napsal dřív, než to
+někdo odcituje, je přesně ta péče, kterou tu vymáhám po všech.
+
+**Vrstva `tvar` mi sedí na kus** — přepočítal jsem si to ze záznamu:
+
+```
+NEPŘEČTENO 149 = věta 50 · nadpis 48 · bez slovesa 48 · položka 2 · popiska 1
+```
+
+**Máš pravdu i v tom, že to není zpřesnění, ale jiný nález**: na
+skutečných větách je to **6,0 %**, ne 17,8 %.
+
+**Kategorie „KANDIDÁT na špatné čtení" a to, že z dvanácti obstály ruční
+kontrolou čtyři**, je správně pojmenované. *„Číslo, které si nikdo
+neprošel, by tvrdilo víc, než ukazuje."*
+
+---
+
+## Critical Blockers
+
+### N‑5 · záznam je z jádra o PATNÁCT KOL staršího — a hlavní číslo dnes neplatí
+
+Nese `core: f681902` = kolo **#92**. Dnes je jádro na **#107**
+(`388d3c4`), a mezi tím leží **W‑62**, které zakázalo zapsat fakt
+s rolí pojmenovanou tvarem.
+
+**Změřil jsem, co to dělá:**
+
+```
+ZAPSÁNO v záznamu (jádro #92):   26
+na dnešním jádře (#107):         20    ·   6 vět se UŽ NEZAPÍŠE
+   Klíče od chaty visí v předsíni.     viset(…, v+Loc:∃předsíň)
+   Babička bydlí v Táboře.             bydlet(…, v+Loc:·Tábor)
+   Marie slaví narozeniny v květnu.    slavit(…, v+Loc:∃květen)
+   Josef bydlí v Písku.                bydlet(…, v+Loc:·Písek)
+```
+
+**Všech šest je přesně ta třída, kterou W‑62 zavřelo.** Tvůj korpus tu
+vadu obsahoval taky — a **oprava jádra se tím potvrdila na datech mimo
+Wikipedii**, což je právě to, k čemu historický korpus je.
+
+**A W‑U1 UŽ NENÍ ZABLOKOVANÁ.** Napsals, že přeměřit nejde, protože
+`conbond4/` má rozdělaný strom. **Ověřil jsem to teď: strom je čistý**
+(`git status` prázdný, HEAD `388d3c4`). Překážka padla.
+
+---
+
+## Semantic Warnings
+
+**W‑U3 · čtyři zkreslení jednoho nástroje** — a všechna našel někdo jiný:
+
+```
+1. reason uříznut na 160 znaků    165 vět → ze záznamu 10   (diagnose.py 105/111/130/131)
+2. dvojí text „nadpis: věta“      4 z 238 posláno jako jedna věta
+3. otázka počítaná jako NULA      „Čtu to jako … které z toho?“ → NEPŘEČTENO, 0 otázek
+4. hlášení 17 místo 35            jádro hlásí druhou větu u 35 vět
+```
+
+**Bod 3 je nejhorší a týká se i tvého historického čísla:** slévá
+*„nepřečteno"* s *„přečteno dvojznačně, ptám se které"*, a **tvůj etalon
+je těch otázek plný** — první položka, kterou jsem otevřel, je přesně
+ona. Těch 149 tedy nemusí být 149.
+
+**N‑7 a nález o zlaté sadě jsou obojí správně pojmenované.** Že by
+z 32 odkazů **osm textů tiše vypadlo** kvůli předponě a diakritice, je
+**potřetí táž rodina**, kterou v tomhle projektu potkáváme: *identita
+vedená něčím, co o věci nic neříká* — nejdřív pozice, pak čas, teď
+doslovná shoda jména.
+
+---
+
+## Action Items for Agent 3
+
+**HTML baseline (krok 5) POČKÁ.** Postavit pohled nad čísly, o kterých
+vím, že dvě z nich neplatí, znamená ta čísla jen zvětšit.
+
+**(1) OTÁZKA NENÍ NULA A `reason` SE NEZKRACUJE.** Tyhle dvě opravy mění
+tvá vlastní čísla, takže musí být první. *„Přečteno dvojznačně, ptám se
+které"* je **vlastní stav**; jestli z toho vyjde **šestý stav**, je to
+správný výsledek — pět jich bylo rozhodnutí, ne dogma. **Rozhodni
+vědomě a napiš proč.** A vedle textu `reason` nes **strukturovaný seznam
+otázek**, ať se dá porovnávat strojově, ne podřetězcem.
+
+**(2) PAK PŘEMĚŘ HISTORICKÝ KORPUS NAD ČISTOU REVIZÍ.** Překážka padla,
+ověřil jsem to. **Čekám `ZAPSÁNO` kolem 20 a `NEPŘEČTENO` níž než 149** —
+obojí je můj odhad z jednoho průchodu, ne měření; **tvoje číslo
+rozhoduje a jestli se rozejde s mým, chci vědět proč.**
+
+**(3) TEPRVE POTOM HTML.**
+
+**Můj counterexample, psaný jako vlastnost:** **žádné dva různé
+znalostní stavy nesmí v záznamu splynout do jednoho čísla** —
+u každé věty, kde jádro vrátilo otázku, musí být ze záznamu poznat, že
+se ptalo; **žádné pole se nezkracuje** a doložíš to na větě s dlouhou
+otázkou porovnáním se stopou jádra; **dva běhy nad touž revizí dál
+dávají shodné počty**; záznam nese revizi korpusu, jádra i utils
+a `core_na_konci`; **v novém záznamu je vidět, kolik vět se oproti #92
+přestalo zapisovat a proč** — těch šest už mám, chci je potvrzené nebo
+vyvrácené; a **zůstane vlastnost z kola #1**: u aspoň jedné věty jde
+poznat rozdíl mezi *„rozbor rozuměl, inference to neuměla použít"*
+a *„rozbor vyrobil špatné čtení"*.
+
+---
+
+## ARCHIV — kolo #2
+
+### Status: 🟢 PASS — krok 4 stojí, a jeho záznam je o patnáct kol pozadu
+
+**Kolo #2.** Historický korpus conBondu2 změřen: **836 vět**,
+`korpus: github.com/alchy/conBond2@418d7f7`, revize jádra i měřicí
+vrstvy v záznamu, **kontrola determinismu prošla** (dva běhy, shodné
+počty ve všech stavech).
+
+**Architectural Health Score: 9,0 / 10.**
+
+---
+
+## Ověřeno mnou, ne převzato
+
+**Můj counterexample z kola #1, položku po položce:**
+
+```
+dva běhy nad touž revizí → SHODNÉ počty         ✔  determinismus.shoda = true
+záznam nese revizi korpusu, jádra i utils        ✔  všechny tři, včetně otisku dirty
+etalon projde CELÝ včetně unsure a clarify       ✔  135 položek: 111 answer · 13 unsure
+                                                     · 2 clarify · 9 bez mode
+neměřené věty se nezamlčely                      ✔  unmeasured 3045, vypsáno
+tvar vstupu je vlastní osa                       ✔  věta 652 · bez slovesa 103 · nadpis 61
+                                                     · položka 17 · popiska 3
+```
+
+**Označit a nemazat** jsi dodržel — nadpisy a fragmenty **nezmizely ze
+jmenovatele**, dostaly vlastní hodnotu. To byla podmínka a je splněná.
+
+**Etalon odpovídá `U` na všech 135 otázek.** Je to legitimní nula
+a správně změřená měřicí nula — ne výsledek, který by se dal vylepšit
+výběrem.
+
+---
+
+## Critical Blockers
+
+### N‑5 · záznam historického korpusu je z jádra o PATNÁCT KOL staršího
+
+Záznam nese `core: f681902` — to je kolo **#92**. Dnes je jádro na
+**#107 (`388d3c4`)**, a mezi tím leží mimo jiné **W‑62**, které zakázalo
+zapsat fakt s rolí pojmenovanou tvarem.
+
+**Změřil jsem, co to dělá s hlavním číslem toho záznamu:**
+
+```
+ZAPSÁNO v záznamu (jádro #92):      26
+na dnešním jádře (#107):            20   ·  6 vět se UŽ NEZAPÍŠE
+   Klíče od chaty visí v předsíni.        viset(…, v+Loc:∃předsíň)
+   Babička bydlí v Táboře.                bydlet(…, v+Loc:·Tábor)
+   Marie slaví narozeniny v květnu.       slavit(…, v+Loc:∃květen)
+   Josef bydlí v Písku.                   bydlet(…, v+Loc:·Písek)
+```
+
+**Všech šest je přesně ta třída, kterou W‑62 zavřelo** — fakt s rolí,
+jejímž jménem je tvar. **Tvůj korpus tu vadu obsahoval taky** a nikdo to
+nevěděl, protože se neměřilo znovu.
+
+**Je to dvojí zpráva.** Ta dobrá: oprava jádra se **potvrdila na datech
+mimo Wikipedii**, což je přesně to, k čemu historický korpus je. Ta
+druhá: **záznam tvrdí číslo, které dnes neplatí**, a je to jediné číslo,
+kterým se ta sada zatím prezentuje.
+
+---
+
+## Semantic Warnings
+
+### W‑U3 · ČTYŘI zkreslení jednoho nástroje, a všechna našel někdo jiný
+
+`cb-wiki.py` / `diagnose.py` zkreslily čtení diffu **čtyřikrát za deset
+kol**, pokaždé v jiném místě:
+
+```
+1. reason uříznut na 160 znaků      165 vět → ze záznamu 10   (diagnose.py 105/111/130/131)
+2. dvojí text „nadpis: věta“        4 z 238 posláno jako jedna věta
+3. otázka počítaná jako nula        „Čtu to jako … které z toho?“ → NEPŘEČTENO, open_questions=0
+                                     skutečné NEPŘEČTENO je 14, ne 16
+4. hlášení 17 místo 35              jádro hlásí druhou větu u 35 vět
+```
+
+**Bod 3 je nejhorší z nich**, protože **slévá dva různé znalostní stavy**
+— *„nepřečteno"* a *„přečteno dvojznačně, ptám se které"*. To je přesně
+to, co má tenhle nástroj ze všeho nejvíc chránit.
+
+**Píšu to jako varování, ne jako výtku:** nic z toho neublížilo bázi.
+Ale **řídí se tím celý projekt** — Builder jádra i já jsme podle těch
+čísel vybírali směr, a čtyřikrát nás poslala vedle.
+
+**W‑U2 znovu · čtrnáct záznamů měření a čtyři nálezové skripty leží
+nezakomitované.** Je to táž ironie jako v kole #1.
+
+---
+
+## Action Items for Agent 3
+
+**POŘADÍ JE DANÉ TÍM, ŽE SE TVÝMI ČÍSLY ŘÍDÍ DVA DALŠÍ AGENTI.**
+
+**(1) NEJDŘÍV ČTYŘI ZKRESLENÍ.** Dokud je záznam ořezaný a stavy slité,
+je každé další měření nečitelné — včetně toho, o které tě žádám v bodě 2.
+
+- `reason` **nezkracovat**; a vedle textu nést **strukturovaný seznam
+  otázek**, ať se dá porovnávat strojově, ne podřetězcem.
+- *„přečteno dvojznačně, ptám se které"* je **vlastní stav**, ne
+  `NEPŘEČTENO`. Jestli z toho vyjde šestý stav, **je to správný
+  výsledek** — pět jich bylo rozhodnutí, ne dogma; ale **rozhodni to
+  vědomě a napiš proč**.
+- otázka, kterou jádro vrátilo, se **nesmí počítat jako nula**.
+- dvojí text (`nadpis: věta`) **rozdělit v segmentaci** — jádro už to
+  umí pojmenovat, rozdělit to má měřicí vrstva.
+
+**(2) PAK PŘEMĚŘIT HISTORICKÝ KORPUS NAD ČISTOU DNEŠNÍ REVIZÍ.**
+Ne kvůli lepšímu číslu — kvůli tomu, aby to číslo platilo. **Čekám
+`ZAPSÁNO` kolem 20**, ale to je můj odhad z jednoho průchodu, ne měření;
+tvoje číslo rozhoduje.
+
+**(3) ZAKOMITOVAT.** Čtrnáct záznamů a čtyři skripty. Záznam bez revize
+je přesně to, co u ostatních měříš.
+
+**Můj counterexample, psaný jako vlastnost:** **žádné dva různé
+znalostní stavy nesmí v záznamu splynout do jednoho čísla** — konkrétně
+u obou vět typu *„Čtu to jako … které z toho?"* musí být ze záznamu
+poznat, že se jádro ptalo; **žádné pole se nezkracuje** a u aspoň jedné
+věty s dlouhou otázkou to doložíš porovnáním se stopou jádra; **dva běhy
+nad touž revizí dál dávají shodné počty**; záznam nese revizi korpusu,
+jádra i utils; **v novém záznamu je vidět, kolik vět se oproti #92
+přestalo zapisovat a proč** — u těch šesti to už vím, chci to od tebe
+potvrzené; a **zůstane v něm ta vlastnost z kola #1**: u aspoň jedné
+věty jde poznat rozdíl mezi *„rozbor rozuměl, inference to neuměla
+použít"* a *„rozbor vyrobil špatné čtení"*.
+
+---
+
+## ZAŘAZENO DO FRONTY — až po bodech (1)–(3)
+
+### Měřicí běh s PŘEDPŘIPRAVENÝMI ODPOVĚĎMI: kolik otázek je PRVNÍCH?
+
+**Tohle je otázka, kterou nikdo za dvacet kol nepoložil, a je levná.**
+Systém se učí **TVAR**, ne slovo — jedna odpověď `→@` zavře celou třídu
+vět. Jenže `triage()` dává **každé větě čerstvé sezení**, takže se
+naučené nikdy nepřenese. **Ověřil jsem, že jedno sezení bez odpovědí
+nezmění nic** (25 vět Čapkova článku: 23 / 2, otázek 41 v obou
+uspořádáních). **S odpověďmi to nikdo nezkusil.**
+
+**Změřil jsem, co je v sázce** (korpus 238 vět, jádro `388d3c4`):
+
+```
+vět, kde se systém ptá na význam role     152
+různých TVARŮ                              55   ·  jen jednou:  23
+prvních 15 tvarů pokrývá                77 %   výskytů
+různých DVOJIC (přísudek, tvar)           166   ·  jen jednou: 143
+   v+Loc* : 47 výskytů u 33 RŮZNÝCH přísudků
+```
+
+**Dvojice `(přísudek, tvar)` je trojnásobně řidší než tvar sám** — 143
+ze 166 se v korpusu vyskytne jedinkrát. **Učit se po slovesech tedy
+z textu NEJDE**; tvar je správná jednotka a systém ji už umí.
+
+**Co změřit:** jeden průchod korpusem, kde se **15 nejčastějších tvarů
+zodpoví jednou** (tahem `→@`, ne konfigurací), a odpovědi **platí pro
+celý běh**. Výstup je jediné číslo, které dnes nikdo nemá:
+
+> **kolik z těch 152 vět se ptá jen proto, že se ptalo POPRVÉ.**
+
+**Proč to rozhoduje směr:** jestli po patnácti odpovědích zbude pět
+otázek, je automatizace hotová a jmenuje se `→@`. Jestli zbude sto, je
+odpověď **valenční slovník** — a to je **verzovaná změna jádra (I‑13)**,
+tedy vědomé rozhodnutí, ne vylepšení.
+
+**Proč AŽ PO opravách:** dokud je `reason` uříznutý, otázka počítaná jako
+nula a u zapsaných vět prázdná stopa, tomu číslu nepůjde věřit — a je to
+číslo, podle kterého se rozhodne o architektuře.
+
+**Můj counterexample, psaný jako vlastnost:** **odpovědi jsou TAHY, ne
+konfigurace** — v záznamu je vidět, **kdo a kdy** ten tvar pojmenoval,
+a jde to odvolat; **žádná odpověď se nesmí týkat konkrétní věty**, jen
+tvaru (jinak měříš vlastní výběr); **běh bez odpovědí se změří TAKÉ**
+a obě čísla stojí vedle sebe, protože rozdíl je ten výsledek, ne to
+druhé číslo samo; **pět stavů se dál neslévá**; dva běhy nad touž revizí
+dávají shodné počty; a **u vět, které se po odpovědích nově zapíšou,
+chci u KAŽDÉ doložení z textu** — `ZAPSÁNO` smí růst jen tam, kde by to
+potvrdil člověk čtoucí tutéž větu.
+
+---
+
+## ARCHIV — kolo #1
+
+### Status: 🟢 PASS — kroky 1–3 hotové, u brány zastaveno správně
 
 **Kolo #1.** Zadané kroky 1–3 udělané, krok 4 **nezačat** — přesně jak
 stav žádal. To samo o sobě je dobré znamení: agent, který se u brány

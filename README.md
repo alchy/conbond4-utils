@@ -35,6 +35,7 @@ naklonovaný `conbond4` — cesta se odvozuje ze sourozeneckého adresáře.
 |---|---|
 | `ZAPSÁNO` | přečteno a uloženo do báze |
 | `PTÁ SE` | přečteno neúplně, systém se ptá |
+| `DVOJZNAČNÉ` | přečteno **víc způsoby**, systém se ptá který |
 | `NEPŘEČTENO` | 0 čtení; patro nebo generátor řekl proč |
 | `ODMÍTNUTO` | čtení bylo, zápis se odmítl (kruh, ireflexivita…) |
 | `CHYBA` | parser nebo služba selhaly |
@@ -87,19 +88,23 @@ python cb-korpus.py --vet 40 --dvakrat --json mereni/korpus-2026-08-15.json
 Korpus se klonuje do `data/` (mimo git, CC BY‑SA) a v záznamu je jeho
 **revize** — je zmražený, takže na rozdíl od Wikipedie se měřicí nula
 mezi běhy nepohne. 22 dokumentů, ke kterým existuje ruční zlatá sada,
-836 vět:
+836 vět, jádro `056dc61` (čistá revize):
 
 ```
-PTÁ SE 656 · NEPŘEČTENO 149 · ZAPSÁNO 26 · CHYBA 5 · ODMÍTNUTO 0
+PTÁ SE 669 · NEPŘEČTENO 124 · ZAPSÁNO 31 · DVOJZNAČNÉ 7 · CHYBA 5 · ODMÍTNUTO 0
 
-ručně psané soubory   4 dok ·  74 vět · ZAPSÁNO 24 (32 %)   · NEPŘEČTENO   0
-encyklopedické články 18 dok · 762 vět · ZAPSÁNO  2 (0,3 %) · NEPŘEČTENO 149
+z toho na skutečných větách (bez nadpisů a fragmentů):
+  ZAPSÁNO 31 · PTÁ SE 587 · DVOJZNAČNÉ 7 · NEPŘEČTENO 27   (z 652)
 ```
 
 Dva běhy nad touž revizí korpusu i jádra vrátily **shodné počty ve všech
 vrstvách**. Zlatá sada projde celá (135 položek včetně 9 `unsure`
 a 2 `clarify`) a končí zatím na `U` — báze je prázdná, takže je to
 měřicí nula, ne skóre.
+
+Porovnání dvou běhů dělá `nalezy/diff_behu.py` — po větách, ne procentem:
+běh, kde se deset vět nově zapsalo a deset jiných přestalo zapisovat,
+vypadá v součtu jako beze změny.
 
 ## Kde co je
 

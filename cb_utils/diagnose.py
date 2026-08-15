@@ -62,6 +62,10 @@ _NO_READING: tuple[tuple[str, str], ...] = (
     ("nemá ani jeden člen, který bych uměl pojmenovat", "role_nenalezena"),
 )
 
+#: Jádro tímhle hlásí, že mu po patrech zbylo víc kandidátních čtení.
+#: Je to **otázka, ne mlčení** — proto vlastní vrstva i vlastní stav.
+AMBIGUOUS_MARK = "Čtu to jako"
+
 #: Které tvrdé patro čtení zahodilo. Taky doslova ze stopy jádra —
 #: „morfologie" je pro řízení práce moc hrubá: shoda čísla a pádová
 #: mřížka jsou dvě různé opravy.
@@ -97,18 +101,24 @@ def diagnose(
 ) -> Diagnosis:
     if error:
         kind = "segmentace" if "vět" in error and "rozbor umí jednu" in error else "služba"
-        return Diagnosis((kind,), error[:120])
+        return Diagnosis((kind,), error)
     if written:
         return Diagnosis((), "")
     if refused:
         first = next((l.strip() for l in lines if l.strip().startswith("✗")), "")
-        return Diagnosis(("zápis",), first[:160])
+        return Diagnosis(("zápis",), first)
     trace = " ".join(lines)
     if not read:
+        # DVOJZNAČNÉ ČTENÍ NENÍ NEPŘEČTENÉ. Kaskádě zbylo víc kandidátů
+        # a ptá se, který z nich — tedy větě rozumí, jen ne jednoznačně.
+        # Dokud to padalo do „nepřečteno", slévaly se dva různé znalostní
+        # stavy do jednoho čísla.
+        if AMBIGUOUS_MARK in trace or AMBIGUOUS_MARK in question:
+            return Diagnosis(("dvojznačnost",), question or trace, "víc_čtení")
         why = next((l.strip() for l in lines if "[PROČ:" in l), "")
         if why:
             kind = next((k for mark, k in _HARD if mark in why), "")
-            return Diagnosis(("morfologie",), why[:160], kind)
+            return Diagnosis(("morfologie",), why, kind)
         # Jádro má pro „ani jedno čtení" vlastní vysvětlení
         # (`cascade.why_nothing`) a posílá ho v OTÁZCE, ne v řádku
         # `[PROČ:`. Čte se odtud doslova; kdyby se sem začalo hádat
@@ -118,14 +128,14 @@ def diagnose(
         )
         for mark, layer in _NO_READING:
             if mark in said:
-                return Diagnosis((layer,), said[:200], "bez_čtení")
+                return Diagnosis((layer,), said, "bez_čtení")
         if said:
-            return Diagnosis(("rozbor",), said[:200], "bez_čtení")
+            return Diagnosis(("rozbor",), said, "bez_čtení")
         return Diagnosis(("rozbor",), "0 čtení a systém neřekl proč", "mlčení")
     found: list[str] = []
     for name, marks, asks in _RULES:
         if any(m in trace for m in marks) or any(a in question for a in asks):
             found.append(name)
     if not found:
-        return Diagnosis(("rozbor",), (question or trace)[:160])
-    return Diagnosis(tuple(found), (question or "")[:160])
+        return Diagnosis(("rozbor",), question or trace)
+    return Diagnosis(tuple(found), question)

@@ -165,6 +165,7 @@ def main() -> None:
                         "layers": list(r.layers),
                         "sole": r.sole,
                         "kind": r.kind,
+                        "questions": list(r.questions),
                         "reading": r.reading,
                         "reason": r.detail,
                     }

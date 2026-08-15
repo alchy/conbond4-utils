@@ -95,6 +95,9 @@ def _zaznam_vety(result: Result, radek: str, tvar: str) -> dict:
         "verdict": result.verdict.value,
         "status": result.status,
         "open_questions": result.open_questions,
+        # Seznam, ne jen číslo: dva běhy se pak porovnají položkou po
+        # položce a „ubyla jedna otázka, přibyla jiná" není neviditelné.
+        "questions": list(result.questions),
         "layers": list(result.layers),
         "sole": result.sole,
         "kind": result.kind,
