@@ -35,7 +35,7 @@ naklonovaný `conbond4` — cesta se odvozuje ze sourozeneckého adresáře.
 |---|---|
 | `ZAPSÁNO` | přečteno a uloženo do báze |
 | `PTÁ SE` | přečteno neúplně, systém se ptá |
-| `NEPŘEČTENO` | 0 čtení; patro řeklo proč |
+| `NEPŘEČTENO` | 0 čtení; patro nebo generátor řekl proč |
 | `ODMÍTNUTO` | čtení bylo, zápis se odmítl (kruh, ireflexivita…) |
 | `CHYBA` | parser nebo služba selhaly |
 
@@ -43,20 +43,50 @@ naklonovaný `conbond4` — cesta se odvozuje ze sourozeneckého adresáře.
 délka ani počet čárek, ale počet otázek, na které by člověk musel
 odpovědět, než se věta zapíše. Nula znamená „zapsalo se to samo".
 
-## První měření (4 témata, 236 vět)
+## Měření (4 témata, 238 vět)
+
+Dva běhy nad **týmiž větami a týmiž revizemi článků**; mezi nimi se
+změnilo jádro (oprava W‑32 — rysy se porovnávají průnikem, ne rovností):
 
 ```
-CELKEM  PTÁ SE 187 · NEPŘEČTENO 49 · CHYBA 2 · ZAPSÁNO 0
+běh 1   PTÁ SE 187 · NEPŘEČTENO 49 · CHYBA 2 · ZAPSÁNO 0
+běh 2   PTÁ SE 206 · NEPŘEČTENO 30 · CHYBA 2 · ZAPSÁNO 0
+
+vrstva            vyskytuje se  sám blokuje    (běh 2)
+role               205 (86.1 %)   39 (16.4 %)
+kvantifikace       163 (68.5 %)    1 ( 0.4 %)
+koreference         16 ( 6.7 %)    0 ( 0.0 %)
+role_nenalezena     12 ( 5.0 %)   12 ( 5.0 %)
+konstrukce          11 ( 4.6 %)    0 ( 0.0 %)
+morfologie          10 ( 4.2 %)   10 ( 4.2 %)   všech 10 · shoda_čísla
+rozbor               5 ( 2.1 %)    5 ( 2.1 %)
+kolize_rolí          3 ( 1.3 %)    3 ( 1.3 %)
+segmentace           2 ( 0.8 %)    2 ( 0.8 %)
 ```
 
 **Ani jedna věta z encyklopedické prózy se nezapsala sama.** Nejblíž jsou
 věty s jednou otevřenou otázkou (*„Jako nemístné viděl v tehdejší situaci
-hledání viníků."*), typické souvětí jich má pět až sedm. `NEPŘEČTENO`
-padá na tvrdých patrech — shoda, pádová mřížka — a to je správně: věta,
-které systém nerozumí, se nemá zapsat napůl.
+hledání viníků."*), typické souvětí jich má pět až sedm.
 
-Je to číslo, které se má hýbat. Zatím říká, že vymyšlené věty a
-encyklopedická próza jsou dva různé světy.
+`NEPŘEČTENO` v běhu 1 **nepadalo na tvrdých patrech oprávněně**: 29 z 49
+shodil filtr shody čísla a ani jedna z těch vět nebyla negramatická —
+doloženo minimálními páry v `nalezy/shoda_cisla.py`, popsáno v
+`NALEZY.md` (N‑1). Oprava jádra 20 z nich uvolnila; zbylých 10 jsou
+koordinovaný a kvantifikovaný podmět, tedy jiné příčiny.
+
+Záznam každého běhu nese revizi článku, model orákula **i revizi jádra**
+(`mereni/<datum>-<sha>.json`) — bez té třetí vypadá změna jádra jako
+nestabilní měření.
+
+## Kde co je
+
+| soubor | co v něm je |
+|---|---|
+| `NALEZY.md` | co je doloženo, s čísly z běhu a s reprodukcí |
+| `STARE-FRAMEWORKY.md` | conBond2/3 — co z nich má cenu přenést a co ne |
+| `MAPOVANI.md` | návrh mapování starého měření na conBond4 (k revizi) |
+| `nalezy/` | spustitelné reprodukce nálezů |
+| `mereni/` | záznamy běhů |
 
 ## Co tu vědomě není
 

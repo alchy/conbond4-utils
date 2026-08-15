@@ -10,7 +10,9 @@ každá odpovídá jinému místu v architektuře a jiné opravě.
 
     segmentace          text se nerozpadl na věty tak, jak parser čeká
     morfologie          tvrdé patro (shoda, pádová mřížka) zahodilo čtení
-    rozbor              0 čtení a systém neumí říct proč
+    kořen               rozbor nemá kořen, ze kterého by šel přísudek
+    role_nenalezena     přísudek nemá ani jeden pojmenovatelný člen
+    rozbor              0 čtení; důvod jádra beze změny, nebo mlčení
     koreference         odkaz na něco mimo větu (on, jeho, ten, určitost)
     role                povrchový tvar bez pojmenované role
     kolize_rolí         dvě určení téhož tvaru na jednom jménu role
@@ -44,10 +46,39 @@ _RULES: tuple[tuple[str, tuple[str, ...], tuple[str, ...]], ...] = (
 )
 
 
+#: Co jádro samo řekne, když z věty nevznikne ANI JEDNO čtení
+#: (`cascade.why_nothing`). Klíč je doslovný kus té věty, hodnota jméno
+#: vrstvy. **Nic se nehádá z povrchu věty** — čte se odpověď jádra.
+#:
+#: Dřív se tahle větev zahazovala a všech dvacet případů z prvního běhu
+#: dostalo hlášku „0 čtení a systém neumí říct proč". To bylo tvrzení
+#: o jádře, které NEPLATILO: jádro důvod řeklo, jen ho měřicí vrstva
+#: nepřečetla, protože ho hledala výhradně v řádcích `[PROČ:`. Měření,
+#: které jádru podsune mlčení, je horší než měření žádné.
+_NO_READING: tuple[tuple[str, str], ...] = (
+    ("rozbor nemá kořen", "kořen"),
+    ("dvě určení mají týž tvar", "kolize_rolí"),
+    ("dva jádrové členy dostaly touž roli", "kolize_rolí"),
+    ("nemá ani jeden člen, který bych uměl pojmenovat", "role_nenalezena"),
+)
+
+#: Které tvrdé patro čtení zahodilo. Taky doslova ze stopy jádra —
+#: „morfologie" je pro řízení práce moc hrubá: shoda čísla a pádová
+#: mřížka jsou dvě různé opravy.
+_HARD: tuple[tuple[str, str], ...] = (
+    ("shoda čísla", "shoda_čísla"),
+    ("pádová mřížka", "pádová_mřížka"),
+)
+
+
 @dataclass(frozen=True, slots=True)
 class Diagnosis:
     layers: tuple[str, ...]
     reason: str
+    #: Jemnější druh UVNITŘ vrstvy, taky ze slov jádra. Vrstva říká, kde
+    #: se to opravuje; druh říká co. Zvlášť proto, že se vrstvy sčítají
+    #: napříč běhy a přejmenovat je by rozbilo srovnání se starším během.
+    kind: str = ""
 
     @property
     def sole(self) -> str:
@@ -76,8 +107,21 @@ def diagnose(
     if not read:
         why = next((l.strip() for l in lines if "[PROČ:" in l), "")
         if why:
-            return Diagnosis(("morfologie",), why[:160])
-        return Diagnosis(("rozbor",), "0 čtení a systém neumí říct proč")
+            kind = next((k for mark, k in _HARD if mark in why), "")
+            return Diagnosis(("morfologie",), why[:160], kind)
+        # Jádro má pro „ani jedno čtení" vlastní vysvětlení
+        # (`cascade.why_nothing`) a posílá ho v OTÁZCE, ne v řádku
+        # `[PROČ:`. Čte se odtud doslova; kdyby se sem začalo hádat
+        # z povrchu věty, měřila by tahle vrstva sama sebe.
+        said = question or next(
+            (l.strip() for l in lines if "přečíst neumím" in l), ""
+        )
+        for mark, layer in _NO_READING:
+            if mark in said:
+                return Diagnosis((layer,), said[:200], "bez_čtení")
+        if said:
+            return Diagnosis(("rozbor",), said[:200], "bez_čtení")
+        return Diagnosis(("rozbor",), "0 čtení a systém neřekl proč", "mlčení")
     found: list[str] = []
     for name, marks, asks in _RULES:
         if any(m in trace for m in marks) or any(a in question for a in asks):

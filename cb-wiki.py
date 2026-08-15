@@ -29,7 +29,8 @@ from pathlib import Path
 
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
 
-from cb_utils.triage import Result, Verdict, sentences_of, triage
+from cb_utils.revize import revision
+from cb_utils.triage import CONBOND4, Result, Verdict, sentences_of, triage
 from cb_utils.wiki import fetch, paragraphs
 
 HERE = Path(__file__).resolve().parent
@@ -56,11 +57,14 @@ def _table(results: list[Result], title: str) -> None:
         return
     hit: Counter[str] = Counter()
     sole: Counter[str] = Counter()
+    kinds: Counter[tuple[str, str]] = Counter()
     for result in results:
         for layer in result.layers:
             hit[layer] += 1
         if result.sole:
             sole[result.sole] += 1
+            if result.kind:
+                kinds[(result.sole, result.kind)] += 1
     print(f"\n{title}   (vět {total})")
     print(f"  {'vrstva':16} {'vyskytuje se':>13} {'sám blokuje':>12}")
     for layer, count in hit.most_common():
@@ -70,6 +74,12 @@ def _table(results: list[Result], title: str) -> None:
         print(
             f"  {layer:16} {count:5} ({share:4.1f} %) {alone:5} ({alone_share:4.1f} %)"
         )
+        # Druh UVNITŘ vrstvy. Bez něj splyne „shoda opravdu neplatí"
+        # s „rys má dvě hodnoty a porovnává se jako řetězec" — a to
+        # jsou dvě různé opravy v jádře, ne jedno číslo.
+        for (name, kind), how_many in sorted(kinds.items()):
+            if name == layer:
+                print(f"  {'':16} {'':13} {how_many:5}  · {kind}")
 
 
 def main() -> None:
@@ -88,7 +98,19 @@ def main() -> None:
     oracle = UDPipeOracle()
     print(f"orákulum: {oracle.provenance}\n")
 
-    record: dict = {"oracle": oracle.provenance, "topics": []}
+    # IDENTITA BĚHU je trojí: co přišlo na vstup (revize článku), kdo to
+    # rozebral (model orákula) a kdo to četl (revize jádra). Bez té třetí
+    # vypadá změna jádra jako nestabilní měření — přesně to se stalo mezi
+    # prvním a druhým během (viz cb_utils/revize.py).
+    record: dict = {
+        "oracle": oracle.provenance,
+        "core": revision(CONBOND4),
+        "utils": revision(HERE),
+        "sentences_per_topic": args.vet,
+        "topics": [],
+    }
+    print(f"jádro:    {record['core']}")
+    print(f"měření:   {record['utils']}\n")
     everything: list[Result] = []
     total: Counter[str] = Counter()
 
@@ -142,6 +164,7 @@ def main() -> None:
                         "open_questions": r.open_questions,
                         "layers": list(r.layers),
                         "sole": r.sole,
+                        "kind": r.kind,
                         "reading": r.reading,
                         "reason": r.detail,
                     }

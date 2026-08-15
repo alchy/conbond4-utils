@@ -59,10 +59,16 @@ class Result:
     #: Jediná vrstva, nebo prázdno — věta, která uvázla JEN na jedné
     #: věci, ukazuje přesnou hranici schopnosti a je nejcennější.
     sole: str = ""
+    #: Jemnější druh uvnitř vrstvy, slovy jádra (`shoda_čísla`,
+    #: `pádová_mřížka`, `bez_čtení`, `mlčení`). Vrstva říká, KDE se to
+    #: opravuje; druh říká CO — a bez něj splyne dvacet vět shozených
+    #: dvojznačným rysem s devíti, kde shoda opravdu neplatí.
+    kind: str = ""
 
     def render(self) -> str:
         gap = f" ({self.open_questions}×?)" if self.open_questions else ""
         what = f" {{{'+'.join(self.layers)}}}" if self.layers else ""
+        what += f"/{self.kind}" if self.kind else ""
         head = f"[{self.verdict.value:11}]{gap}{what} {self.sentence}"
         body = f"\n              {self.reading}" if self.reading else ""
         tail = f"\n              {self.detail}" if self.detail else ""
@@ -85,11 +91,13 @@ def triage(sentence: str, oracle: UDPipeOracle) -> Result:
     except SegmentationError as error:
         d = diagnose(lines=(), question="", read=False, written=False,
                      refused=False, error=f"{error}")
-        return Result(sentence, Verdict.ERROR, "", d.reason, 0, d.layers, d.sole)
+        return Result(sentence, Verdict.ERROR, "", d.reason, 0, d.layers,
+                      d.sole, d.kind)
     except OracleError as error:
         d = diagnose(lines=(), question="", read=False, written=False,
                      refused=False, error=str(error))
-        return Result(sentence, Verdict.ERROR, "", d.reason, 0, d.layers, d.sole)
+        return Result(sentence, Verdict.ERROR, "", d.reason, 0, d.layers,
+                      d.sole, d.kind)
     lines = tuple(result.lines)
     reading = _first(lines, "✓ přečteno", "◐ přečteno", "→ NEVÍM, jak")
     open_questions = sum(1 for line in lines if "CHYBÍ:" in line or "NEZAKOTVENO:" in line)
@@ -103,15 +111,15 @@ def triage(sentence: str, oracle: UDPipeOracle) -> Result:
         error="",
     )
     if result.statement_id:
-        return Result(sentence, Verdict.WRITTEN, reading, "", 0, (), "")
+        return Result(sentence, Verdict.WRITTEN, reading, "", 0, (), "", "")
     if _first(lines, "✗"):
         return Result(sentence, Verdict.REFUSED, reading, d.reason,
-                      open_questions, d.layers, d.sole)
+                      open_questions, d.layers, d.sole, d.kind)
     if result.predication is None:
         return Result(sentence, Verdict.UNREAD, reading, d.reason,
-                      open_questions, d.layers, d.sole)
+                      open_questions, d.layers, d.sole, d.kind)
     return Result(sentence, Verdict.ASKS, reading, d.reason,
-                  open_questions, d.layers, d.sole)
+                  open_questions, d.layers, d.sole, d.kind)
 
 
 def sentences_of(text: str, oracle: UDPipeOracle) -> tuple[str, ...]:
