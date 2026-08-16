@@ -71,6 +71,10 @@
   .znacka { display:inline-block; font-size:11px; padding:1px 6px; border-radius:4px;
              background:var(--grid); color:var(--ink2); margin-right:5px; }
   .prazdno { color:var(--sede); padding:18px 2px; }
+  .varovani { margin:16px 0 4px; padding:11px 14px; border-radius:8px;
+               border:1px solid var(--err); color:var(--ink);
+               background:color-mix(in srgb, var(--err) 12%, transparent); }
+  .varovani ul { margin:6px 0 0; padding-left:20px; }
 </style>
 
 <div class="wrap">
@@ -80,6 +84,7 @@
 skóre: <code>PTÁ SE</code> není chyba, <code>DVOJZNAČNÉ</code> není mlčení
 a nadpis, který se nepřečetl, není mezera schopnosti.</p>
 
+<div class="varovani"><b>Tenhle běh nejde zopakovat.</b><ul><li>jádro bylo <b>rozdělané</b> — tahle čísla nepatří žádnému commitu</li><li>jádro se <b>během běhu změnilo</b> — záznam není nad jedním stavem kódu</li></ul></div>
 <h2>Identita běhu</h2>
 <table class="krizem"><tr><th>korpus</th><td><code>github.com/alchy/conBond2@418d7f7</code></td></tr><tr><th>jádro</th><td><code>27c6a62 2026-08-16 09:52 W-78: přívlastek ve jmenné frázi — složí se i pod ztracenou hlavou +dirty:bb2a6d72</code></td></tr><tr><th>jádro na konci</th><td><code>27c6a62 2026-08-16 09:52 W-78: přívlastek ve jmenné frázi — složí se i pod ztracenou hlavou +dirty:21360955</code></td></tr><tr><th>orákulum</th><td><code>udpipe2 model=cs_all-ud-2.17-251125 tokenizer=6247b8b7a5c8</code></td></tr><tr><th>měřicí vrstva</th><td><code>b0bc673 2026-08-16 10:02 W-78 a W-79: porovnavana hodnota bez poznamky, doklady spustitelne</code></td></tr><tr><th>záznam</th><td><code>korpus-2026-08-16-1050.json</code></td></tr><tr><th>strop vět na dokument</th><td><code>40</code></td></tr><tr><th>neměřeno řádků nad stropem</th><td><code>3045</code></td></tr><tr><th>determinismus</th><td>dva běhy nad touž revizí <b>shodné</b></td></tr></table>
 

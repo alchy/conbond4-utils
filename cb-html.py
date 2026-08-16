@@ -208,6 +208,26 @@ def postav(zaznam: dict, zdroj: Path) -> str:
             ("neměřeno řádků nad stropem", zaznam.get("unmeasured", "?")),
         )
     )
+    # VAROVÁNÍ PŘÍMO V MAPĚ, ne v poznámce pod ní. Mapa se ukazuje
+    # a cituje; kdo si ji otevře za měsíc, musí z ní poznat, jestli se
+    # čísla dají zopakovat — jinak se z „běhu nad rozdělaným stromem"
+    # stane citovaný fakt.
+    vady = []
+    if "+dirty:" in str(zaznam.get("core", "")):
+        vady.append("jádro bylo <b>rozdělané</b> — tahle čísla nepatří "
+                    "žádnému commitu")
+    if zaznam.get("core_na_konci") and zaznam["core_na_konci"] != zaznam.get("core"):
+        vady.append("jádro se <b>během běhu změnilo</b> — záznam není nad "
+                    "jedním stavem kódu")
+    if "+dirty:" in str(zaznam.get("utils", "")):
+        vady.append("měřicí vrstva byla <b>rozdělaná</b> — čísla vyrobil kód, "
+                    "který v žádném commitu není")
+    varovani = (
+        '<div class="varovani"><b>Tenhle běh nejde zopakovat.</b><ul>'
+        + "".join(f"<li>{v}</li>" for v in vady)
+        + "</ul></div>"
+    ) if vady else ""
+
     determinismus = zaznam.get("determinismus") or {}
     if determinismus:
         hlavicka += (
@@ -240,6 +260,7 @@ def postav(zaznam: dict, zdroj: Path) -> str:
         )
 
     return _SABLONA.format(
+        varovani=varovani,
         hlavicka=hlavicka,
         pocet=len(vety),
         stavy=sloupce(stavy, STAVY),
@@ -325,6 +346,10 @@ _SABLONA = """<!doctype html>
   .znacka {{ display:inline-block; font-size:11px; padding:1px 6px; border-radius:4px;
              background:var(--grid); color:var(--ink2); margin-right:5px; }}
   .prazdno {{ color:var(--sede); padding:18px 2px; }}
+  .varovani {{ margin:16px 0 4px; padding:11px 14px; border-radius:8px;
+               border:1px solid var(--err); color:var(--ink);
+               background:color-mix(in srgb, var(--err) 12%, transparent); }}
+  .varovani ul {{ margin:6px 0 0; padding-left:20px; }}
 </style>
 
 <div class="wrap">
@@ -334,6 +359,7 @@ _SABLONA = """<!doctype html>
 skóre: <code>PTÁ SE</code> není chyba, <code>DVOJZNAČNÉ</code> není mlčení
 a nadpis, který se nepřečetl, není mezera schopnosti.</p>
 
+{varovani}
 <h2>Identita běhu</h2>
 <table class="krizem">{hlavicka}</table>
 

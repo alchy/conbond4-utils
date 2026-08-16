@@ -279,6 +279,36 @@ def etalon(korpus: Korpus, oracle) -> dict:
     return {"polozky": zaznamy}
 
 
+def pockej_na_ciste(minut: int) -> str:
+    """Počká, až bude jádro na commitu **bez rozdělané práce**.
+
+    Běh nad rozdělaným stromem není měření, je to odhad s razítkem:
+    čísla nepatří žádnému commitu, takže se k nim nikdo nemůže vrátit.
+    Dokud to hlídala jen kázeň, procházelo to — proto to hlídá nástroj.
+
+    Vrací identitu, nad kterou se smí měřit. Když se nedočká, **nic se
+    nezměří**: prázdný záznam je lepší než záznam, který se tváří jako
+    revize a není jí.
+    """
+    konec = time.monotonic() + minut * 60
+    hlaseno = ""
+    while True:
+        jadro, _ = identity(CONBOND4)
+        if "+dirty:" not in jadro:
+            return jadro
+        if time.monotonic() > konec:
+            raise SystemExit(
+                f"jádro je {minut} minut rozdělané ({jadro}) — neměřím.\n"
+                f"Běh nad rozdělaným stromem by vydal čísla, která nepatří "
+                f"žádnému commitu; radši nic než razítko, které neplatí."
+            )
+        if jadro != hlaseno:
+            hlaseno = jadro
+            zbyva = (konec - time.monotonic()) / 60
+            print(f"  čekám na čisté jádro ({zbyva:.0f} min): {jadro}")
+        time.sleep(20)
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--dokument", action="append", default=[],
@@ -292,6 +322,10 @@ def main() -> None:
                         help="spustit dvakrát a porovnat počty")
     parser.add_argument("--etalon", action="store_true",
                         help="jen zlatá sada otázek")
+    parser.add_argument("--nad-cistym", type=int, default=0, metavar="MINUT",
+                        help="počkat, až bude jádro na commitu bez rozdělané "
+                             "práce, a běh zopakovat, když se strom během "
+                             "měření změní")
     parser.add_argument("--bez-etalonu", action="store_true",
                         help="vynechat zlatou sadu")
     args = parser.parse_args()
@@ -303,6 +337,9 @@ def main() -> None:
     # kaskádou uvnitř sezení a jednou kvůli rozboru do záznamu. Na
     # výsledek nemá vliv — klíčem je provenience i text.
     oracle = CachingOracle(zdroj)
+
+    if args.nad_cistym:
+        pockej_na_ciste(args.nad_cistym)
 
     korpus = porid(DATA / "conBond2", revize=args.revize)
     ze_zlate, nespojene = _dokumenty_zlate_sady(korpus)
@@ -385,6 +422,13 @@ def main() -> None:
               " záznam není nad jedním stavem kódu")
         print(f"    začátek: {record['core']}")
         print(f"    konec:   {record['core_na_konci']}")
+        if args.nad_cistym:
+            # Se `--nad-cistym` se takový záznam NEUKLÁDÁ. Uložit ho a
+            # připsat varování už jsme zkusili: soubor pak leží v repu,
+            # kreslí se z něj mapa a varování si nikdo nepřečte.
+            raise SystemExit(
+                "  záznam se neukládá — pusť to znovu, až bude jádro stát"
+            )
 
     if args.dvakrat:
         print("\nKONTROLA DETERMINISMU — druhý běh nad touž revizí\n")
