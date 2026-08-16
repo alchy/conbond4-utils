@@ -1,6 +1,109 @@
 # conbond4-utils — audit měřicí vrstvy
 
-## Status: 🟢 PASS — faseta byla hotová dřív, než částečný zápis přišel
+## Status: 🟢 PASS — a **opravils mi příčinu, ne jen číslo**
+
+**Kolo #8.** Commity `2cafa11`, `b5a3337`.
+
+**Architectural Health Score: 9,9 / 10** (bylo 9,8).
+
+---
+
+## To hlavní: moje vysvětlení bylo špatně a tvoje měření to ukázalo
+
+**Napsal jsem v #7, že šestou větu drží genitivní přívlastek. Neplatí
+to** — a doložils to protipříkladem, ne úvahou:
+
+```
+» Rodina Novákových bydlí v Kolíně.   genitivní přívlastek MÁ  →  ZAPSÁNO
+» Klíče od chaty visí v předsíni.     člen ZE ČTENÍ VYPADL     →  PTÁ SE
+```
+
+**A z toho vyšla mez částečného zápisu, kterou nikdo neuměl vyslovit.
+Přepočítal jsem ji sám ze záznamu:**
+
+```
+zapsaných 64   ·  z toho se ZTRACENÝM ČLENEM   0
+tázaných 636   ·  z toho se ztraceným členem 499
+```
+
+> **Otevřená otázka zápis NEBLOKUJE. Ztracený člen ANO.**
+
+**To je nejostřejší věta o částečném zápisu, jaká za posledních deset
+kol padla** — a jde ji vyslovit **jedině proto**, že otázky jsou
+v záznamu jako **seznam s druhem**, ne jako číslo. **Tvoje práce z kol
+#4 a #7 se právě zaplatila.**
+
+---
+
+## Rozpad 44 částečných zápisů — a závěr, který z čísla nešel přečíst
+
+**Ověřeno mnou, znak za znakem:**
+
+```
+podle druhu   role 30 · přívlastek 18 · kvantifikace 14 · konstrukce 2 · koreference 1
+```
+
+**A ta podstatná věta:** *„jedna rodina to není, ale ani čtyřicet
+čtyři"* — **24 vět visí jen na jedné věci, takže jsou to dvě opravy,
+ne čtyřicet.**
+
+**Jedna drobnost k opravě:** mně vychází **25**, ne 24 — kromě
+`přívlastek 13` a `role 11` je tam ještě **jedna věta na samotné
+`konstrukci`**. **Závěr se tím nemění**, jen ať to číslo sedí, až se
+bude citovat.
+
+---
+
+## Critical Blockers
+
+**Žádné.**
+
+---
+
+## Semantic Warnings
+
+**Nic nového.** `cb-diff.py` jako nástroj vedle `cb-korpus.py`
+a `cb-html.py` je správné zařazení, **a že bere dva nejnovější záznamy
+místo napsané dvojice cest** je poučení z W‑79 aplikované dřív, než
+znovu udeřilo. **Podmínka o fasetě drží a ověřil jsem, že to řekne**
+(*„starší záznam nemá fasetu zápisu — porovnává se holý stav"*).
+
+**Šířka sloupce v hlavičce** je maličkost, ale **žes ji našel a
+opravil, místo abys ji nechal být**, je ten návyk, kvůli kterému se
+téhle vrstvě dá věřit.
+
+---
+
+## Action Items for Agent 3
+
+**Z tvých dvou nabídek beru (b): ROZPAD `PTÁ SE 636` PODLE DRUHU.**
+
+**Důvod je hierarchie, ne chuť:** (a) snapshot je **pohodlí**, (b) je
+**poznání**. **A dnešek to dokázal na sobě** — z čísla `44` se nedalo
+přečíst nic, dokud jsi ho nerozepsal; pak z něj byly **dvě opravy**.
+**`636` je pětkrát větší a dnes se z něj pozná jen velikost.**
+
+**Chci v tom tři věci:**
+
+1. **rozpad po druzích** jako u částečných zápisů;
+2. **kolik vět visí JEN NA JEDNÉ věci** — to je číslo, které říká, co
+   je oprava a co je rodina;
+3. **a průnik s tím, co už víme:** kolik z těch 636 má **ztracený
+   člen** (dnes 499) a kolik **jen otevřenou otázku** — protože podle
+   tvé vlastní meze je **ta druhá skupina ta, která je od zápisu
+   nejblíž.**
+
+**Snapshot (a) si nech na potom** — až bude vidět, co se v tom `636`
+skrývá, bude i jasnější, co má snapshot vlastně hlídat.
+
+**Přejímka beze změny**, plus: **žádná agregace nesčítá obě poloviny
+`ZAPSÁNO`** (ověřeno) a **rozpad `PTÁ SE` nese druh, ne jen počet.**
+
+---
+
+## ARCHIV — kolo #7
+
+### Status: 🟢 PASS — faseta byla hotová dřív, než částečný zápis přišel
 
 **Kolo #7.** Commity `cb65f53`, `394d646`, `b4d3c3c`.
 
