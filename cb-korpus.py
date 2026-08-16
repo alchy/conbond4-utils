@@ -42,7 +42,14 @@ from cb_utils.atribuce import zapis as zapis_atribuci
 from cb_utils.triage import OracleError  # noqa: E402  (nastavuje cestu k jádru)
 from cb_utils.korpus import Korpus, klic, odstavce, porid
 from cb_utils.revize import identity
-from cb_utils.triage import CONBOND4, Result, Verdict, sentences_of, triage
+from cb_utils.triage import (
+    CONBOND4,
+    Result,
+    Verdict,
+    nove_sezeni,
+    sentences_of,
+    triage,
+)
 
 HERE = Path(__file__).resolve().parent
 DATA = HERE / "data"
@@ -113,6 +120,7 @@ def _zaznam_vety(result: Result, radek: str, tvar: str) -> dict:
         "question": result.question,
         "trace": list(result.trace),
         "parse": list(result.parse),
+        "references": list(result.references),
     }
 
 
@@ -135,7 +143,7 @@ def _tvar_vety(radek: str, result: Result) -> str:
 
 
 def zmer_dokument(
-    korpus: Korpus, jmeno: str, oracle, delic, strop: int
+    korpus: Korpus, jmeno: str, oracle, delic, strop: int, *, po_dokumentech: bool = False
 ) -> tuple[list[Result], list[dict], int]:
     """Jeden dokument. Vrací výsledky, záznamy a **kolik vět zbylo
     neměřených** — ať je strop vidět, ne domýšlený.
@@ -148,6 +156,10 @@ def zmer_dokument(
     zaznamy: list[dict] = []
     radky = odstavce(korpus.text(jmeno))
     hotovo = 0
+    # JEDNO SEZENÍ NA DOKUMENT, nebo čerstvé na každou větu. Rozdíl je
+    # celý smysl dokumentového běhu: zájmeno má kam sáhnout jen tehdy,
+    # když předchozí věta v sezení zůstala.
+    sezeni = nove_sezeni() if po_dokumentech else None
     for poradi, radek in enumerate(radky):
         if strop and len(results) >= strop:
             break
@@ -161,7 +173,7 @@ def zmer_dokument(
             print(f"    ! segmentace selhala: {str(error)[:80]}")
             continue
         for veta in vety:
-            result = triage(veta, oracle)
+            result = triage(veta, oracle, sezeni)
             results.append(result)
             zaznamy.append(_zaznam_vety(result, radek, _tvar_vety(radek, result)))
     else:
@@ -408,6 +420,9 @@ def main() -> None:
                         help="spustit dvakrát a porovnat počty")
     parser.add_argument("--etalon", action="store_true",
                         help="jen zlatá sada otázek")
+    parser.add_argument("--po-dokumentech", action="store_true",
+                        help="jedno sezení na dokument místo na větu — "
+                             "zájmeno pak má kam sáhnout")
     parser.add_argument("--nad-cistym", type=int, default=0, metavar="MINUT",
                         help="počkat, až bude jádro na commitu bez rozdělané "
                              "práce, a běh zopakovat, když se strom během "
@@ -444,6 +459,11 @@ def main() -> None:
         "utils": mereni,
         "utils_poznamka": mereni_pozn,
         "strop_vet_na_dokument": args.vet,
+        # Režim sezení patří do identity běhu stejně jako revize: „jedno
+        # sezení na dokument" a „čerstvé na každou větu" měří něco
+        # jiného a jejich čísla se nesmějí porovnávat jako dva běhy
+        # téhož.
+        "rezim_sezeni": "dokument" if args.po_dokumentech else "věta",
         "documents": [],
     }
     print(f"korpus:   {record['korpus']}")
@@ -467,7 +487,8 @@ def main() -> None:
     if not args.etalon:
         for jmeno in jmena:
             zacatek = time.perf_counter()
-            results, zaznamy, zbylo = zmer_dokument(korpus, jmeno, oracle, zdroj, args.vet)
+            results, zaznamy, zbylo = zmer_dokument(korpus, jmeno, oracle, zdroj, args.vet,
+                                     po_dokumentech=args.po_dokumentech)
             everything.extend(results)
             vsechny_zaznamy.extend(zaznamy)
             neizmereno += zbylo
@@ -522,7 +543,8 @@ def main() -> None:
         druhy: Counter[str] = Counter()
         druhe_vrstvy: Counter[str] = Counter()
         for jmeno in jmena:
-            results, _, _ = zmer_dokument(korpus, jmeno, oracle, zdroj, args.vet)
+            results, _, _ = zmer_dokument(korpus, jmeno, oracle, zdroj, args.vet,
+                                     po_dokumentech=args.po_dokumentech)
             druhy.update(r.stav for r in results)
             for r in results:
                 for layer in r.layers:

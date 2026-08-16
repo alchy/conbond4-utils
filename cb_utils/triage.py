@@ -87,6 +87,11 @@ class Result:
     #: strojově, ne součtem. „Ubyla jedna otázka a přibyla jiná" je
     #: v součtu neviditelné a v seznamu je to vidět hned.
     questions: tuple[str, ...] = ()
+    #: Čekající odkazy z `TurnResult.references` — `scope|role|tvar` a
+    #: **co systém nabídl**. Prázdná nabídka je jiný stav než nabídka,
+    #: ze které si nikdo nevybral: první říká „nemám z čeho", druhý
+    #: „mám, ale nerozhodl jsem". Sčítat je by zakrylo, co dělá kontext.
+    references: tuple[str, ...] = ()
     #: `QueryStatus` u tázací věty — `A` / `N` / `U` / `CONFLICT`.
     #: Prázdné u oznamovací: **stav dotazu a stav čtení jsou dvě různé
     #: osy** a slít je do jednoho čísla by znamenalo ztratit obojí.
@@ -307,9 +312,20 @@ def parse_of(sentence: str, oracle: UDPipeOracle) -> tuple[str, ...]:
     )
 
 
-def triage(sentence: str, oracle: UDPipeOracle) -> Result:
-    """Jedna věta, jedno čerstvé sezení."""
-    session = Session(lexicon=golden.golden_lexicon())
+def nove_sezeni() -> Session:
+    return Session(lexicon=golden.golden_lexicon())
+
+
+def triage(sentence: str, oracle: UDPipeOracle, session: Session | None = None) -> Result:
+    """Jedna věta. **Čerstvé sezení, pokud se nepředá jiné.**
+
+    Výchozí chování zůstává „každá věta ve vlastním sezení", protože
+    v něm se věty neovlivňují a měření tak neměří pořadí. Dokumentový
+    běh je vědomá výjimka: jedno sezení na dokument, věty v pořadí, aby
+    zájmeno mělo kam sáhnout. Obojí je legitimní měření, jen měří něco
+    jiného — a proto se to nesmí míchat v jednom záznamu.
+    """
+    session = session or nove_sezeni()
     try:
         result = session.utter(sentence, oracle)
     except (SegmentationError, OracleError) as error:
@@ -341,6 +357,10 @@ def triage(sentence: str, oracle: UDPipeOracle) -> Result:
         "question": question,
         "status": result.status.value if result.status is not None else "",
         "parse": parse_of(sentence, oracle),
+        "references": tuple(
+            f"{o.scope}|{o.role}|{o.form}|{','.join(o.candidates)}"
+            for o in getattr(result, "references", ())
+        ),
     }
     if result.statement_id:
         return Result(

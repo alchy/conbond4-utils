@@ -105,6 +105,15 @@ def main() -> None:
     hlavicka(f"STARÝ  {Path(argy[0]).name}", stary_zaznam)
     hlavicka(f"NOVÝ   {Path(argy[1]).name}", novy_zaznam)
 
+    # REŽIM SEZENÍ SE NESMÍ MÍCHAT. „Jedno sezení na dokument" a
+    # „čerstvé na každou větu" měří něco jiného; porovnat je jde, ale
+    # ne mlčky, protože rozdíl pak vypadá jako změna systému.
+    rezimy = (stary_zaznam.get("rezim_sezeni", "věta"),
+              novy_zaznam.get("rezim_sezeni", "věta"))
+    if rezimy[0] != rezimy[1]:
+        print(f"\n  POZOR: různý režim sezení ({rezimy[0]} → {rezimy[1]})."
+              f" Rozdíly níž nedělá jen jádro, ale i to, co si sezení pamatuje.")
+
     spolecne = sorted(set(stare) & set(nove))
     print(f"\nvět: starý {len(stare)} · nový {len(nove)} · společných {len(spolecne)}")
     jen_stare = len(stare) - len(spolecne)
