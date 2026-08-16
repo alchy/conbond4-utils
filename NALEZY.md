@@ -23,6 +23,72 @@ Reprodukovat ho podle `d6782cb` nejde a záznam to přiznává příznakem
 
 ---
 
+## N‑14 · Na čem visí těch 626 tázaných vět
+
+Největší skupina, a do teď se z ní poznala jen velikost. Rozpad je
+v `cb-korpus.py`, `cb-diff.py` i v mapě — záznam
+`mereni/korpus-2026-08-16-1520.json`, jádro `f8eebb5`, obě strany čisté:
+
+```
+PTÁ SE 626  ·  podle druhu (věta jich má obvykle dvě až tři)
+   835  role            201  podmět          107  vztažná_věta
+   353  kvantifikace    164  koordinace       52  koreference
+   312  přívlastek      122  konstrukce       30  zakotvení
+
+jen na jedné věci:  59 z 626
+   role 35 · kvantifikace 8 · přívlastek 7 · koordinace 5 · podmět 2 · konstrukce 2
+```
+
+**Průnik s mezí z N‑13** — zápis blokuje ztracený člen, ne otevřená
+otázka, takže se ta skupina rozpadá na dvě různě daleké:
+
+```
+se ztraceným členem   441      hranici drží ztráta
+jen otevřená otázka   185      OD ZÁPISU NEJBLÍŽ
+   z toho jen na jedné věci: 29
+   kvantifikace 8 · přívlastek 7 · role 5 · koordinace 5 · podmět 2 · konstrukce 2
+```
+
+**Co se z toho dá číst:** těch 185 vět nedělí od zápisu nic než odpověď
+na otázku — a 29 z nich visí na jediné věci. To je práce v řádu jednotek
+oprav, ne stovek vět. Zbylých 441 potřebuje napřed to, aby se ztracený
+člen do čtení vůbec dostal; tam odpověď nepomůže.
+
+Devět vět v `PTÁ SE` nemá otevřenou věc **žádnou** — jádro u nich nic
+neřeklo. Je to zbytek nadpisů, které projdou jako čtení (`= = =`
+→ `=(co:=, jak:=)`). Do rozpadu nepatří a v mapě je to napsané, aby
+rozdíl 626 vs 617 nevypadal jako chyba součtu.
+
+---
+
+## N‑13b · Jádro se ptá i bez otazníku — zbytek N‑10 o dvě věty dál
+
+Při stavbě rozpadu vypadly dvě věty z 836, které měly prázdný seznam,
+přestože po nich jádro **něco chtělo**:
+
+```
+Pocházel ze starého selského rodu.
+  „Věta nemá podmět — »Pocházel« ho nevyslovil. […] Řekni to prosím jménem."
+```
+
+To není vysvětlení, to je **výzva**: dá se na ni odpovědět, a přesně
+v tom je rozdíl proti *„Tuhle větu přečíst neumím"*. Pravidlo „jedna
+položka = jeden otazník" ji minulo.
+
+Opraveno na obou stranách, a **na zkoušce dřív než na kódu**: `pta_se()`
+v `nalezy/otazka_neni_nula.py` teď rozhoduje podle otazníku **nebo**
+výzvy, a nad starým záznamem ta zkouška **spadne** (2 porušení). To je
+doklad, že to není kosmetika — kontrola, která si sama zúží definici,
+přestane chytat právě tu vadu, kvůli které vznikla.
+
+Přibyly tím i tři nové druhy otázek, které jádro mezitím začalo klást
+(`vztažná_věta`, přívlastek bez „v genitivu", koordinační výklad). `jiné`
+je zase **nula** — a je to podruhé, co ten ukazatel zafungoval přesně
+tak, jak byl zamýšlen: jádro se naučilo ptát jinak a měření to ohlásilo
+z běhu, ne až z reportu.
+
+---
+
 ## N‑13 · Částečný zápis přišel — a rozhodnutí bylo hotové dřív
 
 Reviewer upozornil, že jádro chystá **částečný zápis**: věta se bude
@@ -114,10 +180,13 @@ podle druhu (věta jich může mít víc)     na větu
                                            1  konstrukce
 ```
 
-Jedna rodina to tedy není, ale ani čtyřicet čtyři: **24 vět ze 44 visí
-jen na jedné věci** (13 přívlastek, 11 role). To jsou dvě opravy, ne
-čtyřicet — a přesně tohle číslo se z holého „44 částečných" přečíst
-nedalo.
+Jedna rodina to tedy není, ale ani čtyřicet čtyři: **25 vět ze 44 visí
+jen na jedné věci** (13 přívlastek, 11 role, 1 konstrukce). To jsou dvě
+opravy, ne čtyřicet — a přesně tohle číslo se z holého „44 částečných"
+přečíst nedalo.
+
+*(Původně tu stálo 24; Reviewer přepočítal a měl pravdu — jedna věta visí
+na samotné konstrukci. Číslo, které se bude citovat, má sedět.)*
 
 ---
 

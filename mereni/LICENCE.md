@@ -20,24 +20,24 @@ může odkaz mířit na rozcestník; je to atribuce, ne katalog.
 
 | dokument | článek | odkaz | v záznamech |
 |---|---|---|---|
-| `alois_jirásek` | Alois Jirásek | <https://cs.wikipedia.org/wiki/Alois_Jirásek> | 7 |
-| `antarktida` | Antarktida | <https://cs.wikipedia.org/wiki/Antarktida> | 7 |
-| `bohumil_hrabal` | Bohumil Hrabal | <https://cs.wikipedia.org/wiki/Bohumil_Hrabal> | 7 |
-| `božena_němcová` | Božena Němcová | <https://cs.wikipedia.org/wiki/Božena_Němcová> | 7 |
-| `egon_hostovský` | Egon Hostovský | <https://cs.wikipedia.org/wiki/Egon_Hostovský> | 7 |
-| `fotosyntéza` | Fotosyntéza | <https://cs.wikipedia.org/wiki/Fotosyntéza> | 7 |
-| `františek_halas` | František Halas | <https://cs.wikipedia.org/wiki/František_Halas> | 7 |
-| `jaroslav_hašek` | Jaroslav Hašek | <https://cs.wikipedia.org/wiki/Jaroslav_Hašek> | 7 |
-| `josef_čapek` | Josef Čapek | <https://cs.wikipedia.org/wiki/Josef_Čapek> | 7 |
-| `josef_škvorecký` | Josef Škvorecký | <https://cs.wikipedia.org/wiki/Josef_Škvorecký> | 7 |
-| `karel_čapek` | Karel Čapek | <https://cs.wikipedia.org/wiki/Karel_Čapek> | 7 |
-| `kočka_domácí` | Kočka domácí | <https://cs.wikipedia.org/wiki/Kočka_domácí> | 7 |
-| `kůň_domácí` | Kůň domácí | <https://cs.wikipedia.org/wiki/Kůň_domácí> | 7 |
-| `pes_domácí` | Pes domácí | <https://cs.wikipedia.org/wiki/Pes_domácí> | 7 |
-| `rur` | R.U.R. | <https://cs.wikipedia.org/wiki/R.U.R.> | 7 |
-| `sopka` | Sopka | <https://cs.wikipedia.org/wiki/Sopka> | 7 |
-| `včela_medonosná` | Včela medonosná | <https://cs.wikipedia.org/wiki/Včela_medonosná> | 7 |
-| `šachy` | Šachy | <https://cs.wikipedia.org/wiki/Šachy> | 7 |
+| `alois_jirásek` | Alois Jirásek | <https://cs.wikipedia.org/wiki/Alois_Jirásek> | 8 |
+| `antarktida` | Antarktida | <https://cs.wikipedia.org/wiki/Antarktida> | 8 |
+| `bohumil_hrabal` | Bohumil Hrabal | <https://cs.wikipedia.org/wiki/Bohumil_Hrabal> | 8 |
+| `božena_němcová` | Božena Němcová | <https://cs.wikipedia.org/wiki/Božena_Němcová> | 8 |
+| `egon_hostovský` | Egon Hostovský | <https://cs.wikipedia.org/wiki/Egon_Hostovský> | 8 |
+| `fotosyntéza` | Fotosyntéza | <https://cs.wikipedia.org/wiki/Fotosyntéza> | 8 |
+| `františek_halas` | František Halas | <https://cs.wikipedia.org/wiki/František_Halas> | 8 |
+| `jaroslav_hašek` | Jaroslav Hašek | <https://cs.wikipedia.org/wiki/Jaroslav_Hašek> | 8 |
+| `josef_čapek` | Josef Čapek | <https://cs.wikipedia.org/wiki/Josef_Čapek> | 8 |
+| `josef_škvorecký` | Josef Škvorecký | <https://cs.wikipedia.org/wiki/Josef_Škvorecký> | 8 |
+| `karel_čapek` | Karel Čapek | <https://cs.wikipedia.org/wiki/Karel_Čapek> | 8 |
+| `kočka_domácí` | Kočka domácí | <https://cs.wikipedia.org/wiki/Kočka_domácí> | 8 |
+| `kůň_domácí` | Kůň domácí | <https://cs.wikipedia.org/wiki/Kůň_domácí> | 8 |
+| `pes_domácí` | Pes domácí | <https://cs.wikipedia.org/wiki/Pes_domácí> | 8 |
+| `rur` | R.U.R. | <https://cs.wikipedia.org/wiki/R.U.R.> | 8 |
+| `sopka` | Sopka | <https://cs.wikipedia.org/wiki/Sopka> | 8 |
+| `včela_medonosná` | Včela medonosná | <https://cs.wikipedia.org/wiki/Včela_medonosná> | 8 |
+| `šachy` | Šachy | <https://cs.wikipedia.org/wiki/Šachy> | 8 |
 
 ## Psané ručně v conBondu2 — bez vnějšího zdroje
 
@@ -47,10 +47,10 @@ který neexistuje.
 
 | dokument | v záznamech |
 |---|---|
-| `fyzika_gravitace` | 7 |
-| `poznámky_domácnost` | 7 |
-| `příroda_česká` | 7 |
-| `rodina_novákovi` | 7 |
+| `fyzika_gravitace` | 8 |
+| `poznámky_domácnost` | 8 |
+| `příroda_česká` | 8 |
+| `rodina_novákovi` | 8 |
 
 ---
 

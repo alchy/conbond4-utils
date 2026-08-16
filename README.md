@@ -82,18 +82,18 @@ nestabilní měření.
 ## Historický korpus conBondu2 (krok 4)
 
 ```bash
-python cb-korpus.py --vet 40 --dvakrat --nad-cistym 120 --json mereni/korpus-2026-08-16-1145.json
+python cb-korpus.py --vet 40 --dvakrat --nad-cistym 120 --json mereni/korpus-2026-08-16-1520.json
 ```
 
 Korpus se klonuje do `data/` (mimo git, CC BY‑SA) a v záznamu je jeho
 **revize** — je zmražený, takže na rozdíl od Wikipedie se měřicí nula
 mezi běhy nepohne. 22 dokumentů, ke kterým existuje ruční zlatá sada,
-836 vět, jádro `0eae6dc` (čistá revize, `--nad-cistym`):
+836 vět, jádro `f8eebb5` (čistá revize, `--nad-cistym`):
 
 ```
 ZAPSÁNO · úplně        20      DVOJZNAČNÉ    7
-ZAPSÁNO · s otázkami   44      NEPŘEČTENO  124
-PTÁ SE                636      CHYBA         5      ODMÍTNUTO 0
+ZAPSÁNO · s otázkami   54      NEPŘEČTENO  124
+PTÁ SE                626      CHYBA         5      ODMÍTNUTO 0
 ```
 
 Dva běhy nad touž revizí korpusu i jádra vrátily **shodné počty ve všech
@@ -130,7 +130,7 @@ Mapa je **odvozená** — nese jen to, co je v záznamu měření. Celý řetěz
 
 # 2. měření: korpus conBondu2 → záznam
 #    (korpus se sám naklonuje do data/, mimo git)
-python cb-korpus.py --vet 40 --dvakrat --nad-cistym 120 --json mereni/korpus-2026-08-16-1145.json
+python cb-korpus.py --vet 40 --dvakrat --nad-cistym 120 --json mereni/korpus-2026-08-16-1520.json
 
 # 3. záznam → mapa
 python cb-html.py --do mereni/baseline.html      # bez argumentu vezme poslední záznam

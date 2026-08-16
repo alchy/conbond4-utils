@@ -285,33 +285,74 @@ def postav(zaznam: dict, zdroj: Path) -> str:
     # CO CHYBÍ ČÁSTEČNÝM ZÁPISŮM. Číslo „44 částečných" neřekne, jestli
     # je to jedna rodina, nebo čtyřicet čtyři různých — a řídit se dá
     # jedině podle toho druhého.
-    castecne = [
-        v for v in vety
-        if v["stav"] == "ZAPSÁNO · s otázkami" and v.get("questions")
-    ]
-    castecne_html = ""
-    if castecne:
+    def rozpad(skupina: list[dict], nadpis: str, uvod: str) -> str:
+        """Podle druhu · na větu · **kolik visí jen na jedné věci**.
+
+        To poslední číslo říká, co je jedna oprava a co rodina — bez něj
+        se z „626 tázaných" pozná jen velikost.
+        """
+        if not skupina:
+            return ""
         podle_druhu: Counter[str] = Counter(
-            q.split(":", 1)[0] for v in castecne for q in v["questions"]
+            q.split(":", 1)[0] for v in skupina for q in v["questions"]
         )
         na_vetu: Counter[str] = Counter(
             " + ".join(sorted({q.split(":", 1)[0] for q in v["questions"]}))
-            for v in castecne
+            for v in skupina
+        )
+        sam: Counter[str] = Counter(
+            next(iter({q.split(":", 1)[0] for q in v["questions"]}))
+            for v in skupina
+            if len({q.split(":", 1)[0] for q in v["questions"]}) == 1
         )
         radky = "".join(
             f"<tr><th>{html.escape(k)}</th><td>{n}</td></tr>"
-            for k, n in na_vetu.most_common()
+            for k, n in na_vetu.most_common(10)
         )
-        castecne_html = (
-            f"<h2>Co chybí částečným zápisům — {len(castecne)} vět</h2>"
-            "<p class='sede'>Zápis se stal, otázka zůstala. Bez tohohle "
-            "rozpadu se z čísla nepozná, jestli je to jedna rodina, nebo "
-            "tolik různých, kolik je vět.</p>"
+        return (
+            f"<h2>{html.escape(nadpis)} — {len(skupina)} vět</h2>"
+            f"<p class='sede'>{uvod}</p>"
             + sloupce(podle_druhu)
-            + "<table class='krizem'><tr><th>na větu</th><th>kolik</th></tr>"
-            + radky
-            + "</table>"
+            + f"<p class='sede'><b>Jen na jedné věci: {sum(sam.values())}"
+            f" z {len(skupina)}</b> — "
+            + " · ".join(f"{html.escape(k)} {n}" for k, n in sam.most_common())
+            + "</p><table class='krizem'>"
+            "<tr><th>na větu</th><th>kolik</th></tr>" + radky + "</table>"
         )
+
+    ma_otazky = [v for v in vety if v.get("questions")]
+    castecne = [v for v in ma_otazky if v["stav"] == "ZAPSÁNO · s otázkami"]
+    ptaji = [v for v in ma_otazky if v["stav"] == "PTÁ SE"]
+    # Ztracený člen je HRANICE ZÁPISU (kolo #8): zapsaných se ztrátou
+    # bylo 0 z 64. Věta bez ztráty je proto od zápisu nejblíž — a to je
+    # jiná informace než „ptá se".
+    bez_ztraty = [
+        v for v in ptaji
+        if not any("do čtení se nedostalo" in q for q in v["questions"])
+    ]
+    # Kolik vět v `PTÁ SE` nemá ANI JEDNU otevřenou věc: jádro u nich
+    # nic neřeklo (typicky zbytek nadpisu, co projde jako čtení). Rozdíl
+    # proti číslu ve stavech se tím nedá přehlédnout — jinak by vypadal
+    # jako chyba součtu.
+    vsech_ptajicich = sum(1 for v in vety if v["stav"] == "PTÁ SE")
+    nemluvi = vsech_ptajicich - len(ptaji)
+    poznamka = (
+        f" Z {vsech_ptajicich} vět v „PTÁ SE“ jich {nemluvi} nemá otevřenou"
+        f" věc — jádro u nich nic neřeklo, takže tady nejsou."
+        if nemluvi else ""
+    )
+    castecne_html = (
+        rozpad(castecne, "Co chybí částečným zápisům",
+               "Zápis se stal, otázka zůstala. Bez rozpadu se z čísla nepozná, "
+               "jestli je to jedna rodina, nebo tolik různých, kolik je vět.")
+        + rozpad(ptaji, "Na čem visí „PTÁ SE“",
+                 "Největší skupina. Otázek je víc než vět — jedna věta jich má "
+                 "obvykle dvě až tři." + poznamka)
+        + rozpad(bez_ztraty, "Z toho bez ztraceného členu — od zápisu nejblíž",
+                 "Zápis blokuje ztracený člen, ne otevřená otázka: zapsaných se "
+                 "ztrátou je nula. Tyhle věty tedy dělí od zápisu jen to, na co "
+                 "se systém ptá.")
+    )
 
     return _SABLONA.format(
         varovani=varovani,
