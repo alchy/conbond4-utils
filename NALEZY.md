@@ -23,6 +23,54 @@ Reprodukovat ho podle `d6782cb` nejde a záznam to přiznává příznakem
 
 ---
 
+## N‑13 · Částečný zápis přišel — a rozhodnutí bylo hotové dřív
+
+Reviewer upozornil, že jádro chystá **částečný zápis**: věta se bude
+smět zapsat i s otevřenými otázkami, tedy vznikne stav *„zapsáno,
+a přesto se ptá"*, pro který měření nemělo jméno. Chtěl rozhodnutí
+**dřív, než ten běh přijde**. Rozhodnuto (`triage.Result.stav`):
+
+**Není to sedmý stav, jsou to dvě osy — ale nikde se nesečtou.** Osa
+stavů odpovídá na *co se s větou stalo* a částečný zápis **je** zápis:
+báze se změnila a to je fakt, který ta osa nese. Kolik ještě chybí, je
+otázka druhé osy (`questions`), kterou jsme dvě kola čistili; pojmenovat
+ji zpátky do stavu by znamenalo slít je znovu.
+
+Holé `ZAPSÁNO 64` by ale tvrdilo víc, než platí. Proto se `ZAPSÁNO`
+v **každé** agregaci štěpí na dvě fasety — jeden stav, dvě čísla, nikdy
+jedno.
+
+**A přišlo to hned dalším během** (`mereni/korpus-2026-08-16-1145.json`,
+jádro `0eae6dc`, obě strany čisté):
+
+```
+ZAPSÁNO · úplně        20
+ZAPSÁNO · s otázkami   44      ← bez fasety by tu stálo „ZAPSÁNO 64"
+PTÁ SE                636
+NEPŘEČTENO            124
+DVOJZNAČNÉ              7
+CHYBA                   5
+```
+
+Dvě třetiny zápisů jsou částečné. Kdyby se faseta rozhodovala až podle
+tohohle běhu, rozhodovala by se podle čísla, které se má vysvětlit — a to
+je přesně obráceně.
+
+Diff proti minulému běhu (`nalezy/diff_behu.py`): **30 vět `PTÁ SE →
+ZAPSÁNO`**, a mezi nimi **všech šest**, které v N‑9 zápis ztratily:
+
+```
+» Babička bydlí v Táboře.
+  ◐ přečteno, neúplné   bydlet(kdo:∀babička, v+Loc/Geo:·Tábor)
+  otevřeno dál:         Nevím, co znamená „v+Loc/Geo“ — je to tvar, ne význam
+```
+
+Vrátily se tedy **jako částečné zápisy s otázkou, která nezmizela** —
+ne tak, že by se otázka „vyřešila". To je vidět jedině proto, že stav
+a otázky jsou dvě osy.
+
+---
+
 ## N‑12 · Měřit nad rozdělaným jádrem už nejde — hlídá to nástroj
 
 Reviewer vrátil FAIL na věc, kterou moje vlastní pole ohlásilo: záznam

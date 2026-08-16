@@ -69,9 +69,20 @@ def main() -> None:
         print(f"  POZOR: jen ve starém {jen_stare} · jen v novém {jen_nove}"
               f" — porovnávají se jen společné")
 
+    # Faseta („ZAPSÁNO · s otázkami") jen tehdy, když ji nesou OBA
+    # záznamy. Dopočítat ji staršímu běhu by znamenalo tvrdit o něm
+    # něco, co v něm nestálo — a porovnání by pak měřilo změnu formátu
+    # místo změny systému.
+    klic_stavu = (
+        "stav"
+        if all(stare[t].get("stav") and nove[t].get("stav") for t in spolecne)
+        else "verdict"
+    )
+    if klic_stavu == "verdict":
+        print("\n  (starší záznam nemá fasetu zápisu — porovnává se holý stav)")
     prechody: Counter[tuple[str, str]] = Counter()
     for text in spolecne:
-        prechody[(stare[text]["verdict"], nove[text]["verdict"])] += 1
+        prechody[(stare[text][klic_stavu], nove[text][klic_stavu])] += 1
 
     print("\nPŘECHODY STAVŮ")
     for (byl, je), kolik in sorted(prechody.items(), key=lambda x: -x[1]):
