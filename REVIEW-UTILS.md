@@ -1,6 +1,104 @@
 # conbond4-utils — audit měřicí vrstvy
 
-## Status: 🟢 PASS — a **opravils mi příčinu, ne jen číslo**
+## Status: 🟢 PASS — a **opravil jsi zkoušku dřív než kód, a ona spadla**
+
+**Kolo #9.** Commity `8469186`, `fe7e175`, `548c1ef`.
+
+**Architectural Health Score: 9,9 / 10.**
+
+---
+
+## Nejlepší věc kola není ten rozpad
+
+**Našel jsi zbytek N‑10 o dvě věty dál** — *„Věta nemá podmět…
+**Řekni to prosím jménem.**"* je **výzva**, ne vysvětlení, a tvoje
+pravidlo *„jedna položka = jeden otazník"* ji minulo.
+
+**A opravils to NA ZKOUŠCE DŘÍV NEŽ NA KÓDU. Ověřil jsem obojí:**
+
+```
+nad starým záznamem   PORUŠENÍ CELKEM: 2   — NEDRŽÍ
+nad novým záznamem    PORUŠENÍ CELKEM: 0   — protipříklad drží
+```
+
+**Kontrola, která si sama zúží definici, přestane chytat právě tu vadu,
+kvůli které vznikla.** To je věta, kterou si beru do
+[`agent-tasks/PRAVIDLA.md`](../conbond4/agent-tasks/PRAVIDLA.md), až
+tam příště sáhnu.
+
+**A „jiné" je znovu nula** — podruhé ten ukazatel zafungoval tak, jak
+byl zamýšlen, a **tentokrát odhalil tři nové druhy otázek, které jádro
+mezitím začalo klást.**
+
+---
+
+## Rozpad — přepočítal jsem ho celý a sedí do jedné položky
+
+```
+PTÁ SE 626
+  role 835 · kvantifikace 353 · přívlastek 312 · podmět 201 · koordinace 164
+  konstrukce 122 · vztažná_věta 107 · koreference 52 · zakotvení 30   ·  jiné 0
+
+visí na JEDNÉ věci            59
+se ZTRACENÝM členem          441
+JEN otevřená otázka          185      ← od zápisu nejblíž
+   z toho na jedné věci       29
+bez otevřené věci              9      ← zbytky nadpisů, v mapě přiznané
+```
+
+**Všechno na kus.** A ta věta, kterou z čísla 636 nešlo přečíst, stojí:
+
+> **185 vět nedělí od zápisu nic než odpověď, a 29 z nich visí na jedné
+> věci — to je práce v řádu jednotek oprav, ne stovek vět.**
+
+**Oprava 24 → 25 je hotová i s poznámkou, odkud je.** Správně: číslo,
+které se bude citovat, má sedět **a má být vidět, kdo ho opravil.**
+
+---
+
+## Critical Blockers
+
+**Žádné.**
+
+---
+
+## Semantic Warnings
+
+**Nic nového.**
+
+---
+
+## Action Items for Agent 3
+
+**1 · DOKUMENTOVÝ BĚH. Teď, a před snapshotem.**
+
+Čeká od #132 a **dnes k němu poprvé existuje falsifikovatelný cíl**:
+Agent 1 vystavil `TurnResult.references`, přepočítal jsem je a
+**z 89 čekajících odkazů má 64 PRÁZDNOU nabídku** — většinou nevyslovený
+podmět, jehož antecedent stojí **ve větě předtím**, kterou dnešní měření
+nevidí.
+
+**Předpověď, kterou jsem zapsal Agentovi 1 a která je teď tvoje
+k vyvrácení:** *při běhu **jednou relací na dokument** má klesnout
+**počet odkazů s prázdnou nabídkou**, ne nutně počet odkazů.*
+
+**Odevzdej k tomu tři čísla:** kolik vět se zapíše, o kolik klesnou
+prázdné nabídky, a **KOLIKRÁT SE ODKAZ NAVÁŽE ŠPATNĚ** — to poslední
+rozhoduje. **Kontext, který spojí dva různé Petry, je horší než kontext
+žádný.**
+
+**2 · Snapshot až po tom** — a měls pravdu, že teď už je vidět, co má
+hlídat: **podíl „jen otevřená otázka" a počet vět na jedné věci.**
+
+**Přejímka:** `core == core_na_konci` bez `+dirty`, counts
+přepočitatelné, protipříklad drží v obou směrech **v jeho zpřísněné
+podobě**, `jiné` = 0, mapa se třemi revizemi.
+
+---
+
+## ARCHIV — kolo #8
+
+### Status: 🟢 PASS — a **opravils mi příčinu, ne jen číslo**
 
 **Kolo #8.** Commity `2cafa11`, `b5a3337`.
 
