@@ -1,6 +1,108 @@
 # conbond4-utils — audit měřicí vrstvy
 
-## Status: 🟢 PASS — N‑10 zavřená v obou směrech, a předpověď byla dřív než měření
+## Status: 🔴 FAIL — nástroj je opravený a hned si všiml sám sebe: **záznam je z běhu, který se nedá zopakovat**
+
+**Kolo #5.** Commity `b0bc673`, `675bea6`, `bf4e8fb`, `1492c22`.
+
+**Architectural Health Score: 9,6 / 10** — vrstva je lepší, odevzdaný
+doklad ne.
+
+---
+
+## Co drží, ověřeno mnou
+
+```
+W‑78  protipříklad na vymyšlených řetězcích (revize_poplach.py)   0 porušení
+      přibyl nesledovaný soubor → SHODA   ·  uklizeno vedle → SHODA
+      sledovaný strom / commit / čistý→rozdělaný → ROZDÍL
+W‑79  všechny tři skripty berou poslední záznam, spustil jsem je bez argumentu
+      názvy korpus-RRRR-MM-DD-HHMM.json se řadí správně
+N‑10  drží dál: ptá se 679 · prázdný seznam 0 · mlčí 157 · neprázdný 0
+HTML  2,3 MB jeden soubor · lang="cs" + translate="no"
+      šest stavů zvlášť, sedm druhů zvlášť, nikde jeden součet
+```
+
+**Že „poslední podle jména" vracelo STARŠÍ záznam, protože pomlčka je
+v abecedě před tečkou, jsi našel sám** — a je to přesně ta vada, která
+nespadne a jen tiše kreslí nad starým během. **Stejně tak `nsubj:pass`
+v tabulce očekávaných závislostí: číslo, které skočilo šestkrát (12 →
+78), byl artefakt párování, ne změna správnosti.** Obojí jsi ohlásil
+dřív, než se někdo zeptal.
+
+**Řazení vět v mapě podle POČTU OTEVŘENÝCH VĚCÍ, ne podle délky**, je
+správné rozhodnutí: *nejhorší věta není nejdelší, ale ta, na kterou by
+člověk musel odpovědět nejvíckrát.*
+
+---
+
+## Critical Blockers
+
+### Záznam `korpus-2026-08-16-1050.json` je z běhu nad ROZDĚLANÝM jádrem, které se během běhu ZMĚNILO
+
+```
+core          : 27c6a62 … složí se i pod ztracenou hlavou  +dirty:bb2a6d72
+core_na_konci : 27c6a62 … složí se i pod ztracenou hlavou  +dirty:21360955
+```
+
+**Tvoje nové pole zafungovalo přesně tak, jak má, a ohlásilo pravdu.
+Jenže ta pravda zní: tenhle běh se nedá zopakovat.** Čísla
+`666 / 124 / 34 / 7 / 5` **nepatří commitu `27c6a62`** — patří něčemu
+mezi dvěma rozdělanými stavy, které v žádném commitu nejsou.
+
+**Popsals to jako úspěch detektoru** (*„první skutečné zachycení té
+změny a přesně k tomu to pole je"*) — **a to je pravda**. Ale je to
+zároveň důvod ten záznam **znovu naměřit**, ne ho odevzdat. **Je to
+tvoje vlastní pravidlo z W‑69**, jen obrácené na jádro: *měř nad
+commitnutým stromem*.
+
+**A dopad je větší než jeden soubor: HTML baseline se kreslí z něj**,
+takže mapa, kterou jsi odevzdal jako krok 5, stojí na číslech, ke
+kterým se nikdo nemůže vrátit.
+
+**Co chci:** přeměřit nad **čistým, commitnutým** jádrem, vydat nový
+záznam a **překreslit mapu z něj**. Nic jiného tohle kolo neotvírej.
+
+**Přiznávám u toho vlastní chybu:** poprvé jsem si ta pole vypsal
+zkrácená na 80 znaků, `+dirty:…` se do výpisu nevešlo a **málem jsem
+napsal, že `core == core_na_konci` a je to v pořádku.** Je to popáté,
+co mě v téhle sérii doběhla vlastní zkratka v měřidle — a tentokrát by
+to prošlo do verdiktu.
+
+---
+
+## Semantic Warnings
+
+**Čísla z toho záznamu už jsem jednou použil** — tabulka „stav podle
+délky věty" ve verdiktu jádra #132 je z něj. **Závěr (od 11 slov výš se
+nezapíše prakticky nic) je tak silný, že ho pár vět nezvrátí**, ale
+**po přeměření ho ověřím znovu** a v REVIEW.md to opravím, jestli se
+pohne.
+
+**W‑67 zůstává** — prázdný `reason` u `ZAPSÁNO`, dnes **34 z 836** vět,
+u nichž ze záznamu nejde ověřit nic než formuli. **Souhlas, že je další
+v pořadí** — ale až po přeměření.
+
+---
+
+## Action Items for Agent 3
+
+1. **Přeměřit nad čistým jádrem** a vydat nový záznam. Když jádro
+   zrovna rozdělané je, **počkej** — běh nad rozdělaným stromem není
+   měření, je to odhad s razítkem.
+2. **Překreslit `baseline.html` z nového záznamu** a v hlavičce mapy
+   uvést revizi jádra, korpusu i vrstvy — ať se z obrázku pozná, čeho
+   je obrazem.
+3. **Pak W‑67.**
+
+**Přejímka:** `core == core_na_konci`, **obě strany bez `+dirty:`**;
+counts přepočítatelné po větách; N‑10 dál 0 porušení; determinismus
+shoda; mapa nese tři revize.
+
+---
+
+## ARCHIV — kolo #4
+
+### Status: 🟢 PASS — N‑10 zavřená v obou směrech, a předpověď byla dřív než měření
 
 **Kolo #4.** Commity `6aae0c9`, `0ed6c30`, `40bfc8c`, `3827731`,
 `4ecb9da`.
