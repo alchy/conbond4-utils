@@ -1,4 +1,4 @@
-# Nálezy
+﻿# Nálezy
 
 Co měřicí vrstva doložila. Každý nález má **reprodukci, kterou jde
 pustit**, a čísla z běhu — ne z odhadu. Opravy v jádře **nedělám**;
@@ -20,6 +20,32 @@ změnilo — a to je přesně to, co má být ze záznamu vidět:
 Běh 2 je nad **rozdělaným pracovním stromem** jádra, ne nad revizí.
 Reprodukovat ho podle `d6782cb` nejde a záznam to přiznává příznakem
 `+dirty` — proto je to v názvu souboru.
+
+---
+
+## N‑11 · HTML baseline — a co v ní není náhodou
+
+Krok 5 (`cb-html.py`, `mereni/baseline.html`). Mapa, ne log: u každé
+věty je původní řádek ze zdroje, tvar vstupu, rozbor, **stopa kaskády**,
+čtení a otevřené věci seznamem — takže se z ní dá zjistit, proč jedna
+věta skončila jak skončila, **aniž se pouští celý běh**.
+
+Tři rozhodnutí, která z ní dělají měřicí nástroj, a ne obrázek:
+
+* **Šest stavů a sedm druhů otázek zvlášť, nikde jeden součet.** Kdyby
+  nahoře stálo jedno skóre, zmizelo by přesně to, co se dvě kola
+  opravovalo: `PTÁ SE` není chyba, `DVOJZNAČNÉ` není mlčení a nadpis,
+  který se nepřečetl, není mezera schopnosti.
+* **Řadí se podle počtu otevřených věcí, ne podle délky.** „Nejhorší
+  věty" nejsou nejdelší, ale ty, na kterých by člověk musel odpovědět
+  nejvíckrát.
+* **`lang="cs"` a `translate="no"`.** Poučení z conBondu2: bez toho si
+  prohlížeč jazyk domyslí, stránku přeloží a **sáhne i na data** — na
+  obrazovce pak stojí rozbor, který v korpusu není.
+
+Stránka je jeden soubor bez sítě. Report, který si při otevření něco
+stahuje, přestane fungovat právě tehdy, kdy je potřeba nejvíc — až se
+bude dohledávat, jak to vypadalo před půl rokem.
 
 ---
 
@@ -86,7 +112,7 @@ seznam.
 
 ### A jak to dopadlo — předpověď proti měření
 
-Přeměřeno nad `1009036` (`mereni/korpus-2026-08-16.json`), měřicí vrstva
+Přeměřeno nad `1009036` (`mereni/korpus-2026-08-16-0930.json`), měřicí vrstva
 **zakomitovaná** (`40bfc8c`, W‑69 vyřízené):
 
 ```
@@ -167,7 +193,7 @@ kandidátní čtení se slučuje: pro člověka je to jedna otázka.
 ## N‑9 · Přeměřeno nad čistou revizí jádra — šest vět se přestalo zapisovat
 
 W‑U1 uzavřená: pracovní strom jádra byl čistý, měření běželo nad
-`056dc61`. Záznam `mereni/korpus-2026-08-15-b.json`, týž korpus
+`056dc61`. Záznam `mereni/korpus-2026-08-15-2250.json`, týž korpus
 (`conBond2@418d7f7`), týž model, 836 vět.
 
 | | běh #92 (`f681902` +dirty) | běh #107+ (`056dc61`, čistý) |
@@ -227,7 +253,7 @@ psané věty.
 ## N‑5 · Vymyšlená věta a encyklopedická próza jsou dva různé světy — s čísly
 
 Krok 4, běh nad **historickým korpusem conBondu2** (`cb-korpus.py`,
-záznam `mereni/korpus-2026-08-15.json`):
+záznam `mereni/korpus-2026-08-15-1400.json`):
 
 | co | hodnota |
 |---|---|

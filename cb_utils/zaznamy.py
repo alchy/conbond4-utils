@@ -18,13 +18,22 @@ from pathlib import Path
 MERENI = Path(__file__).resolve().parent.parent / "mereni"
 
 
-def posledni(vzor: str = "korpus-*.json", *, kde: Path | None = None) -> Path | None:
+#: Jméno záznamu: `korpus-RRRR-MM-DD-HHMM.json`. Není to kosmetika —
+#: na tom stojí řazení. Dokud se běhy jmenovaly `…-08-16.json` a
+#: `…-08-16-b.json`, vyšel jako „poslední" ten STARŠÍ: pomlčka je
+#: v abecedě před tečkou, takže `-b.json` seřadí PŘED `.json`.
+#: Nejtišší možná vada — nic nespadne, jen se kreslí nad starým během.
+VZOR = "korpus-????-??-??-????.json"
+
+
+def posledni(vzor: str = VZOR, *, kde: Path | None = None) -> Path | None:
     """Nejnovější záznam podle jména, nebo `None`.
 
-    Řadí se **jménem**, ne časem souboru: jméno nese datum a revizi,
-    kdežto čas se změní každým kopírováním repozitáře. Je to táž zásada
-    jako všude jinde tady — identita nesmí viset na něčem, co se dá
-    přepsat mimochodem.
+    Řadí se **jménem**, ne časem souboru: jméno nese datum a hodinu,
+    kdežto čas souboru se změní každým kopírováním repozitáře. Je to táž
+    zásada jako všude jinde tady — identita nesmí viset na něčem, co se
+    dá přepsat mimochodem. Podmínkou je, že jména mají **týž tvar**;
+    proto `VZOR` a proto se starší běhy přejmenovaly.
     """
     slozka = kde or MERENI
     if not slozka.exists():
@@ -33,7 +42,7 @@ def posledni(vzor: str = "korpus-*.json", *, kde: Path | None = None) -> Path | 
     return zaznamy[-1] if zaznamy else None
 
 
-def vyber(argv: list[str], vzor: str = "korpus-*.json") -> Path:
+def vyber(argv: list[str], vzor: str = VZOR) -> Path:
     """Cesta z argumentů, jinak poslední záznam. Hlásí, když není nic."""
     volne = [a for a in argv if not a.startswith("--")]
     if volne:

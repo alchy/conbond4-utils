@@ -1,4 +1,4 @@
-# conbond4-utils
+﻿# conbond4-utils
 
 Nástroje kolem conBondu4, které **nepatří do jádra**: obstarání textu,
 rozdělení na věty a měření, co si s nimi jádro dnes počne.
@@ -82,19 +82,16 @@ nestabilní měření.
 ## Historický korpus conBondu2 (krok 4)
 
 ```bash
-python cb-korpus.py --vet 40 --dvakrat --json mereni/korpus-2026-08-15.json
+python cb-korpus.py --vet 40 --dvakrat --json mereni/korpus-2026-08-16-1050.json
 ```
 
 Korpus se klonuje do `data/` (mimo git, CC BY‑SA) a v záznamu je jeho
 **revize** — je zmražený, takže na rozdíl od Wikipedie se měřicí nula
 mezi běhy nepohne. 22 dokumentů, ke kterým existuje ruční zlatá sada,
-836 vět, jádro `056dc61` (čistá revize):
+836 vět, jádro `27c6a62`:
 
 ```
-PTÁ SE 669 · NEPŘEČTENO 124 · ZAPSÁNO 31 · DVOJZNAČNÉ 7 · CHYBA 5 · ODMÍTNUTO 0
-
-z toho na skutečných větách (bez nadpisů a fragmentů):
-  ZAPSÁNO 31 · PTÁ SE 587 · DVOJZNAČNÉ 7 · NEPŘEČTENO 27   (z 652)
+PTÁ SE 666 · NEPŘEČTENO 124 · ZAPSÁNO 34 · DVOJZNAČNÉ 7 · CHYBA 5 · ODMÍTNUTO 0
 ```
 
 Dva běhy nad touž revizí korpusu i jádra vrátily **shodné počty ve všech
@@ -105,6 +102,24 @@ měřicí nula, ne skóre.
 Porovnání dvou běhů dělá `nalezy/diff_behu.py` — po větách, ne procentem:
 běh, kde se deset vět nově zapsalo a deset jiných přestalo zapisovat,
 vypadá v součtu jako beze změny.
+
+Záznamy se jmenují `korpus-RRRR-MM-DD-HHMM.json` a ten tvar **není
+kosmetika**: skripty berou bez argumentu poslední záznam podle jména,
+a dokud se běhy jmenovaly `…-08-16.json` a `…-08-16-b.json`, vycházel
+jako poslední ten **starší** (pomlčka je v abecedě před tečkou).
+
+## HTML baseline (krok 5)
+
+```bash
+python cb-html.py --do mereni/baseline.html
+```
+
+Diagnostická mapa, ne log v HTML: jeden soubor bez sítě, u každé věty
+původní řádek ze zdroje, tvar vstupu, rozbor, stopa kaskády, čtení a
+otevřené věci **seznamem**. Nahoře šest stavů zvlášť a sedm druhů otázek
+zvlášť — jedno číslo místo nich by zahodilo přesně to, co se dvě kola
+opravovalo. Filtruje se stavem, tvarem, vrstvou, druhem otázky a
+dokumentem; věty se řadí podle počtu otevřených věcí, ne podle délky.
 
 ## Kde co je
 
@@ -117,6 +132,7 @@ vypadá v součtu jako beze změny.
 | `mereni/` | záznamy běhů |
 | `cb-wiki.py` | měření nad živou Wikipedií (rozšíření) |
 | `cb-korpus.py` | měření nad zmraženým korpusem conBondu2 (základ) |
+| `cb-html.py` | záznam → diagnostická mapa v HTML |
 
 ## Co tu vědomě není
 
