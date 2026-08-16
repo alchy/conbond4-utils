@@ -1,6 +1,115 @@
 # conbond4-utils — audit měřicí vrstvy
 
-## Status: 🔴 FAIL — nástroj je opravený a hned si všiml sám sebe: **záznam je z běhu, který se nedá zopakovat**
+## Status: 🟢 PASS — přeměřeno nad čistým jádrem, a kázeň nahradil nástroj
+
+**Kolo #6.** Commity `0c3aa8d`, `7c27dcd`, `edbca3d`, `9fcc847`.
+
+**Architectural Health Score: 9,7 / 10** (bylo 9,6).
+
+---
+
+## Přejímka položku po položce — ověřeno mnou
+
+```
+core == core_na_konci          6be9329 …  OBĚ STRANY BEZ +dirty      ✔
+měřicí vrstva                  7c27dcd    bez +dirty                 ✔
+counts přepočitatelné po větách  666 · 124 · 34 · 7 · 5 = 836        ✔
+determinismus                  shoda ve stavech i vrstvách           ✔
+N‑10                           ptá se 679 → prázdný 0 · mlčí 157 → neprázdný 0
+mapa nese tři revize           korpus · jádro · vrstva               ✔
+otevřených věcí                1904
+```
+
+**Nejlepší rozhodnutí kola: kázeň nahradil nástroj.** `--nad-cistym`
+počká na čistý commit a **když se strom během měření změní, ZÁZNAM SE
+NEULOŽÍ**. To „neuložit" je správně a tvůj důvod platí doslova:
+*soubor pak leží v repu, kreslí se z něj mapa a varování si nikdo
+nepřečte.*
+
+**A žes počkal i sám na sebe** — první pokus měl čisté jádro, ale
+rozdělanou měřicí vrstvu, a ten záznam jsi nechal jako `‑1051`, aby
+bylo vidět, že se hlídá obojí — **to je ta část, kterou bych ti
+neuměl vymyslet.**
+
+**Červený pruh v mapě jsem ověřil jen negativně:** v tomhle běhu
+**správně chybí**. Že se objeví, když má, jsem nezkoušel — **doplň k němu
+zkoušku**, ať to nezůstane na slově.
+
+**Tabulku „stav podle délky věty" jsem přepočítal proti `‑1052`, jak jsi
+chtěl — vychází ZNAK ZA ZNAKEM stejně:**
+
+```
+0–5  133/21   6–10  180/9   11–15  162/0   16–25  240/3   26–40  96/1   41+  25/0
+medián zapsané věty 5 slov  ·  medián korpusu 14
+```
+
+**Závěr z #132 tedy drží** — a drží **na platném běhu**, což je rozdíl,
+který se dal zjistit jedině přeměřením.
+
+---
+
+## Critical Blockers
+
+**Žádné.**
+
+---
+
+## Semantic Warnings
+
+**Nic nového.** Otevřené: **W‑67** (prázdný `reason` u `ZAPSÁNO`, dnes
+34 z 836) — souhlas, že je další v pořadí.
+
+---
+
+## Rozhodnutí, které sis vyžádal: LICENCE ZÁZNAMŮ
+
+**Ptáš se správně a je dobře, žes to nezamlčel.** Záznamy v `mereni/`
+nesou **celé věty cizího textu** (Wikipedie, CC BY‑SA) ve veřejném
+repozitáři.
+
+**Rozhoduji variantu 1 — text zůstane, atribuce se doplní** — a důvod
+je věcný: **bez věty se ze záznamu nedá zjistit, na co se systém ptal**,
+a to je jediné, k čemu ta vrstva je. Otisk místo textu zabije diagnózu;
+záznamy mimo git zabijí reprodukovatelnost napříč stroji.
+
+**Co k tomu musí přibýt, ať je to hotové a ne rozdělané:**
+
+* **licenční soubor** u `mereni/` s uvedením CC BY‑SA a odkazem na
+  licenci;
+* **atribuce po dokumentech** — u každého dokumentu **název článku
+  a URL**, ne jen `conBond2@418d7f7`;
+* **věta v `README.md`**, že repozitář obsahuje odvozeninu z CC BY‑SA
+  a co z toho plyne pro toho, kdo si ho forkne.
+
+**A protože je to věc, která míří ven z projektu, ne dovnitř:
+POSLEDNÍ SLOVO MÁ MAJITEL REPA.** Jestli řekne „žádný cizí text
+v gitu", padá to na variantu 3 a záznamy se drží mimo — pak ale chci
+vidět, **čím se nahradí diagnóza**, ne jen že se text odstranil.
+
+---
+
+## Action Items for Agent 3
+
+1. **Atribuce podle rozhodnutí výše** — a než bude hotová, **nepřidávej
+   do `mereni/` další záznamy s celými větami**.
+2. **Zkouška na červený pruh** (ověřeno zatím jen negativně).
+3. **Pak W‑67.**
+4. **A jedna věc přijde od Agenta 1, počítej s ní:** schválil jsem
+   **částečný zápis** — věta se bude smět zapsat i s otevřenými
+   otázkami. **Přinese to stav, pro který dnes nemáš jméno**
+   (*„zapsáno, a přesto se ptá"*), a **nechci, aby ti spadl do „jiné"**.
+   **Rozhodni, jestli je to šestý a půltý stav, nebo dvě osy** — a
+   rozhodni to **dřív, než ten běh přijde**.
+
+**Přejímka:** `core == core_na_konci` bez `+dirty`, counts
+přepočitatelné, N‑10 0 porušení, determinismus shoda, mapa se třemi
+revizemi — **a nově: žádný nový záznam bez atribuce.**
+
+---
+
+## ARCHIV — kolo #5
+
+### Status: 🔴 FAIL — nástroj je opravený a hned si všiml sám sebe: **záznam je z běhu, který se nedá zopakovat**
 
 **Kolo #5.** Commity `b0bc673`, `675bea6`, `bf4e8fb`, `1492c22`.
 
