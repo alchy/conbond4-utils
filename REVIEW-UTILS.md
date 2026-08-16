@@ -1,6 +1,172 @@
 # conbond4-utils — audit měřicí vrstvy
 
-## Status: 🟢 PASS — krok 4 stojí, a nejlepší věta v předávce je varování před vlastním číslem
+## Status: 🔴 FAIL — otázka je nula dál, jen o patro jinde: **108 vět**
+
+**Kolo #3.** Commit `29b061f`. **Zkracování je opravdu pryč a je to
+doložené**, šestý stav je správné rozhodnutí, `diff_behu.py` je dobrý
+nástroj a přechodová čísla sedí do jedné věty. **Ale vada, kterou jsi
+zavřel u dvojznačnosti, žije dál u největší třídy otázek.**
+
+**Architectural Health Score: 9,3 / 10** — vrstva je lepší než v #2;
+blokuje jedno konkrétní číslo, ne architektura.
+
+---
+
+## Co jsem ověřil sám a co drží
+
+```
+counts ze záznamu přepočítány po větách   ✔ 669 · 124 · 31 · 7 · 5 = 836
+determinismus                             ✔ beh1 == beh2; navíc můj vlastní
+                                             vzorek 9 vět dvakrát → shoda
+nezkracování, doložené během               ✔ nalezy/bez_zkraceni.py: 1839 znaků,
+                                             shoda znak po znaku
+šest vět, které se přestaly zapisovat      ✔ všech 6 reprodukováno na živém jádře
+jedenáct nově zapsaných                    ✔ Einstein / Krkonoše ověřeny zvlášť
+přechody 20 · 11 · 18 · 7 · 6              ✔ diff_behu.py vrací přesně to
+7 ze 135 položek zlaté sady                ✔ včetně první „Kolik zubů má dospělý pes?"
+diff odmítne porovnat chybějící pole       ✔ „OTÁZKY — nelze porovnat"
+```
+
+**Šestý stav je správně a zdůvodnění sedí.** *„Větě nerozumím"* je mez
+schopnosti, *„rozumím jí dvěma způsoby"* je položená otázka — to jsou
+dva různé znalostní stavy a slít je znamená ztratit obojí. **Pět stavů
+bylo rozhodnutí, ne dogma; tohle je vědomé šesté a je odůvodněné
+v kódu.**
+
+---
+
+## Critical Blockers
+
+### N‑10 · 108 vět se PTÁ a v záznamu má **nula otázek a prázdný seznam**
+
+**Reprodukováno na živém jádře, ne přečteno ze záznamu:**
+
+```
+» Rys loví srnce a zajíce.
+    verdikt        PTÁ SE
+    otázka jádra   „Nevím, jakou roli hraje »zajíce« (obj>conj+Acc) —
+                    do čtení se nedostalo. Jak se ta role jmenuje?"
+    open_questions 0
+    questions      ()
+```
+
+**To je slovo do slova ta vada, kterou jsi tohle kolo zavíral** — jen
+místo dvojznačnosti ji nese **„Nevím, jakou roli hraje…"**, což je
+**největší třída otázek v korpusu**.
+
+**Rozsah, změřeno:**
+
+```
+PTÁ SE                                     669
+  z toho s PRÁZDNÝM seznamem otázek        108   (16 %)
+     „Nevím, jakou roli hraje…"            103
+     „Věta nemá podmět…"                     4
+     „Co ten přívlastek v genitivu tvrdí"     1
+```
+
+**A tohle je ten důkaz, že to není druhá osa, ale nesrovnalost v jedné:**
+
+```
+otázka „Nevím, jakou roli hraje…"  celkem   237
+   započítána do seznamu                    134
+   nezapočítána (oq = 0)                    103
+```
+
+**Táž otázka jednou počítá a podruhé ne.** Nerozhoduje o tom věta ani
+otázka — rozhoduje **náhoda, jestli stopa zrovna nesla hranatou značku**.
+`open_items()` čte `[CHYBÍ:…]`, `[NEZAKOTVENO:…]` a spol. ze stopy;
+otázku samu nečte. Proto:
+
+```
+» Původ a studium = = =
+    otázka  „Nevím, jakou roli hraje »studium« (nsubj>conj+Nom)…"
+    seznam  NEZAKOTVENO: role co …  ·  NEZAKOTVENO: role jak …
+```
+
+**V seznamu není to, na co se systém ptal.** Jsou tam jiné otevřené věci,
+které se v té větě náhodou vyskytly. **Seznam se tedy nejmenuje, čím
+je.**
+
+**Proč to blokuje, ne jen vadí:** `diff_behu.py` porovnává běhy
+**seznamem otázek** — a přesně u těch 108 vět je seznam prázdný, takže
+změna v tom, **na co se systém ptá**, je v porovnání **neviditelná**.
+Postavil jsi nástroj proti slévání a nechal v něm slepé místo o velikosti
+šestiny všech tázaných vět. Totéž dělá `render()`: `(N×?)` u nich
+nenapíše nic.
+
+**Co po tobě chci:** aby číslo i seznam pocházely **z otázky**, ne ze
+stopy. Otázka existuje → seznam není prázdný. Když otázka nese víc věcí
+najednou („role X, role Y"), rozpad je tvoje rozhodnutí a chci ho vidět
+zdůvodněný — **ale nula, když se systém ptá, nesmí zůstat ani jednou.**
+
+**A ověř to protipříkladem, ne součtem:** projdi všech 669 `PTÁ SE`
+a ukaž, že **žádná** nemá prázdný seznam; a naopak ukaž, že věta, kde
+jádro **mlčí**, prázdný seznam **má** — jinak jsi jen otočil vadu na
+druhou stranu.
+
+---
+
+## Semantic Warnings
+
+### W‑69 · záznam je z **rozdělaného** stromu měřicí vrstvy
+
+```
+utils: 1bdee3e … +dirty:1da9971e
+```
+
+**Čísla vyrobil kód, který v žádném commitu není.** Otisk `dirty` jsi
+tam dal sám a je to správně — ale **u vrstvy, jejímž jediným úkolem je
+reprodukovatelnost, je „reprodukovat to nejde" divná vlastnost**.
+Doporučuji: **měřit až nad commitnutým stromem**, nebo do záznamu
+uložit i diff. Netlačím na přeměření kvůli tomuhle samotnému — stejně
+budeš měřit znovu kvůli N‑10.
+
+### W‑70 · „důvod je u všech šesti týž" — není
+
+Ověřil jsem to:
+
+```
+v+Loc/Geo   Babička v Táboře · Josef v Písku · Rodina v Kolíně
+u+Gen/Geo   Vltava … u Mělníka
+v+Loc       Marie … v květnu
+Gen         Klíče OD CHATY … vede otázka na přívlastek, ne na v+Loc
+```
+
+**Rodina je táž** (nenaučený tvar → role), **věta ale ne.** Jsou to čtyři
+různé tvary a jedna věta padá na něčem jiném. Drobnost, píšu ji proto,
+že tady se měří — a „u všech týž" je tvrzení, ne shrnutí.
+
+---
+
+## Co zůstává otevřené z minula
+
+**W‑67** (zkracování) **zavřeno**, doložené. HTML baseline (krok 5)
+**nezačato a je to správné pořadí** — nemá smysl kreslit baseline nad
+číslem, které se po N‑10 změní.
+
+---
+
+## Action Items for Agent 3
+
+1. **N‑10 první, nic jiného.** Číslo a seznam ať vzniknou z otázky.
+   Protipříklad výše: **žádná ptající se věta bez seznamu, žádná mlčící
+   se seznamem.**
+2. **Přeměř nad commitnutým stromem** (W‑69) a řekni, **o kolik se změnil
+   součet otevřených věcí** — čekám velký skok, protože 108 vět dnes
+   přispívá nulou. **Jestli skok NEVYJDE, chci vědět proč**, ne
+   vysvětlení po faktu.
+3. **Až potom HTML baseline.**
+
+**Zbytek předávky je dobrá práce a nechci, aby to zapadlo:** doklad
+nezkrácení během, ne úvahou; šestý stav se zdůvodněním v kódu; nástroj,
+který **odmítne** porovnat chybějící pole místo aby napsal nulu. **To
+poslední je přesně ten návyk, který v N‑10 ještě chybí.**
+
+---
+
+## ARCHIV — kolo #2
+
+### Status: 🟢 PASS — krok 4 stojí, a nejlepší věta v předávce je varování před vlastním číslem
 
 **Kolo #2.** Historický korpus conBondu2 změřen: **836 vět**, 22
 dokumentů, `korpus: github.com/alchy/conBond2@418d7f7`, **kontrola

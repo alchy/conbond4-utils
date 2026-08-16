@@ -23,6 +23,69 @@ Reprodukovat ho podle `d6782cb` nejde a záznam to přiznává příznakem
 
 ---
 
+## N‑10 · Otázka byla nula ještě jednou, o patro jinde — OPRAVENO
+
+Nález Revieweru z kola #3 a je to táž vada, kterou jsem v N‑8 zavíral —
+jen ji místo dvojznačnosti nesla **největší třída otázek**:
+
+```
+Rys loví srnce a zajíce.
+  verdikt:  PTÁ SE
+  jádro:    „Nevím, jakou roli hraje »zajíce« (obj>conj+Acc) — do čtení
+             se nedostalo. Jak se ta role jmenuje?"
+  záznam:   open_questions 0 · questions ()
+```
+
+**Rozsah:** ze 669 vět `PTÁ SE` mělo 108 (16 %) prázdný seznam.
+
+**Proč to nebyla druhá osa, ale nesrovnalost v jedné:** táž otázka
+*„Nevím, jakou roli hraje…"* je v korpusu 237×, započítala se 134× a
+nezapočítala 103×. Nerozhodovala o tom věta ani otázka, ale to, jestli
+u ní ve stopě zrovna stála hranatá značka — `open_items` četl `[CHYBÍ:…]`
+a `[NEZAKOTVENO:…]` ze **stopy** a otázku samu nečetl. U vět, kde se
+stopa a otázka rozešly, seznam navíc **pojmenovával něco jiného**, než na
+co se systém ptal.
+
+**Oprava: zdroj je jen jeden — otázka jádra.** Jedna položka = jeden
+otazník, kterým končí tah. Otazník uvnitř uvozovek („Kolik?") hranicí
+není; bez té podmínky se 80 otázek rozpadlo v půlce věty. Ke každé
+položce se lepí **druh** (`role`, `kvantifikace`, `koreference`,
+`konstrukce`, `přívlastek`, `dvojznačnost`, `podmět`, `zakotvení`), aby
+šly běhy porovnat strojově — po opravě nezůstalo v `jiné` **nic**.
+
+Druhý směr téhož pravidla drží taky: kde jádro **mlčí** (*„Tuhle větu
+přečíst neumím: …"* je vysvětlení, ne otázka), je seznam prázdný právem.
+Ověřuje obojí `nalezy/otazka_neni_nula.py` — a je to protipříklad, ne
+součet: projde všechny věty a spadne, když se najde jediné porušení.
+
+### Předpověď dřív, než jsem přeměřil
+
+Reviewer čekal velký skok součtu nahoru. **Nevyjde, a vím proč** —
+změřeno simulací nového pravidla nad starým záznamem *před* přeměřením
+(`nalezy/otazka_neni_nula.py --simulace`):
+
+```
+součet otevřených věcí   1863  →  1782   (−81)
+
+z nuly na něco    116 vět   +164     ← těch 108 z N-10 a k nim 8 dalších
+jinak přibylo     161 vět   +215
+ubylo             230 vět   −460
+beze změny        329 vět
+```
+
+**Změnila se jednotka, ne jen pokrytí.** Dřív se počítaly *značky ve
+stopě*: jedna otázka na tři role vyrobila tři `[CHYBÍ:]` a k nim tři
+`[NEZAKOTVENO:]`, tedy až šest položek. Teď se počítá to, co `Result`
+o sobě tvrdí od začátku — **na kolik otázek by člověk musel odpovědět**,
+a jeden tah dialogu je jedna otázka, i když se v něm jmenují tři role.
+
+Součty přes tuhle změnu **nejsou srovnatelné** a uvádět je vedle sebe
+jako pokles by bylo tvrzení, které nikde neplatí. Srovnatelný je rozklad
+výš a druhá polovina protipříkladu: **žádná** tázaná věta už nemá prázdný
+seznam.
+
+---
+
 ## N‑8 · Otázka počítaná jako nula — OPRAVENO, a přibyl šestý stav
 
 Nález Revieweru, potvrzený a opravený. Když kaskádě po patrech zbylo víc

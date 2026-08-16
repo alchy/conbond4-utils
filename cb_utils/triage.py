@@ -115,49 +115,102 @@ def _first(lines: tuple[str, ...], *prefixes: str) -> str:
     return ""
 
 
-#: Značky, kterými jádro ve stopě hlásí OTEVŘENOU VĚC. Každá je jedna
-#: otázka, na kterou by člověk musel odpovědět, než se věta zapíše.
-_OTEVRENE = (
-    "CHYBÍ",
-    "NEZAKOTVENO",
-    "URČITOST",
-    "KOLIZE",
-    "UZAVŘENÍ SVĚTA",
-    "ZTRACENO",
+#: Jedna otevřená věc = jeden **otazník, kterým končí tah**. Dělí se
+#: proto jen za otazníkem, po kterém začíná další věta (velké písmeno)
+#: nebo končí text — otazník uvnitř uvozovek („Kolik?") je součást
+#: citovaného slova, ne konec otázky. Bez téhle podmínky se 80 otázek
+#: rozpadlo v půlce na „) — do čtení se nedostalo. Jak se ta role
+#: jmenuje?", což je půlka věty, ne otevřená věc.
+_HRANICE = re.compile(r"\?(?=\s+[A-ZÁ-ŽČĎĚŇŘŠŤŮÚÝŽ]|\s*$)")
+
+#: Druh otevřené věci podle toho, ČÍM ZAČÍNÁ otázka jádra. Slouží ke
+#: strojovému porovnání dvou běhů — text otázky nese jména konkrétních
+#: slov, takže sám o sobě se mezi větami neporovná.
+_DRUHY: tuple[tuple[str, str], ...] = (
+    ("Nevím, jakou roli hraje", "role"),
+    ("Nevím, co znamená", "role"),
+    ("Nevím, o kom to platí", "kvantifikace"),
+    ("Na koho odkazuje", "koreference"),
+    ("A na koho odkazuje", "koreference"),
+    ("O kterém", "koreference"),
+    ("Zájmena zatím neumím", "koreference"),
+    ("Co ta věta tvrdí o vztahu", "konstrukce"),
+    ("prohlásit za UZAVŘENOU", "uzavření"),
+    ("Věta nemá podmět", "podmět"),
+    ("Řekni to prosím jménem", "zakotvení"),
+    ("Co ten přívlastek v genitivu tvrdí", "přívlastek"),
+    ("Zapíšu to jako vztah vedle věty", "přívlastek"),
+    ("Ta věta tvrdí ještě tohle", "konstrukce"),
+    ("Tvar je ", "konstrukce"),
+    (AMBIGUOUS_MARK, "dvojznačnost"),
 )
-_ZNACKA = re.compile(r"\[([^\]:]+):([^\]]*)\]")
+
+
+def _druh(text: str) -> str:
+    for zacatek, jmeno in _DRUHY:
+        if zacatek in text:
+            return jmeno
+    return "jiné"
 
 
 def open_items(lines: tuple[str, ...], question: str) -> tuple[str, ...]:
-    """Otevřené věci jako **seznam**, ne jako číslo.
+    """Otevřené věci jako **seznam**, a **z OTÁZKY, ne ze stopy**.
 
-    Dřív se počítal jen výskyt `CHYBÍ:` a `NEZAKOTVENO:` v řádcích a do
-    záznamu šlo číslo. Dvě vady naráz: dvojznačné čtení („Čtu to jako
-    A / B — které z toho?") vycházelo jako **nula otevřených věcí**,
-    ačkoli je to položená otázka; a z čísla nešlo porovnat dva běhy jinak
-    než součtem, takže „ubyla jedna otázka a přibyla jiná" vypadalo jako
-    beze změny.
+    Dvě předchozí verze se spletly každá jinak a obě stejným způsobem —
+    počítaly něco jiného, než na co se systém ptal:
 
-    Vrací se proto text každé otevřené věci, **nezkrácený**. Zkrácení na
-    160 znaků je přesně ta úspora, kvůli které pak ze záznamu nejde
-    poznat, na co se systém ptal.
+    * první počítala výskyty `CHYBÍ:` a `NEZAKOTVENO:` v řádcích, takže
+      dvojznačné čtení („Čtu to jako A / B — které z toho?") vyšlo jako
+      **nula** otevřených věcí, ačkoli je to položená otázka;
+    * druhá k tomu přidala dvojznačnost, ale pořád četla **stopu**.
+      A stopa nemusí nést hranatou značku: 108 z 669 tázaných vět mělo
+      prázdný seznam, přestože se jádro ptalo. Táž otázka („Nevím, jakou
+      roli hraje…") se v korpusu objevila 237×, započítala se 134× a
+      nezapočítala 103× — nerozhodovala věta ani otázka, ale náhoda,
+      jestli u ní zrovna stála značka. A u vět, kde se stopa a otázka
+      lišily, seznam **pojmenovával něco jiného**, než na co se systém
+      ptal.
+
+    Zdroj je proto jediný: **otázka jádra**. Když se jádro ptá, seznam
+    není prázdný; když mlčí, prázdný je.
+
+    **Rozpad otázky na položky:** jedna položka = jeden **otazník**.
+    Jádro skládá otázku z tahů, které samy končí otazníkem („… Jak se ta
+    role jmenuje? Nevím, o kom to platí — … nebo o tom konkrétním (·)?"),
+    takže dělení za otazníkem sedí na tahy, ne na věty. Text **před**
+    otazníkem se drží celý, protože v něm je, o kterém slově řeč.
+
+    Co otazník nemá, není otázka: „Tuhle větu přečíst neumím: přísudek
+    nemá ani jeden člen, který bych uměl pojmenovat." je **vysvětlení**
+    a odpovědět na něj nejde. Takové věty mají prázdný seznam právem a je
+    to ten druhý směr téhož pravidla.
+
+    Ke každé položce se lepí **druh** (`role`, `kvantifikace`,
+    `koreference`, …), aby šly dva běhy porovnat strojově: samotný text
+    otázky nese jména konkrétních slov, takže se mezi větami neporovná.
     """
+    zdroj = question
+    if not zdroj:
+        # `_utter_many` vypíše otázku jen do řádků, do `question` ji
+        # nedá — bez téhle zálohy by dvojznačnost z víc rozborů zase
+        # spadla na nulu.
+        zdroj = " ".join(l.strip().lstrip("? ") for l in lines if "?" in l)
     out: list[str] = []
-    for line in lines:
-        for klic, telo in _ZNACKA.findall(line):
-            if klic.strip() not in _OTEVRENE:
-                continue
-            polozka = f"{klic.strip()}: {telo.strip()}"
-            # Táž otevřená věc se u dvojznačné věty objeví jednou za
-            # každé kandidátní čtení. Pro člověka je to JEDNA otázka
-            # („co znamená role Gen"), takže se opakování slučuje —
-            # jinak by dvojznačnost nafoukla i počet otevřených věcí
-            # a měřila by se jednou dvakrát.
-            if polozka not in out:
-                out.append(polozka)
-    if AMBIGUOUS_MARK in question or any(AMBIGUOUS_MARK in l for l in lines):
-        kde = question or next(l for l in lines if AMBIGUOUS_MARK in l)
-        out.append(f"DVOJZNAČNOST: {kde.strip().lstrip('? ')}")
+    zacatek = 0
+    kusy: list[str] = []
+    for hranice in _HRANICE.finditer(zdroj):
+        kusy.append(zdroj[zacatek : hranice.end()])
+        zacatek = hranice.end()
+    for kus in kusy:
+        text = kus.strip()
+        if not text:
+            continue
+        polozka = f"{_druh(text)}: {text}"
+        # Táž otevřená věc se u dvojznačné věty objeví jednou za každé
+        # kandidátní čtení. Pro člověka je to JEDNA otázka, takže se
+        # opakování slučuje — jinak by dvojznačnost nafoukla i počet.
+        if polozka not in out:
+            out.append(polozka)
     return tuple(out)
 
 
