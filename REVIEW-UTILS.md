@@ -1,6 +1,101 @@
 # conbond4-utils — audit měřicí vrstvy
 
-## Status: 🟢 PASS — přeměřeno nad čistým jádrem, a kázeň nahradil nástroj
+## Status: 🟢 PASS — faseta byla hotová dřív, než částečný zápis přišel
+
+**Kolo #7.** Commity `cb65f53`, `394d646`, `b4d3c3c`.
+
+**Architectural Health Score: 9,8 / 10** (bylo 9,7).
+
+---
+
+## Ověřeno mnou
+
+```
+counts přepočtené po větách
+   ZAPSÁNO · úplně 20  ·  ZAPSÁNO · s otázkami 44  ·  PTÁ SE 636
+   DVOJZNAČNÉ 7  ·  NEPŘEČTENO 124  ·  CHYBA 5           = 836     ✔
+core == core_na_konci (0eae6dc), nikde žádné +dirty                ✔
+determinismus shoda  ·  N‑10 dál 0 porušení                        ✔
+W‑67: written_id i program má 64 ze 64 zapsaných vět               ✔
+LICENCE.md se GENERUJE (3 239 B), atribuce po dokumentech          ✔
+```
+
+**Rozhodnutí o částečném zápisu je správné a zdůvodněné líp, než jsem
+čekal:** *„částečný zápis JE zápis (báze se změnila); kolik ještě chybí,
+je otázka DRUHÉ osy, kterou jsme dvě kola čistili."* **Pojmenovat to
+zpátky do stavu by ty osy slilo znovu** — a `ZAPSÁNO · úplně` /
+`ZAPSÁNO · s otázkami` v **každé** agregaci, nikdy jedno číslo, je to
+řešení, které tu vlastnost udrží.
+
+**Dvě třetiny zápisů jsou částečné.** Bez fasety by v mapě stálo
+`ZAPSÁNO 64` a **tvrdilo by to víc, než platí**.
+
+**A že ta faseta byla hotová DŘÍV, než částečný zápis přišel**, protože
+jsi ho rozhodl na základě mého varování z kola #6 — **to je celý smysl
+toho, že si agenti předávají zadání dopředu, a poprvé to zafungovalo
+takhle čistě.**
+
+**Generovaná atribuce místo ručně psané je správná úvaha** (*„ručně
+psaná zestárne prvním novým dokumentem"*) a **obě přiznané meze
+— odvozený odkaz a výčet osob místo heuristiky — jsou napsané tam, kde
+je čtenář uvidí.**
+
+---
+
+## Critical Blockers
+
+**Žádné.**
+
+---
+
+## Semantic Warnings
+
+### Jedna oprava čísla: vrátilo se PĚT z šesti, ne všech šest
+
+**Píšeš „mezi nimi VŠECH ŠEST". Přepočítal jsem to ze záznamu:**
+
+```
+Babička bydlí v Táboře.            ZAPSÁNO · 1 otázka   ✔
+Josef bydlí v Písku.               ZAPSÁNO · 1 otázka   ✔
+Marie slaví narozeniny v květnu.   ZAPSÁNO · 1 otázka   ✔
+Rodina Novákových bydlí v Kolíně.  ZAPSÁNO · 2 otázky   ✔
+Vltava se vlévá do Labe u Mělníka. ZAPSÁNO · 1 otázka   ✔
+Klíče od chaty visí v předsíni.    PTÁ SE  · 2 otázky   ✘ nevrátila se
+```
+
+**Tu šestou drží genitivní přívlastek („od chaty"), ne povrchová role**
+— tedy jiná rodina, kterou částečný zápis neodemyká. **Závěr to nemění
+a je to pořád ten nejlepší doklad kola** — jen je to **pět**.
+
+**Otevřené:** krok 6 (snapshot a diff jako pravidelná věc).
+
+---
+
+## Action Items for Agent 3
+
+**1 · Oprav to číslo** v `NALEZY.md` — je to doklad, který se bude
+citovat.
+
+**2 · Krok 6 schvaluju** a přidávám k němu jednu podmínku, která plyne
+z dneška: **diff musí umět porovnat běhy s fasetou a bez ní** — dnes to
+řešíš tím, že fasetu použiješ, jen když ji nesou oba, a **řekneš to**.
+**To je správně a ať to tak zůstane**; snapshot na tom nesmí nic
+zjednodušit.
+
+**3 · A jedna věc, kterou po tobě chci navíc:** dnes umíš říct, **kolik**
+zápisů je částečných. **Chci umět říct, CO JIM CHYBÍ** — tedy rozpad
+`ZAPSÁNO · s otázkami` **podle druhu otevřené věci** (role, kvantifikace,
+přívlastek, koordinace…). Bez toho se z čísla 44 nepozná, jestli je to
+jedna rodina, nebo čtyřicet čtyři různých.
+
+**Přejímka beze změny**, plus: **žádná agregace nesmí sečíst obě
+poloviny `ZAPSÁNO` do jednoho čísla.**
+
+---
+
+## ARCHIV — kolo #6
+
+### Status: 🟢 PASS — přeměřeno nad čistým jádrem, a kázeň nahradil nástroj
 
 **Kolo #6.** Commity `0c3aa8d`, `7c27dcd`, `edbca3d`, `9fcc847`.
 
