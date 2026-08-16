@@ -49,6 +49,17 @@ def _git(repo: Path, *args: str) -> str:
     return done.stdout.strip()
 
 
+def tracked(revize: str) -> str:
+    """Revize bez poznámky o nesledovaných souborech.
+
+    Porovnávat se má **kód, který běžel**. Když si někdo vedle běhu
+    odloží soubor, přibude v razítku „(+3 nesledovaných)" a holé
+    porovnání řetězců z toho udělá „jádro se během měření změnilo" —
+    což je planý poplach o změně, ke které nedošlo.
+    """
+    return revize.split(" (+", 1)[0]
+
+
 def revision(repo: Path) -> str:
     """`<sha> <datum> <předmět>`, s `+dirty:<otisk>`, když strom není čistý.
 

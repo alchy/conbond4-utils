@@ -138,6 +138,7 @@ _DRUHY: tuple[tuple[str, str], ...] = (
     ("prohlásit za UZAVŘENOU", "uzavření"),
     ("Věta nemá podmět", "podmět"),
     ("Řekni to prosím jménem", "zakotvení"),
+    ("Věta jmenuje víc členů v roli", "koordinace"),
     ("Co ten přívlastek v genitivu tvrdí", "přívlastek"),
     ("Zapíšu to jako vztah vedle věty", "přívlastek"),
     ("Ta věta tvrdí ještě tohle", "konstrukce"),
@@ -147,6 +148,10 @@ _DRUHY: tuple[tuple[str, str], ...] = (
 
 
 def _druh(text: str) -> str:
+    """Druh otevřené věci. `jiné` je **signál, ne odpadní koš**: jádro
+    umí novou otázku a měření pro ni ještě nemá jméno, takže se má
+    doplnit. Tabulka po každém kole jádra zestárne — sledovat počet
+    `jiné` je způsob, jak to poznat dřív než z reportu."""
     for zacatek, jmeno in _DRUHY:
         if zacatek in text:
             return jmeno

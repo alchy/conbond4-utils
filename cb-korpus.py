@@ -40,7 +40,7 @@ sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="repla
 from cb_utils import tvar as tvar_mod
 from cb_utils.triage import OracleError  # noqa: E402  (nastavuje cestu k jádru)
 from cb_utils.korpus import Korpus, klic, odstavce, porid
-from cb_utils.revize import revision
+from cb_utils.revize import revision, tracked
 from cb_utils.triage import CONBOND4, Result, Verdict, sentences_of, triage
 
 HERE = Path(__file__).resolve().parent
@@ -373,7 +373,7 @@ def main() -> None:
     # začátek, by pak tvrdil identitu, kterou půlka měření neměla.
     # Poznat to jde jen tak, že se stav zjistí dvakrát.
     record["core_na_konci"] = revision(CONBOND4)
-    if record["core_na_konci"] != record["core"]:
+    if tracked(record["core_na_konci"]) != tracked(record["core"]):
         print("\n  POZOR: jádro se BĚHEM měření změnilo —"
               " záznam není nad jedním stavem kódu")
         print(f"    začátek: {record['core']}")
