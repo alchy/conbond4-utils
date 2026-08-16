@@ -56,8 +56,8 @@ Dvě třetiny zápisů jsou částečné. Kdyby se faseta rozhodovala až podle
 tohohle běhu, rozhodovala by se podle čísla, které se má vysvětlit — a to
 je přesně obráceně.
 
-Diff proti minulému běhu (`nalezy/diff_behu.py`): **30 vět `PTÁ SE →
-ZAPSÁNO`**, a mezi nimi **všech šest**, které v N‑9 zápis ztratily:
+Diff proti minulému běhu (`cb-diff.py`): **30 vět `PTÁ SE → ZAPSÁNO`**,
+a mezi nimi **pět z šesti**, které v N‑9 zápis ztratily:
 
 ```
 » Babička bydlí v Táboře.
@@ -68,6 +68,56 @@ ZAPSÁNO`**, a mezi nimi **všech šest**, které v N‑9 zápis ztratily:
 Vrátily se tedy **jako částečné zápisy s otázkou, která nezmizela** —
 ne tak, že by se otázka „vyřešila". To je vidět jedině proto, že stav
 a otázky jsou dvě osy.
+
+**Pět, ne šest** — opraveno po Reviewerově kontrole a přepočítáno ze
+záznamu. *„Klíče od chaty visí v předsíni."* se nevrátila a drží ji něco
+jiného než ostatní pět:
+
+```
+Babička v Táboře · Josef v Písku · Marie v květnu · Vltava u Mělníka
+   ZAPSÁNO · s otázkami   otázka: co znamená role „v+Loc/Geo“
+Rodina Novákových v Kolíně
+   ZAPSÁNO · s otázkami   k tomu otázka na genitivní přívlastek
+Klíče od chaty visí v předsíni.
+   PTÁ SE                 „Nevím, jakou roli hraje »chaty« (nsubj>nmod+Gen)
+                           — DO ČTENÍ SE NEDOSTALO“
+```
+
+Rozdíl není v tom, že jde o genitiv — *„Rodina Novákových"* má genitivní
+přívlastek taky a zapsala se. Rozdíl je v tom, že u „chaty" **člen ze
+čtení vypadl**. Ověřeno na celém korpusu, a je to ostrá hranice:
+
+```
+zapsaných se ztraceným členem     0 z  64
+tázaných  se ztraceným členem   499 z 636
+```
+
+**Otevřená otázka zápis neblokuje, ztracený člen ano.** Tohle je přesná
+mez částečného zápisu — a dá se říct jedině proto, že otázky jsou
+v záznamu jako seznam s druhem, ne jako číslo.
+
+### Co těm částečným zápisům chybí
+
+Reviewer chtěl vědět nejen kolik, ale **co** — jinak se z čísla 44
+nepozná, jestli je to jedna rodina, nebo čtyřicet čtyři různých. Rozpad
+je v `cb-korpus.py`, v `cb-diff.py` i v mapě:
+
+```
+podle druhu (věta jich může mít víc)     na větu
+  30  role                                13  přívlastek
+  18  přívlastek                          12  kvantifikace + role
+  14  kvantifikace                        11  role
+   2  konstrukce                           3  přívlastek + role
+   1  koreference                          2  kvantifikace + přívlastek + role
+                                           1  koreference + role
+                                           1  konstrukce + role
+                                           1  konstrukce
+```
+
+Jedna rodina to tedy není, ale ani čtyřicet čtyři: **24 vět ze 44 visí
+jen na jedné věci** (13 přívlastek, 11 role). To jsou dvě opravy, ne
+čtyřicet — a přesně tohle číslo se z holého „44 částečných" přečíst
+nedalo.
 
 ---
 
@@ -305,7 +355,7 @@ Determinismus drží i po přidání šestého stavu: dva běhy nad `056dc61`
 vrátily shodné počty ve stavech i ve všech vrstvách.
 
 **Šest vět, které Reviewer předpověděl, potvrzeno — všech šest**
-(`nalezy/diff_behu.py`, přechod `ZAPSÁNO → PTÁ SE`):
+(`cb-diff.py`, přechod `ZAPSÁNO → PTÁ SE`):
 
 ```
 » Babička bydlí v Táboře.            » Josef bydlí v Písku.

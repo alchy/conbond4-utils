@@ -1,12 +1,13 @@
 #!/usr/bin/env python
 """Dva běhy nad týmž korpusem — co se změnilo a PROČ.
 
-    python nalezy/diff_behu.py starý.json nový.json
-    python nalezy/diff_behu.py starý.json nový.json --vety
+    python cb-diff.py                          # dva nejnovější záznamy
+    python cb-diff.py starý.json nový.json
+    python cb-diff.py … --vety                 # vypsat všechny věty
 
-Krok 6 zadání v malém. Celkové procento tady nestačí a je to hlavní
-věc, kterou tenhle skript hlídá: běh, kde se deset vět nově zapsalo
-a deset jiných přestalo zapisovat, vypadá v součtu jako **beze změny**.
+Krok 6 zadání. Celkové procento tady nestačí a je to hlavní věc, kterou
+tenhle nástroj hlídá: běh, kde se deset vět nově zapsalo a deset jiných
+přestalo zapisovat, vypadá v součtu jako **beze změny**.
 
 Proto se porovnává **po větách** a odděleně:
 
@@ -20,6 +21,10 @@ Proto se porovnává **po větách** a odděleně:
 
 Věty se párují **textem**, ne pořadím. Pořadí je přesně ta identita,
 na které se zlatá sada conBondu2 už jednou rozbila.
+
+**Faseta zápisu jen tehdy, když ji nesou oba záznamy** — a když ne,
+řekne se to. Dopočítat starším běhům, které z jejich zápisů byly
+částečné, by znamenalo měřit změnu formátu místo změny systému.
 """
 
 from __future__ import annotations
@@ -50,9 +55,50 @@ def hlavicka(jmeno: str, zaznam: dict) -> None:
             print(f"   {klic:14} {zaznam[klic]}")
 
 
+def chybi_castecnym(vety: dict, jmeno: str) -> None:
+    """Co chybí částečným zápisům — **podle druhu, ne počtem**.
+
+    Číslo „44 částečných" neřekne, jestli je to jedna rodina, nebo
+    čtyřicet čtyři různých; rozpad po druzích ano. Tohle je jediné
+    místo, kde se dá poznat, co dělit dál: kdyby všech 44 viselo na
+    jedné otázce, byla by to jedna oprava.
+    """
+    castecne = [
+        v for v in vety.values()
+        if v.get("stav") == "ZAPSÁNO · s otázkami" and v.get("questions")
+    ]
+    if not castecne:
+        return
+    druhy: Counter[str] = Counter(
+        q.split(":", 1)[0] for v in castecne for q in v["questions"]
+    )
+    kombinace: Counter[str] = Counter(
+        " + ".join(sorted({q.split(":", 1)[0] for q in v["questions"]}))
+        for v in castecne
+    )
+    print(f"\nCO CHYBÍ ČÁSTEČNÝM ZÁPISŮM — {jmeno}   ({len(castecne)} vět)")
+    print("  podle druhu (věta jich může mít víc):")
+    for druh, kolik in druhy.most_common():
+        print(f"    {kolik:5}  {druh}")
+    print("  na větu:")
+    for kombo, kolik in kombinace.most_common():
+        print(f"    {kolik:5}  {kombo}")
+
+
 def main() -> None:
     argy = [a for a in sys.argv[1:] if not a.startswith("--")]
-    if len(argy) != 2:
+    if not argy:
+        # Bez argumentů: dva NEJNOVĚJŠÍ záznamy. Napsaná dvojice cest by
+        # zestárla příštím během — táž vada jako W‑79, jen o krok dál.
+        sys.path.insert(0, str(Path(__file__).resolve().parent))
+        from cb_utils.zaznamy import MERENI, VZOR
+
+        nalezene = sorted(MERENI.glob(VZOR))
+        if len(nalezene) < 2:
+            raise SystemExit("v mereni/ nejsou dva záznamy k porovnání")
+        argy = [str(nalezene[-2]), str(nalezene[-1])]
+        print(f"(bez argumentů: {Path(argy[0]).name} → {Path(argy[1]).name})\n")
+    elif len(argy) != 2:
         raise SystemExit(__doc__)
     stary_zaznam, stare = nacti(Path(argy[0]))
     novy_zaznam, nove = nacti(Path(argy[1]))
@@ -143,6 +189,9 @@ def main() -> None:
             pribylo[q.split(" (")[0]] += 1
         for q in a - b:
             ubylo[q.split(" (")[0]] += 1
+    chybi_castecnym(stare, Path(argy[0]).name)
+    chybi_castecnym(nove, Path(argy[1]).name)
+
     if pribylo or ubylo:
         print("\nOTÁZKY — podle druhu, ne počtem")
         for jmeno, tabulka in (("ubylo", ubylo), ("přibylo", pribylo)):

@@ -282,8 +282,40 @@ def postav(zaznam: dict, zdroj: Path) -> str:
             f"<th>kolik</th></tr>{radky}</table>"
         )
 
+    # CO CHYBÍ ČÁSTEČNÝM ZÁPISŮM. Číslo „44 částečných" neřekne, jestli
+    # je to jedna rodina, nebo čtyřicet čtyři různých — a řídit se dá
+    # jedině podle toho druhého.
+    castecne = [
+        v for v in vety
+        if v["stav"] == "ZAPSÁNO · s otázkami" and v.get("questions")
+    ]
+    castecne_html = ""
+    if castecne:
+        podle_druhu: Counter[str] = Counter(
+            q.split(":", 1)[0] for v in castecne for q in v["questions"]
+        )
+        na_vetu: Counter[str] = Counter(
+            " + ".join(sorted({q.split(":", 1)[0] for q in v["questions"]}))
+            for v in castecne
+        )
+        radky = "".join(
+            f"<tr><th>{html.escape(k)}</th><td>{n}</td></tr>"
+            for k, n in na_vetu.most_common()
+        )
+        castecne_html = (
+            f"<h2>Co chybí částečným zápisům — {len(castecne)} vět</h2>"
+            "<p class='sede'>Zápis se stal, otázka zůstala. Bez tohohle "
+            "rozpadu se z čísla nepozná, jestli je to jedna rodina, nebo "
+            "tolik různých, kolik je vět.</p>"
+            + sloupce(podle_druhu)
+            + "<table class='krizem'><tr><th>na větu</th><th>kolik</th></tr>"
+            + radky
+            + "</table>"
+        )
+
     return _SABLONA.format(
         varovani=varovani,
+        castecne=castecne_html,
         hlavicka=hlavicka,
         pocet=len(vety),
         stavy=sloupce(stavy, STAVY),
@@ -394,6 +426,7 @@ a nadpis, který se nepřečetl, není mezera schopnosti.</p>
 vět — jedna věta má otevřených věcí víc.</p>
 {druhy}
 
+{castecne}
 {tvar}
 {zarazeni}
 {vrstvy}

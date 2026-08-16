@@ -101,7 +101,7 @@ vrstvách**. Zlatá sada projde celá (135 položek včetně 9 `unsure`
 a 2 `clarify`) a končí zatím na `U` — báze je prázdná, takže je to
 měřicí nula, ne skóre.
 
-Porovnání dvou běhů dělá `nalezy/diff_behu.py` — po větách, ne procentem:
+Porovnání dvou běhů dělá `cb-diff.py` — po větách, ne procentem:
 běh, kde se deset vět nově zapsalo a deset jiných přestalo zapisovat,
 vypadá v součtu jako beze změny.
 
@@ -172,6 +172,7 @@ pull. Vedeno v `ZDROJ.md`.
 | `cb-wiki.py` | měření nad živou Wikipedií (rozšíření) |
 | `cb-korpus.py` | měření nad zmraženým korpusem conBondu2 (základ) |
 | `cb-html.py` | záznam → diagnostická mapa v HTML |
+| `cb-diff.py` | dva běhy → co se změnilo a proč (krok 6) |
 
 ## Co tu vědomě není
 

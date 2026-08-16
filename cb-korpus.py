@@ -201,6 +201,35 @@ def tabulka(results: list[Result], titulek: str) -> None:
                 print(f"  {'':18} {'':13} {how_many:5}  · {kind}")
 
 
+def tabulka_castecnych(results: list[Result]) -> None:
+    """Co chybí částečným zápisům — **podle druhu, ne počtem**.
+
+    Číslo „44 částečných" neřekne, jestli je to jedna rodina, nebo
+    čtyřicet čtyři různých. Bez tohohle rozpadu se z fasety dá poznat
+    jen KOLIK, a řídit se dá jedině podle CO.
+    """
+    castecne = [
+        r for r in results
+        if r.verdict is Verdict.WRITTEN and r.questions
+    ]
+    if not castecne:
+        return
+    druhy: Counter[str] = Counter(
+        q.split(":", 1)[0] for r in castecne for q in r.questions
+    )
+    kombinace: Counter[str] = Counter(
+        " + ".join(sorted({q.split(":", 1)[0] for q in r.questions}))
+        for r in castecne
+    )
+    print(f"\nCO CHYBÍ ČÁSTEČNÝM ZÁPISŮM   (vět {len(castecne)})")
+    print("  podle druhu (věta jich může mít víc):")
+    for druh, kolik in druhy.most_common():
+        print(f"    {kolik:5}  {druh}")
+    print("  na větu:")
+    for kombo, kolik in kombinace.most_common():
+        print(f"    {kolik:5}  {kombo}")
+
+
 def tabulka_tvaru(zaznamy: list[dict]) -> None:
     """Tvar × stav. **Kříží se, nesčítají.** Nadpis, který se nepřečetl,
     není mezera schopnosti; věta, která se nepřečetla, ano."""
@@ -216,10 +245,14 @@ def tabulka_tvaru(zaznamy: list[dict]) -> None:
         *(v.value for v in Verdict if v is not Verdict.WRITTEN),
     ]
     stavy = [s for s in poradi if any(x == s for _, x in krizem)]
+    # Sloupec je široký podle NEJDELŠÍHO JMÉNA STAVU, ne podle čísla:
+    # „ZAPSÁNO · s otázkami" se do třinácti znaků nevejde a hlavička se
+    # slepí do „ZAPSÁNO · úplněZAPSÁNO · s otázkami".
+    sirka = max(13, *(len(s) + 2 for s in stavy))
     print(f"\nTVAR VSTUPU × STAV   (vět {len(zaznamy)})")
-    print(f"  {'tvar':14}" + "".join(f"{s:>13}" for s in stavy) + f"{'celkem':>9}")
+    print(f"  {'tvar':14}" + "".join(f"{s:>{sirka}}" for s in stavy) + f"{'celkem':>9}")
     for t in tvary:
-        radek = "".join(f"{krizem[(t, s)]:>13}" for s in stavy)
+        radek = "".join(f"{krizem[(t, s)]:>{sirka}}" for s in stavy)
         celkem = sum(krizem[(t, s)] for s in stavy)
         print(f"  {t:14}{radek}{celkem:>9}")
 
@@ -418,6 +451,7 @@ def main() -> None:
                   f" na dokument — strop je stejný pro všechny dokumenty"
                   f" a bere se od začátku, nevybírá podle obtížnosti")
         tabulka(everything, "ROZKLAD PŘES VŠECHNY DOKUMENTY")
+        tabulka_castecnych(everything)
         tabulka_tvaru(vsechny_zaznamy)
         print("=" * 72)
 
