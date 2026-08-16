@@ -110,16 +110,53 @@ jako poslední ten **starší** (pomlčka je v abecedě před tečkou).
 
 ## HTML baseline (krok 5)
 
-```bash
-python cb-html.py --do mereni/baseline.html
-```
-
 Diagnostická mapa, ne log v HTML: jeden soubor bez sítě, u každé věty
 původní řádek ze zdroje, tvar vstupu, rozbor, stopa kaskády, čtení a
 otevřené věci **seznamem**. Nahoře šest stavů zvlášť a sedm druhů otázek
 zvlášť — jedno číslo místo nich by zahodilo přesně to, co se dvě kola
 opravovalo. Filtruje se stavem, tvarem, vrstvou, druhem otázky a
 dokumentem; věty se řadí podle počtu otevřených věcí, ne podle délky.
+
+### Jak ji vyrobit od nuly
+
+Mapa je **odvozená** — nese jen to, co je v záznamu měření. Celý řetěz:
+
+```bash
+# 1. co musí běžet vedle (jednou)
+#    - služba cb-udpipe na 127.0.0.1:42200   (viz conbond4-deps)
+#    - jádro conbond4 jako SOUROZENECKÝ adresář ../conbond4
+
+# 2. měření: korpus conBondu2 → záznam
+#    (korpus se sám naklonuje do data/, mimo git)
+python cb-korpus.py --vet 40 --dvakrat --json mereni/korpus-2026-08-16-1050.json
+
+# 3. záznam → mapa
+python cb-html.py --do mereni/baseline.html      # bez argumentu vezme poslední záznam
+
+# 4. otevřít
+#    - dvojklikem na soubor, nebo
+python -m http.server 8731 --directory mereni    # a jít na /baseline.html
+```
+
+Krok 2 trvá jednotky minut (836 vět × rozbor a kaskáda) a **je to ta
+drahá část**; krok 3 je vteřina a dá se opakovat nad týmž záznamem, kolik
+je potřeba. Proto jsou to dva skripty a ne jeden: kdo mění pohled,
+nemá důvod znovu měřit — a hlavně by při tom měřil **jiné jádro**, což
+je přesně ten druh tichého posunu, který se tady hlídá.
+
+Záznamy v `mereni/` a `baseline.html` jsou v gitu proto, že bez nich by
+po pull nešlo porovnat dva běhy a čísla v `NALEZY.md` by se musela brát
+na slovo.
+
+**Je v tom ale otevřená věc a nemá se přehlédnout:** záznam nese celé
+věty korpusu, a ty jsou **cizí text pod CC BY‑SA**. Pravidlo 7 zadání
+říká, že cizí text do gitu nepatří, pokud to není licenčně nutné —
+a tady je to nutné *měřicky*, ne licenčně: bez věty v záznamu nejde
+zpětně zjistit, na co se systém ptal. Možnosti jsou tři a rozhodnutí
+není moje: nechat a doplnit atribuci podle CC BY‑SA (licence to dovoluje
+se share‑alike), ukládat místo textu otisk věty (pak ale mapa přestane
+být čitelná), nebo držet záznamy mimo git a přijít o porovnatelnost po
+pull. Vedeno v `ZDROJ.md`.
 
 ## Kde co je
 

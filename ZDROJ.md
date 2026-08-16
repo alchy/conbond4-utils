@@ -20,6 +20,30 @@ revize tam není pro ozdobu — bez něj by se dva různé texty pod týmž
 jménem nedaly rozeznat, což je táž past jako keš rozborů bez identity
 modelu (viz `conbond4-deps`).
 
+## Korpus conBondu2
+
+| co | odkud | licence | v gitu? |
+|---|---|---|---|
+| texty článků | `github.com/alchy/conBond2`, `data/raw/` | **CC BY-SA** (Wikipedie) + 5 vlastních | **ne** — klonuje se do `data/` |
+| zlaté sady | `data/gold/*.json` tamtéž | vlastní dílo projektu | ne (čtou se z klonu) |
+| **věty v záznamech měření** | `mereni/*.json`, `baseline.html` | **CC BY-SA** | **ANO — a je to otevřená otázka** |
+
+Poslední řádek je vědomá výjimka, ne přehlédnutí. Záznam měření nese
+**celé věty** korpusu, protože bez nich nejde zpětně zjistit, na co se
+systém ptal a proč — a měření, které se nedá po pull ověřit, je jen
+tvrzení. Je to ale cizí text v repozitáři, což pravidlo 7 zadání zakazuje.
+
+Tři cesty ven a **rozhodnutí patří Revieweru**, ne měřicí vrstvě:
+
+1. nechat a doplnit atribuci — CC BY-SA to dovoluje (uvést zdroj, dílo
+   šířit pod touž licencí);
+2. ukládat místo věty její otisk — reprodukovatelnost zůstane, ale mapa
+   přestane být čitelná a s ní i celý smysl kroku 5;
+3. držet záznamy mimo git — pak po pull nejde porovnat dva běhy.
+
+Do rozhodnutí platí varianta 1 bez formální atribuce, což je stav, který
+se má **buď dodělat, nebo zvrátit**; proto to stojí tady a ne v poznámce.
+
 ## Parser
 
 `cb-udpipe` s modelem `cs_all-ud-2.17-251125` (**CC BY-NC-SA 4.0**,
