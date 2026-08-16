@@ -1,8 +1,8 @@
 {
  "korpus": "github.com/alchy/conBond2@418d7f7",
  "oracle": "udpipe2 model=cs_all-ud-2.17-251125 tokenizer=6247b8b7a5c8",
- "core": "1009036 2026-08-16 09:25 Rozklad přívlastku ve jmenné frázi — a doložené zúžení B-27 (+2 nesledovaných souborů)",
- "utils": "0ed6c30 2026-08-16 09:27 Revize: rozdelany strom a neuklizeny strom nejsou totez",
+ "core": "1009036 2026-08-16 09:25 Rozklad přívlastku ve jmenné frázi — a doložené zúžení B-27 (+6 nesledovaných souborů)",
+ "utils": "40bfc8c 2026-08-16 09:29 Druh otazky: koordinace, a bez planeho poplachu o zmene jadra",
  "strop_vet_na_dokument": 40,
  "documents": [
   {
@@ -19,7 +19,7 @@
      "open_questions": 2,
      "questions": [
       "role: Nevím, jakou roli hraje „23.“ (nsubj>parataxis>nummod+?), „srpna“ (nsubj>parataxis+Gen), „1851“ (nsubj>parataxis>nummod+?), „Hronov“ (nsubj>parataxis+Nom), „12.“ (nsubj>parataxis>conj>nummod+?), „března“ (nsubj>parataxis>conj+Gen), „1930“ (nsubj>parataxis>conj>nummod+?), „Praha“ (nsubj>parataxis+Nom), „středoškolský“ (conj>amod+Nom), „řady“ (conj>nmod+Gen), „historických“ (conj>nmod>nmod>amod+Gen), „románů“ (conj>nmod>nmod+Gen), „realismu“ (conj>nmod+Gen) — do čtení se nedostalo. Jak se ta role jmenuje?",
-      "jiné: Věta jmenuje víc členů v roli „group“ — „dramatik“, „učitel“, „politik“, „autor“, „představitel“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „group“ — „dramatik“, „učitel“, „politik“, „autor“, „představitel“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role"
@@ -82,7 +82,7 @@
       "kvantifikace: Nevím, o kom to platí — Acc (NOUN/Sing/Acc/obl). O každém (∀), o některém (∃), nebo o tom konkrétním (·)?",
       "role: Nevím, jakou roli hraje „učitel“ (advcl+Nom), „dějepisu“ (advcl>nmod+Gen), „Litomyšli“ (conj>conj+Loc), „Praze“ (conj>conj+Loc) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "role: Nevím, co znamená „Acc“ — je to tvar, ne význam. Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
-      "jiné: Věta jmenuje víc členů v roli „kdo“ — „nejprve“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „kdo“ — „nejprve“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -482,7 +482,7 @@
      "open_questions": 2,
      "questions": [
       "role: Nevím, jakou roli hraje „1822“ (nsubj>parataxis+?), „1901“ (nsubj>parataxis>conj+?), „tkadlec“ (nsubj>appos+Nom), „pekař“ (nsubj>appos>conj>orphan+Nom), „Vincencie“ (conj+Nom), „Jirásková“ (conj>flat+Nom), „rozená“ (conj>amod+Nom), „Prouzová“ (conj>amod>obj+Nom), „1821“ (conj>parataxis+?), „1887“ (conj>parataxis>conj+?) — do čtení se nedostalo. Jak se ta role jmenuje?",
-      "jiné: Věta jmenuje víc členů v roli „group“ — „matkou“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „group“ — „matkou“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role"
@@ -596,7 +596,7 @@
      "open_questions": 2,
      "questions": [
       "role: Nevím, jakou roli hraje „Broumově“ (obj>nmod+Loc), „1863“ (obj>parataxis+?), „1867“ (obj>parataxis>conj+?), „české“ (obj>conj>amod+Acc), „Hradci“ (obj>conj>nmod+Loc), „Králové“ (obj>conj>nmod>nmod+Gen), „1867“ (obj>conj>parataxis+?), „1871“ (obj>conj>parataxis>conj+?) — do čtení se nedostalo. Jak se ta role jmenuje?",
-      "jiné: Věta jmenuje víc členů v roli „co“ — „gymnázium“, „vystudoval“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „co“ — „gymnázium“, „vystudoval“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role"
@@ -661,7 +661,7 @@
       "kvantifikace: Nevím, o kom to platí — Gen (NOUN/Plur/Gen/obl). O každém (∀), o některém (∃), nebo o tom konkrétním (·)?",
       "role: Nevím, jakou roli hraje „Čtrnáct“ (obl>nummod+Acc) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "role: Nevím, co znamená „Gen“, „v+Loc/Geo“ — je to tvar, ne význam (to za lomítkem je SIGNÁL Z ROZBORU — `Geo` = `NameType=Geo` na filleru — takže „v Praze“ a „v roce 1935“ jsou DVA RŮZNÉ TVARY a odpověď na jeden neplatí pro druhý). Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
-      "jiné: Věta jmenuje víc členů v roli „kdo“ — „působil“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „kdo“ — „působil“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -834,7 +834,7 @@
       "kvantifikace: Nevím, o kom to platí — v+Gen (DET/det). O každém (∀), o některém (∃), nebo o tom konkrétním (·)?",
       "role: Nevím, jakou roli hraje „době“ (obl>case>fixed+Loc) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "role: Nevím, co znamená „v+Gen“ — je to tvar, ne význam. Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
-      "jiné: Věta jmenuje víc členů v roli „kdo“ — „vznikly“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „kdo“ — „vznikly“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -942,7 +942,7 @@
      "questions": [
       "kvantifikace: Nevím, o kom to platí — co (NOUN/Plur/Gen/obj). O každém (∀), o některém (∃), nebo o tom konkrétním (·)?",
       "role: Nevím, jakou roli hraje „7“ (obj>nummod+?), „šest“ (obj>conj>nummod+Acc), „jednoho“ (obj>conj>nummod+Acc), „syna“ (obj>conj+Acc) — do čtení se nedostalo. Jak se ta role jmenuje?",
-      "jiné: Věta jmenuje víc členů v roli „co“ — „dcer“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „co“ — „dcer“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -1263,7 +1263,7 @@
       "kvantifikace: Nevím, o kom to platí — v+Loc:arg (NOUN/Sing/Loc/obl:arg). O každém (∀), o některém (∃), nebo o tom konkrétním (·)?",
       "role: Nevím, jakou roli hraje „vyučoval“ (obl>parataxis+?), „gymnáziu“ (obl>parataxis>obl+Loc), „Žitné“ (obl>parataxis>obl>nmod>amod+Loc), „ulici“ (obl>parataxis>obl>nmod+Loc), „literární“ (obl>conj>amod+Loc) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "role: Nevím, co znamená „v+Loc/Geo“, „v+Loc:arg“ — je to tvar, ne význam (to za lomítkem je SIGNÁL Z ROZBORU — `Geo` = `NameType=Geo` na filleru — takže „v Praze“ a „v roce 1935“ jsou DVA RŮZNÉ TVARY a odpověď na jeden neplatí pro druhý). Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
-      "jiné: Věta jmenuje víc členů v roli „v+Loc:arg“ — „činnosti“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „v+Loc:arg“ — „činnosti“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -1359,7 +1359,7 @@
      "open_questions": 2,
      "questions": [
       "role: Nevím, jakou roli hraje „Mikolášem“ (obj>nmod+Ins), „Alšem“ (obj>nmod>flat+Ins), „nímž“ (obj>nmod>acl>obl+Ins), „sdílel“ (obj>nmod>acl+?), „obdobné“ (obj>nmod>acl>obj>amod+Acc), „umělecké“ (obj>nmod>acl>obj>amod+Acc), „představy“ (obj>nmod>acl>obj+Acc), „plány“ (obj>nmod>acl>obj>conj+Acc), „spisovateli“ (obj>nmod>conj+Ins), „lumírovského“ (obj>nmod>conj>nmod>amod+Gen), „kruhu“ (obj>nmod>conj>nmod+Gen), „J“ (obj>nmod>conj>appos>nmod+?), „V“ (obj>nmod>conj>appos>nmod+?), „Sládkem“ (obj>nmod>conj>appos+Ins), „Jaroslavem“ (obj>nmod>conj>appos>conj+Ins), „Vrchlickým“ (obj>nmod>conj>appos>conj>flat+Ins), „Josefem“ (obj>nmod>conj>appos>conj+Ins), „Thomayerem“ (obj>nmod>conj>appos>conj>flat+Ins) — do čtení se nedostalo. Jak se ta role jmenuje?",
-      "jiné: Věta jmenuje víc členů v roli „kdo“ — „navázal“, „měl“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „kdo“ — „navázal“, „měl“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role"
@@ -1457,7 +1457,7 @@
      "questions": [
       "role: Nevím, jakou roli hraje „nejrozsáhlejší“ (nsubj>conj>amod+Nom), „románová“ (nsubj>conj>amod+Nom) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "role: Nevím, co znamená „v+Loc/Geo“ — je to tvar, ne význam (to za lomítkem je SIGNÁL Z ROZBORU — `Geo` = `NameType=Geo` na filleru — takže „v Praze“ a „v roce 1935“ jsou DVA RŮZNÉ TVARY a odpověď na jeden neplatí pro druhý). Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
-      "jiné: Věta jmenuje víc členů v roli „kdo“ — „díla“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „kdo“ — „díla“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role"
@@ -1499,7 +1499,7 @@
       "role: Nevím, jakou roli hraje „1890“ (obl>nummod>compound+?), „České“ (obl>nmod>amod+Gen), „věd“ (obl>nmod>nmod+Gen), „umění“ (obl>nmod>nmod>conj+Gen) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "role: Nevím, co znamená „Gen“ — je to tvar, ne význam. Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
       "přívlastek: Co ten přívlastek v genitivu tvrdí — „řádný_člen akademie“?",
-      "přívlastek: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „co“ — „jmenován“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „co“ — „jmenován“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -1601,7 +1601,7 @@
      "questions": [
       "role: Nevím, jakou roli hraje „rodného“ (obl>amod+Gen) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "role: Nevím, co znamená „advmod“, „advmod:emph“ — je to tvar, ne význam. Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
-      "jiné: Věta jmenuje víc členů v roli „kdo“ — „podnikal“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „kdo“ — „podnikal“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -1696,7 +1696,7 @@
      "open_questions": 2,
      "questions": [
       "role: Nevím, jakou roli hraje „1885“ (obl>parataxis+?), „jižních“ (obl>conj>amod+Gen), „1887“ (obl>conj>parataxis+?), „1890“ (obl>conj>parataxis+?), „Slovensko“ (obl>conj+Acc), „1897“ (obl>conj>parataxis+?), „1900“ (obl>conj>parataxis+?), „1897“ (obl>conj>parataxis+?) — do čtení se nedostalo. Jak se ta role jmenuje?",
-      "jiné: Věta jmenuje víc členů v roli „kam“ — „Čech“, „Kostnice“, „Itálie“, „Bledu“, „Uher“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „kam“ — „Čech“, „Kostnice“, „Itálie“, „Bledu“, „Uher“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -1822,7 +1822,7 @@
      "questions": [
       "role: Nevím, jakou roli hraje „zastavení“ (obj>nmod+Dat), „smyšleného“ (obj>nmod>nmod>amod+Gen), „obvinění“ (obj>nmod>nmod+Gen), „rituální“ (obj>nmod>nmod>nmod>amod+Gen), „vraždy“ (obj>nmod>nmod>nmod+Gen), „antisemitským“ (obj>nmod>nmod>nmod>amod+Ins), „podtextem“ (obj>nmod>nmod>nmod+Ins), „T“ (obl>nmod+?), „G“ (obl>nmod+?), „K“ (obl>conj>nmod+?), „Neumannem“ (obl>conj>flat+Ins), „A“ (obl>conj>nmod+?), „Heyrovským“ (obl>conj>flat+Ins) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "role: Nevím, co znamená „spolu+Ins“ — je to tvar, ne význam. Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
-      "jiné: Věta jmenuje víc členů v roli „spolu+Ins“ — „S.“, „Rašínem“, „L.“, „dalšími“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „spolu+Ins“ — „S.“, „Rašínem“, „L.“, „dalšími“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role"
@@ -2207,7 +2207,7 @@
      "open_questions": 2,
      "questions": [
       "role: Nevím, jakou roli hraje „celý“ (advcl+Nom), „Jižního“ (advmod>obl>amod+Gen), „polárního“ (advmod>obl>amod+Gen), „kruhu“ (advmod>obl+Gen) — do čtení se nedostalo. Jak se ta role jmenuje?",
-      "jiné: Věta jmenuje víc členů v roli „kdo“ — „obklopen“, „nachází“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „kdo“ — „obklopen“, „nachází“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -2351,7 +2351,7 @@
      "open_questions": 2,
      "questions": [
       "role: Nevím, co znamená „v+Loc“ — je to tvar, ne význam. Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
-      "jiné: Věta jmenuje víc členů v roli „co“ — „nejsušší“, „největrnější“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „co“ — „nejsušší“, „největrnější“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role"
@@ -2400,7 +2400,7 @@
       "kvantifikace: Nevím, o kom to platí — o+Acc:arg (NOUN/Sing/Acc/obl:arg). O každém (∀), o některém (∃), nebo o tom konkrétním (·)?",
       "role: Nevím, jakou roli hraje „ročním“ (obl>nmod>amod+Ins), „úhrnem“ (obl>nmod+Ins), „srážek“ (obl>nmod>nmod+Gen), „200“ (obl>nmod>nmod>nummod+?), „mm“ (obl>nmod>nmod>nummod>nmod+?), „pobřeží“ (obl>nmod>nmod+Gen), „vnitrozemí“ (conj>orphan+Loc) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "role: Nevím, co znamená „o+Acc:arg“ — je to tvar, ne význam. Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
-      "jiné: Věta jmenuje víc členů v roli „kdo“ — „méně“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „kdo“ — „méně“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -2623,7 +2623,7 @@
       "kvantifikace: Nevím, o kom to platí — mezi+Acc (NOUN/Plur/Acc/obl). O každém (∀), o některém (∃), nebo o tom konkrétním (·)?",
       "role: Nevím, co znamená „mezi+Acc“ — je to tvar, ne význam. Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
       "přívlastek: Co ten přívlastek v genitivu tvrdí — „původní_druh živočich“?",
-      "přívlastek: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „kdo“ — „hlístice“, „tučňáci“, „tuleni“, „želvušky“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „kdo“ — „hlístice“, „tučňáci“, „tuleni“, „želvušky“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -2985,7 +2985,7 @@
       "role: Nevím, jakou roli hraje „jaderné“ (nsubj>conj>amod+Nom), „jaderného“ (nsubj>conj>nmod>amod+Gen), „odpadu“ (nsubj>conj>nmod+Gen), „nerostných“ (nsubj>conj>nmod>amod+Gen), „surovin“ (nsubj>conj>nmod+Gen), „roku“ (nsubj>conj>nmod+Gen), „2048“ (nsubj>conj>nmod>nummod+?) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "role: Nevím, co znamená „podle+Gen“, „v+Loc/Geo“ — je to tvar, ne význam (to za lomítkem je SIGNÁL Z ROZBORU — `Geo` = `NameType=Geo` na filleru — takže „v Praze“ a „v roce 1935“ jsou DVA RŮZNÉ TVARY a odpověď na jeden neplatí pro druhý). Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
       "přívlastek: Co ten přívlastek v genitivu tvrdí — „podmínka smlouva“?",
-      "přívlastek: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „co“ — „těžba“, „výbuchy“, „ukládání“, „těžba“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „co“ — „těžba“, „výbuchy“, „ukládání“, „těžba“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -3092,7 +3092,7 @@
      "questions": [
       "kvantifikace: Nevím, o kom to platí — co (NOUN/Sing/Ins/root). O každém (∀), o některém (∃), nebo o tom konkrétním (·)?",
       "role: Nevím, co znamená „v+Loc/Geo“ — je to tvar, ne význam (to za lomítkem je SIGNÁL Z ROZBORU — `Geo` = `NameType=Geo` na filleru — takže „v Praze“ a „v roce 1935“ jsou DVA RŮZNÉ TVARY a odpověď na jeden neplatí pro druhý). Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
-      "jiné: Věta jmenuje víc členů v roli „v+Loc/Geo“ — „okolí“, „rybolov“, „výzkum“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „v+Loc/Geo“ — „okolí“, „rybolov“, „výzkum“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -3325,7 +3325,7 @@
       "kvantifikace: Nevím, o kom to platí — co (NOUN/Sing/Nom/nsubj:pass). O každém (∀), o některém (∃), nebo o tom konkrétním (·)?",
       "role: Nevím, jakou roli hraje „řeckého“ (obl>amod+Gen), „medvědí“ (obl>conj>appos+Nom), „severní“ (obl>conj>appos>conj+Nom) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "role: Nevím, co znamená „z:arg“ — je to tvar, ne význam. Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
-      "jiné: Věta jmenuje víc členů v roli „z:arg“ — „ἀρκτικός“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „z:arg“ — „ἀρκτικός“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -3452,7 +3452,7 @@
       "kvantifikace: Nevím, o kom to platí — pro+Acc (NOUN/Sing/Acc/obl). O každém (∀), o některém (∃), nebo o tom konkrétním (·)?",
       "role: Nevím, jakou roli hraje „Římští“ (nsubj>nmod>amod+Nom), „autoři“ (nsubj>nmod+Nom), „něhož“ (obj>acl>obl+Gen), „pochází“ (obj>acl+?), „starofrancouzské“ (obj>acl>nsubj>amod+Nom), „pole“ (obj>acl>nsubj+Nom), „moderní“ (obj>acl>nsubj>nmod>appos>amod+Nom), „doložené“ (obj>acl>nsubj>amod+Nom), „roce“ (obj>acl>nsubj>amod>obl+Loc), „1270“ (obj>acl>nsubj>amod>obl>nummod+?), „středoanglické“ (obj>acl>conj>orphan>amod+Nom), „pol“ (obj>acl>conj>orphan+?), „objevuje“ (obj>acl>conj>orphan>acl+?), „pojednání“ (obj>acl>conj>orphan>acl>obl+Loc), „anglického“ (obj>acl>conj>orphan>acl>obl>nmod>amod+Gen), „autora“ (obj>acl>conj>orphan>acl>obl>nmod+Gen), „Geoffreyho“ (obj>acl>conj>orphan>acl>obl>nmod>flat+Gen), „Chaucera“ (obj>acl>conj>orphan>acl>obl>nmod>flat+Gen) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "role: Nevím, co znamená „pro+Acc“ — je to tvar, ne význam. Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
-      "jiné: Věta jmenuje víc členů v roli „kdo“ — „Apuleius“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „kdo“ — „Apuleius“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -3780,7 +3780,7 @@
      "status": "",
      "open_questions": 1,
      "questions": [
-      "jiné: Věta jmenuje víc členů v roli „kdo“ — „navrhovali“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „kdo“ — „navrhovali“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "rozbor"
@@ -4160,7 +4160,7 @@
       "kvantifikace: Nevím, o kom to platí — Ins:arg (NOUN/Sing/Ins/obl:arg). O každém (∀), o některém (∃), nebo o tom konkrétním (·)?",
       "role: Nevím, jakou roli hraje „publikovat“ (advcl>xcomp+?), „40.“ (advcl>xcomp>obl>nummod+?), „roce“ (advcl>xcomp>obl+Loc), „věku“ (advcl>xcomp>obl>nmod+Gen), „Osudy“ (obl>acl>nsubj+Nom), „dobrého“ (obl>acl>nsubj>nmod>amod+Gen), „vojáka“ (obl>acl>nsubj>nmod+Gen), „Švejka“ (obl>acl>nsubj>nmod>flat+Gen), „přeloženy“ (obl>acl+?), „58“ (obl>acl>obl>nummod+?), „jazyků“ (obl>acl>obl+Gen), „Čapkovi“ (obl>conj>flat+Loc), „díla“ (obl>conj>acl>nsubj+Nom), „přeložena“ (obl>conj>acl+?), „desítek“ (obl>conj>acl>obl+Gen), „jazyků“ (obl>conj>acl>obl>nmod+Gen) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "role: Nevím, co znamená „Ins:arg“, „advcl:ačkoliv“ — je to tvar, ne význam. Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
-      "jiné: Věta jmenuje víc členů v roli „kudy“ — „Karlu“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „kudy“ — „Karlu“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -4241,7 +4241,7 @@
       "kvantifikace: Nevím, o kom to platí — na+Acc (NOUN/Sing/Acc/obl). O každém (∀), o některém (∃), nebo o tom konkrétním (·)?",
       "role: Nevím, co znamená „na+Acc“ — je to tvar, ne význam. Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
       "přívlastek: Co ten přívlastek v genitivu tvrdí — „přání rodič“?",
-      "přívlastek: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „kdo“ — „neprovozoval“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „kdo“ — „neprovozoval“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -4344,7 +4344,7 @@
       "kvantifikace: Nevím, o kom to platí — co (NOUN/Sing/Ins/root). O každém (∀), o některém (∃), nebo o tom konkrétním (·)?",
       "role: Nevím, jakou roli hraje „Zlatého“ (nmod>nmod>amod+Gen), „tygra“ (nmod>nmod+Gen), „Praze“ (nmod>nmod+Loc), „Starém“ (nmod>nmod>nmod>amod+Loc), „Městě“ (nmod>nmod>nmod+Loc), „kmenovým“ (conj>amod+Ins), „tzv.“ (conj>nmod>amod+Gen), „Hrabalovy“ (conj>nmod>amod+Gen), „Sorbonny“ (conj>nmod+Gen) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "přívlastek: Co ten přívlastek v genitivu tvrdí — „stálý_host hospoda“?",
-      "přívlastek: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „co“ — „členem“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „co“ — „členem“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -4497,7 +4497,7 @@
       "role: Nevím, jakou roli hraje „Židenice“ (obl>nmod+Nom), „Balbínova“ (obl>parataxis>amod+Nom), „ul“ (obl>parataxis+?), „489“ (obl>parataxis>nummod>compound+?), „47“ (obl>parataxis>nummod+?), „pamětní“ (obl>parataxis>conj>amod+Nom), „deska“ (obl>parataxis>conj+Nom), „4.“ (obl>parataxis>nummod+?), „ledna“ (obl>parataxis+Gen), „1894“ (obl>parataxis>nummod+?), „Brno“ (obl>parataxis+Nom), „1970“ (obl>parataxis>nummod+?), „rakouské“ (obl>conj>nmod>amod+Gen), „armády“ (obl>conj>nmod+Gen), „Bohumilu“ (obl>conj>flat+Dat), „Blechovi“ (obl>conj>flat+Dat), „3.“ (obl>conj>parataxis>nummod+?), „ledna“ (obl>conj>parataxis+Gen), „1893“ (obl>conj>parataxis>nummod+?), „Jevišovice“ (obl>conj>parataxis+Nom), „1970“ (obl>conj>parataxis>nummod+?), „Brno“ (obl>conj>parataxis+Nom), „otcovství“ (obl>conj>acl>obl+Dat), „nehlásil“ (obl>conj>acl+?) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "role: Nevím, co znamená „Dat:arg“ — je to tvar, ne význam. Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
       "konstrukce: Ta věta tvrdí ještě tohle: „matka Marie Božena Kilianová“. Zapíšu to jako členství vedle věty, ale sám to neudělám a NEPTÁM SE JEN „ano/ne“ — potřebuju vědět, ČÍM ten titul je. POVOLÁNÍ („básník Josef Hora“) zapíšu; ÚŘAD DRŽENÝ V ČASE („prezident Masaryk“) nezapíšu, protože bezčasé členství by platilo šíř, než co ta věta říká — Masaryk byl prezident v nějakém období, ne pořád. Z rozboru se to rozeznat nedá: „prezident“ a „básník“ v něm vypadají stejně. Povolání, nebo úřad?",
-      "jiné: Věta jmenuje víc členů v roli „Dat:arg“ — „důstojníku“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „Dat:arg“ — „důstojníku“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role"
@@ -4630,7 +4630,7 @@
       "role: Nevím, jakou roli hraje „němž“ (obl>acl>obl+Loc), „nese“ (obl>acl+?), „křestní“ (obl>acl>obj>amod+Acc), „jméno“ (obl>acl>obj+Acc), „limonádami“ (nsubj>nmod+Ins), „17.“ (nsubj>parataxis>nummod+?), „listopadu“ (nsubj>parataxis+Gen), „1889“ (nsubj>parataxis>nummod+?), „Konice“ (nsubj>parataxis+Nom), „1966“ (nsubj>parataxis>nummod+?), „předobraz“ (nsubj>parataxis>conj+Nom), „literární“ (nsubj>parataxis>conj>nmod>amod+Gen), „postavy“ (nsubj>parataxis>conj>nmod+Gen), „Francina“ (nsubj>parataxis>conj>nmod>nmod+Gen), „hlavní“ (nsubj>conj>amod+Nom), „městském“ (nsubj>conj>nmod>amod+Loc), „pivovaru“ (nsubj>conj>nmod+Loc), „Polné“ (nsubj>conj>nmod>nmod+Loc), „odešla“ (nsubj>conj>nmod>nmod>acl+?), „pracovala“ (nsubj>conj>nmod>nmod>acl>conj+?), „účetní“ (nsubj>conj>nmod>nmod>acl>conj>advcl+Nom), „Bohumilova“ (nsubj>conj>nmod>nmod>acl>nsubj>amod+Nom), „matka“ (nsubj>conj>nmod>nmod>acl>nsubj+Nom) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "role: Nevím, co znamená „za+Acc:arg“ — je to tvar, ne význam. Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
       "konstrukce: Ta věta tvrdí ještě tohle: „obchodník František Hrabal“. Zapíšu to jako členství vedle věty, ale sám to neudělám a NEPTÁM SE JEN „ano/ne“ — potřebuju vědět, ČÍM ten titul je. POVOLÁNÍ („básník Josef Hora“) zapíšu; ÚŘAD DRŽENÝ V ČASE („prezident Masaryk“) nezapíšu, protože bezčasé členství by platilo šíř, než co ta věta říká — Masaryk byl prezident v nějakém období, ne pořád. Z rozboru se to rozeznat nedá: „prezident“ a „básník“ v něm vypadají stejně. Povolání, nebo úřad?",
-      "jiné: Věta jmenuje víc členů v roli „kdo“ — „účetní“. Platí to o každém zvlášť, nebo o nich dohromady?",
+      "koordinace: Věta jmenuje víc členů v roli „kdo“ — „účetní“. Platí to o každém zvlášť, nebo o nich dohromady?",
       "koreference: Z rozboru to poznat nejde: „Petr a Jana přišli.“ a „Petr a Jana zvedli klavír.“ mají touž stavbu. Na koho odkazuje „mu“?"
      ],
      "layers": [
@@ -5161,7 +5161,7 @@
       "kvantifikace: Nevím, o kom to platí — Gen (NOUN/Sing/Gen/obl), co (DET/det). O každém (∀), o některém (∃), nebo o tom konkrétním (·)?",
       "role: Nevím, jakou roli hraje „brněnském“ (obl>nmod>amod+Loc), „gymnáziu“ (obl>nmod+Loc) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "role: Nevím, co znamená „Gen“, „v+Loc“ — je to tvar, ne význam. Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
-      "jiné: Věta jmenuje víc členů v roli „kdo“ — „zakončil“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „kdo“ — „zakončil“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -5494,7 +5494,7 @@
       "kvantifikace: Nevím, o kom to platí — během+Gen (NOUN/Sing/Gen/obl). O každém (∀), o některém (∃), nebo o tom konkrétním (·)?",
       "role: Nevím, jakou roli hraje „železniční“ (advcl>amod+Nom), „dělník“ (advcl+Nom), „výpravčí“ (advcl>conj+Nom) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "role: Nevím, co znamená „během+Gen“, „v+Loc/Geo“ — je to tvar, ne význam (to za lomítkem je SIGNÁL Z ROZBORU — `Geo` = `NameType=Geo` na filleru — takže „v Praze“ a „v roce 1935“ jsou DVA RŮZNÉ TVARY a odpověď na jeden neplatí pro druhý). Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
-      "jiné: Věta jmenuje víc členů v roli „kdo“ — „zpracoval“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „kdo“ — „zpracoval“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -5550,7 +5550,7 @@
      "open_questions": 2,
      "questions": [
       "role: Nevím, jakou roli hraje „pojišťovací“ (obj>appos>amod+Nom), „agent“ (obj>appos+Nom), „obchodní“ (obj>appos>conj>amod+Nom), „cestující“ (obj>appos>conj+Nom), „roku“ (obj>appos>conj+Gen), „1949“ (obj>appos>conj>nummod+?), „brigádník“ (obj>appos>conj+Nom), „kladenských“ (obj>appos>conj>nmod>amod+Loc), „ocelárnách“ (obj>appos>conj>nmod+Loc) — do čtení se nedostalo. Jak se ta role jmenuje?",
-      "jiné: Věta jmenuje víc členů v roli „kdo“ — „šel“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „kdo“ — „šel“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role"
@@ -5652,7 +5652,7 @@
       "role: Nevím, jakou roli hraje „1950“ (obj>parataxis+?), „1973“ (obj>parataxis>conj+?), „pražské“ (obl>amod+Loc), „hrázi“ (obl>nmod+Loc), „326“ (obl>nmod>nummod>compound+?), „24“ (obl>nmod>nummod+?), „dům“ (parataxis>nsubj+Nom), „zbourán“ (parataxis+?), „souvislosti“ (parataxis>obl>case>fixed+Loc), „stavbou“ (parataxis>obl+Ins), „metra“ (parataxis>obl>nmod+Gen), „pamětní“ (conj>amod+Nom), „deska“ (conj+Nom), „chodníku“ (conj>nmod+Loc) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "role: Nevím, co znamená „v+Loc/Geo“ — je to tvar, ne význam (to za lomítkem je SIGNÁL Z ROZBORU — `Geo` = `NameType=Geo` na filleru — takže „v Praze“ a „v roce 1935“ jsou DVA RŮZNÉ TVARY a odpověď na jeden neplatí pro druhý). Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
       "přívlastek: Co ten přívlastek v genitivu tvrdí — „značný_část život“?",
-      "přívlastek: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „kdo“ — „vyzdobila“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „kdo“ — „vyzdobila“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role"
@@ -6153,7 +6153,7 @@
      "questions": [
       "kvantifikace: Nevím, o kom to platí — Gen (NOUN/Plur/Gen/obl). O každém (∀), o některém (∃), nebo o tom konkrétním (·)?",
       "role: Nevím, co znamená „Gen“, „po+Loc/rok“ — je to tvar, ne význam (to za lomítkem je SIGNÁL Z ROZBORU — `rok` = letopočet jako dítě filleru — takže „v Praze“ a „v roce 1935“ jsou DVA RŮZNÉ TVARY a odpověď na jeden neplatí pro druhý). Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
-      "jiné: Věta jmenuje víc členů v roli „kdo“ — „psal“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „kdo“ — „psal“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -6364,7 +6364,7 @@
      "open_questions": 2,
      "questions": [
       "role: Nevím, jakou roli hraje „rodným“ (nsubj>nmod>amod+Ins), „jménem“ (nsubj>nmod+Ins), „Novotná“ (nsubj>flat>flat+Nom), „Panklová“ (nsubj>conj>flat+Nom), „4.“ (nsubj>conj>dep>obl>nummod+?), „února“ (nsubj>conj>dep>obl+Gen), „1820“ (nsubj>conj>dep>obl>nummod+?), „Vídeň“ (nsubj>conj>parataxis+Nom), „21.“ (nsubj>conj>dep>orphan>nummod+?), „ledna“ (nsubj>conj>dep>orphan+Gen), „1862“ (nsubj>conj>dep>orphan>nummod+?), „Praha“ (nsubj>parataxis+Nom), „Nové“ (nsubj>parataxis>nmod>amod+Nom), „Město“ (nsubj>parataxis>nmod+Nom), „vrcholné“ (amod>obl>amod+Loc), „fázi“ (amod>obl+Loc), „českého“ (amod>obl>nmod>amod+Gen), „národního“ (amod>obl>nmod>amod+Gen), „obrození“ (amod>obl>nmod+Gen) — do čtení se nedostalo. Jak se ta role jmenuje?",
-      "jiné: Věta jmenuje víc členů v roli „elem“ — „Barbora“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „elem“ — „Barbora“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role"
@@ -6432,7 +6432,7 @@
       "kvantifikace: Nevím, o kom to platí — co (DET/det), k+Dat:arg (NOUN/Sing/Dat/obl:arg). O každém (∀), o některém (∃), nebo o tom konkrétním (·)?",
       "role: Nevím, jakou roli hraje „ranému“ (obl>conj>amod+Dat) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "role: Nevím, co znamená „k+Dat:arg“ — je to tvar, ne význam. Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
-      "jiné: Věta jmenuje víc členů v roli „k+Dat:arg“ — „realismu“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „k+Dat:arg“ — „realismu“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -6572,7 +6572,7 @@
      "open_questions": 2,
      "questions": [
       "kvantifikace: Nevím, o kom to platí — co (NOUN/Sing/Ins/root). O každém (∀), o některém (∃), nebo o tom konkrétním (·)?",
-      "jiné: Věta jmenuje víc členů v roli „odkud“ — „slovenštiny“, „srbštiny“, „srbochorvatštiny“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „odkud“ — „slovenštiny“, „srbštiny“, „srbochorvatštiny“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "kvantifikace"
@@ -6615,7 +6615,7 @@
       "kvantifikace: Nevím, o kom to platí — v+Loc/rok (NOUN/Plur/Loc/obl). O každém (∀), o některém (∃), nebo o tom konkrétním (·)?",
       "role: Nevím, jakou roli hraje „1833“ (obl>nummod>conj+?) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "role: Nevím, co znamená „v+Loc/Geo“, „v+Loc/rok“ — je to tvar, ne význam (to za lomítkem je SIGNÁL Z ROZBORU — `Geo` = `NameType=Geo` na filleru, `rok` = letopočet jako dítě filleru — takže „v Praze“ a „v roce 1935“ jsou DVA RŮZNÉ TVARY a odpověď na jeden neplatí pro druhý). Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
-      "jiné: Věta jmenuje víc členů v roli „kdo“ — „zdokonalovala“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „kdo“ — „zdokonalovala“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -6767,7 +6767,7 @@
       "konstrukce: Co ta věta tvrdí o vztahu těch dvou?",
       "konstrukce: Tvar je cop:předmět+Gen — before, contains, disjoint, member, same_as, subset, within?",
       "přívlastek: Co ten přívlastek v genitivu tvrdí — „literární_dílo Božena“?",
-      "přívlastek: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „kdo“ — „bída“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „kdo“ — „bída“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -7515,7 +7515,7 @@
       "kvantifikace: Nevím, o kom to platí — z+Gen:arg (NOUN/Plur/Gen/obl:arg). O každém (∀), o některém (∃), nebo o tom konkrétním (·)?",
       "role: Nevím, jakou roli hraje „matrice“ (obl>nmod+Loc), „města“ (obl>nmod>nmod+Gen), „Vídně“ (obl>nmod>nmod>nmod+Gen), „4.“ (obl>acl>obl>nummod+?), „února“ (obl>acl>obl+Gen), „1820“ (obl>acl>obl>nummod+?), „předměstí“ (obl>acl>obl+Loc), „Alservorstadt“ (obl>acl>obl>nmod+Nom), „narodila“ (obl>acl+?), „Barbara“ (obl>acl>nsubj+Nom), „Nowotny“ (obl>acl>nsubj>flat+?) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "role: Nevím, co znamená „z+Gen:arg“ — je to tvar, ne význam. Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
-      "jiné: Věta jmenuje víc členů v roli „kdo“ — „badatelé“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „kdo“ — „badatelé“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -8202,7 +8202,7 @@
       "role: Nevím, co znamená „na+Acc“, „před+Ins“ — je to tvar, ne význam. Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
       "přívlastek: Co ten přívlastek v genitivu tvrdí — „panství vévodkyně“?",
       "přívlastek: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Ta věta tvrdí ještě tohle: „dcera Barbora“. Zapíšu to jako členství vedle věty, ale sám to neudělám a NEPTÁM SE JEN „ano/ne“ — potřebuju vědět, ČÍM ten titul je. POVOLÁNÍ („básník Josef Hora“) zapíšu; ÚŘAD DRŽENÝ V ČASE („prezident Masaryk“) nezapíšu, protože bezčasé členství by platilo šíř, než co ta věta říká — Masaryk byl prezident v nějakém období, ne pořád. Z rozboru se to rozeznat nedá: „prezident“ a „básník“ v něm vypadají stejně. Povolání, nebo úřad?",
-      "jiné: Věta jmenuje víc členů v roli „kdo“ — „Novotná“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „kdo“ — „Novotná“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -8335,7 +8335,7 @@
      "open_questions": 2,
      "questions": [
       "role: Nevím, jakou roli hraje „23.“ (nsubj>parataxis>nummod+?), „dubna“ (nsubj>parataxis+Gen), „1908“ (nsubj>parataxis>nummod+?), „Hronov“ (nsubj>parataxis+Nom), „7.“ (nsubj>parataxis>conj>nummod+?), „května“ (nsubj>parataxis>conj+Gen), „1973“ (nsubj>parataxis>conj>nummod+?), „Montclair“ (nsubj>parataxis>nmod+Nom), „USA“ (nsubj>parataxis>nmod>conj+?) — do čtení se nedostalo. Jak se ta role jmenuje?",
-      "jiné: Věta jmenuje víc členů v roli „group“ — „redaktor“, „novinář“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „group“ — „redaktor“, „novinář“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role"
@@ -8473,7 +8473,7 @@
      "status": "",
      "open_questions": 1,
      "questions": [
-      "jiné: Věta jmenuje víc členů v roli „kdo“ — „publikoval“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „kdo“ — „publikoval“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "rozbor"
@@ -8526,7 +8526,7 @@
       "kvantifikace: Nevím, o kom to platí — Gen (NOUN/Sing/Gen/obl). O každém (∀), o některém (∃), nebo o tom konkrétním (·)?",
       "role: Nevím, jakou roli hraje „UK“ (xcomp>obj>nmod+?) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "role: Nevím, co znamená „Gen“ — je to tvar, ne význam. Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
-      "jiné: Věta jmenuje víc členů v roli „kdo“ — „zaznamenána“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „kdo“ — „zaznamenána“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -8618,7 +8618,7 @@
      "questions": [
       "kvantifikace: Nevím, o kom to platí — Gen (NOUN/Sing/Gen/obl). O každém (∀), o některém (∃), nebo o tom konkrétním (·)?",
       "role: Nevím, co znamená „Gen“ — je to tvar, ne význam. Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
-      "jiné: Věta jmenuje víc členů v roli „kdo“ — „pracoval“, „podílel“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „kdo“ — „pracoval“, „podílel“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -8905,7 +8905,7 @@
      "open_questions": 2,
      "questions": [
       "role: Nevím, co znamená „do/Geo“, „v+Loc/rok“ — je to tvar, ne význam (to za lomítkem je SIGNÁL Z ROZBORU — `Geo` = `NameType=Geo` na filleru, `rok` = letopočet jako dítě filleru — takže „v Praze“ a „v roce 1935“ jsou DVA RŮZNÉ TVARY a odpověď na jeden neplatí pro druhý). Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
-      "jiné: Věta jmenuje víc členů v roli „kdo“ — „Lisabon“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „kdo“ — „Lisabon“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role"
@@ -8943,7 +8943,7 @@
      "open_questions": 2,
      "questions": [
       "role: Nevím, co znamená „v+Loc“ — je to tvar, ne význam. Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
-      "jiné: Věta jmenuje víc členů v roli „kdo“ — „vstoupil“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „kdo“ — „vstoupil“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role"
@@ -8986,7 +8986,7 @@
      "questions": [
       "kvantifikace: Nevím, o kom to platí — v+Loc (DET/det). O každém (∀), o některém (∃), nebo o tom konkrétním (·)?",
       "role: Nevím, co znamená „v+Loc“, „v+Loc/rok“ — je to tvar, ne význam (to za lomítkem je SIGNÁL Z ROZBORU — `rok` = letopočet jako dítě filleru — takže „v Praze“ a „v roce 1935“ jsou DVA RŮZNÉ TVARY a odpověď na jeden neplatí pro druhý). Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
-      "jiné: Věta jmenuje víc členů v roli „kdo“ — „vrátil“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „kdo“ — „vrátil“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -9193,7 +9193,7 @@
      "questions": [
       "role: Nevím, jakou roli hraje „učitel“ (advcl+Nom), „češtiny“ (advcl>nmod+Gen), „poradce“ (advcl>conj+Nom), „evropské“ (advcl>conj>nmod>amod+Acc), „literatury“ (advcl>conj>nmod+Acc), „novinář“ (advcl>conj+Nom), „přispíval“ (advcl>conj>parataxis+?), „amerických“ (advcl>conj>parataxis>obl>amod+Gen), „periodik“ (advcl>conj>parataxis>obl+Gen) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "role: Nevím, co znamená „v+Loc/Geo“ — je to tvar, ne význam (to za lomítkem je SIGNÁL Z ROZBORU — `Geo` = `NameType=Geo` na filleru — takže „v Praze“ a „v roce 1935“ jsou DVA RŮZNÉ TVARY a odpověď na jeden neplatí pro druhý). Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
-      "jiné: Věta jmenuje víc členů v roli „kdo“ — „spolupracoval“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „kdo“ — „spolupracoval“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role"
@@ -9255,7 +9255,7 @@
      "questions": [
       "role: Nevím, jakou roli hraje „profesionální“ (advcl>amod+Nom), „literát“ (advcl+Nom), „jazykovou“ (obl>nmod>amod+Ins), „bariérou“ (obl>nmod+Ins), „recepci“ (obl>nmod>nmod+Loc), „děl“ (obl>nmod>nmod>nmod+Gen) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "role: Nevím, co znamená „přes+Acc“ — je to tvar, ne význam. Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
-      "jiné: Věta jmenuje víc členů v roli „kdo“ — „psal“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „kdo“ — „psal“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -9773,7 +9773,7 @@
       "konstrukce: Co ta věta tvrdí o vztahu těch dvou?",
       "konstrukce: Tvar je cop:typický_metoda+Gen — before, contains, disjoint, member, same_as, subset, within?",
       "přívlastek: Co ten přívlastek v genitivu tvrdí — „vypravěč Hostovský“?",
-      "přívlastek: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „kdo“ — „pocity“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „kdo“ — „pocity“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -10042,7 +10042,7 @@
       "role: Nevím, jakou roli hraje „ním“ (nsubj>conj>amod>obl+Ins), „spojený“ (nsubj>conj>amod+Nom), „nedůvěra“ (nsubj>conj>conj+Nom), „kulturní“ (nsubj>conj>advcl>amod+Nom), „status“ (nsubj>conj>advcl+Nom), „životní“ (nsubj>conj>advcl>conj>amod+Nom), „pocit“ (nsubj>conj>advcl>conj+Nom), „efektivní“ (nsubj>conj>nmod>amod+Gen), „mezilidské“ (nsubj>conj>nmod>amod+Gen), „komunikace“ (nsubj>conj>nmod+Gen), „vzájemného“ (nsubj>conj>nmod>conj>amod+Gen), „pochopení“ (nsubj>conj>nmod>conj+Gen), „identity“ (nsubj>conj>nmod+Gen), „morální“ (nsubj>conj>nmod>conj>amod+Gen), „integrity“ (nsubj>conj>nmod>conj+Gen), „jedince“ (nsubj>conj>nmod>conj>nmod+Gen), „člověka“ (nsubj>conj>nmod+Gen), „okolnímu“ (nsubj>conj>nmod>amod+Dat), „dění“ (nsubj>conj>nmod+Dat), „odosobněnému“ (nsubj>conj>nmod>conj>amod+Dat), „společenskému“ (nsubj>conj>nmod>conj>amod+Dat), „systému“ (nsubj>conj>nmod>conj+Dat), „ideologickému“ (nsubj>conj>nmod>conj>amod+Dat), „totalitním“ (nsubj>conj>nmod>conj>amod+Dat), „zřízením“ (nsubj>conj>nmod>conj+Dat), „válečné“ (nsubj>conj>nmod>conj>conj>amod+Dat), „mašinérii“ (nsubj>conj>nmod>conj>conj+Dat) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "role: Nevím, co znamená „v+Loc“ — je to tvar, ne význam. Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
       "přívlastek: Co ten přívlastek v genitivu tvrdí — „dílo Hostovský“?",
-      "přívlastek: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „kdo“ — „strach“, „cizinectví“, „nemožnost“, „ztráta“, „křehkost“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „kdo“ — „strach“, „cizinectví“, „nemožnost“, „ztráta“, „křehkost“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -10134,7 +10134,7 @@
       "kvantifikace: Nevím, o kom to platí — Dat:arg (DET/det), co (ADJ/Plur/root), přes+Acc (NOUN/Sing/Acc/obl). O každém (∀), o některém (∃), nebo o tom konkrétním (·)?",
       "role: Nevím, co znamená „Dat:arg“, „přes+Acc“ — je to tvar, ne význam. Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
       "přívlastek: Co ten přívlastek v genitivu tvrdí — „postava Hostovský“?",
-      "přívlastek: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „co“ — „determinovány“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „co“ — „determinovány“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -10239,7 +10239,7 @@
       "kvantifikace: Nevím, o kom to platí — o+Acc:arg (NOUN/Plur/Acc/obl:arg). O každém (∀), o některém (∃), nebo o tom konkrétním (·)?",
       "role: Nevím, jakou roli hraje „prostory“ (advcl>obl+Acc), „nichž“ (advcl>obl>acl>obl+Gen), „příběhy“ (advcl>obl>acl>obj+Acc), „situuje“ (advcl>obl>acl+?), „českém“ (obl>nmod>amod+Loc), „pohraničí“ (obl>nmod+Loc), „předobraz“ (obl>acl>obl+Acc), „považuje“ (obl>acl+?), „autorův“ (obl>acl>nsubj>amod+Nom), „rodný“ (obl>acl>nsubj>amod+Nom), „Hronov“ (obl>acl>nsubj+Nom) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "role: Nevím, co znamená „advcl:pokud“, „o+Acc:arg“, „v+Loc“ — je to tvar, ne význam. Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
-      "jiné: Věta jmenuje víc členů v roli „kdo“ — „odehrávají“, „přispívají“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „kdo“ — „odehrávají“, „přispívají“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -10521,7 +10521,7 @@
       "role: Nevím, jakou roli hraje „řeckého“ (nsubj>nmod>amod+Gen), „světlo“ (nsubj>nmod>conj+Nom), „shrnutí“ (nsubj>nmod>conj>appos+Nom), „skládání“ (nsubj>nmod>conj>appos>conj+Nom), „fotosyntetická“ (nsubj>conj>amod+Nom), „mění“ (acl+?), „přijatá“ (acl>nsubj>amod+Nom), „energie“ (acl>nsubj+Nom), „světelného“ (acl>nsubj>nmod>amod+Gen), „záření“ (acl>nsubj>nmod+Gen), „energii“ (acl>obl+Acc), „chemických“ (acl>obl>nmod>amod+Gen), „vazeb“ (acl>obl>nmod+Gen) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "konstrukce: Co ta věta tvrdí o vztahu těch dvou?",
       "konstrukce: Tvar je cop:NOUN=NOUN — before, contains, disjoint, member, same_as, subset, within?",
-      "jiné: Věta jmenuje víc členů v roli „kdo“ — „asimilace“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „kdo“ — „asimilace“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -10697,7 +10697,7 @@
       "role: Nevím, jakou roli hraje „zelených“ (obl>nmod>amod+Gen), „mnohých“ (obl>nmod>conj>amod+Gen), „dalších“ (obl>nmod>conj>amod+Gen), „eukaryotických“ (obl>nmod>conj>amod+Gen), „organismů“ (obl>nmod>conj+Gen), „různé“ (obl>nmod>conj>parataxis>amod+Nom), „řasy“ (obl>nmod>conj>parataxis+Nom), „sinic“ (obl>conj>nmod+Gen), „dalších“ (obl>conj>nmod>conj>amod+Gen), „bakterií“ (obl>conj>nmod>conj+Gen) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "role: Nevím, co znamená „v+Loc“ — je to tvar, ne význam. Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
       "přívlastek: Co ten přívlastek v genitivu tvrdí — „chloroplast rostlina“?",
-      "přívlastek: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „v+Loc“ — „buňkách“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „v+Loc“ — „buňkách“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -10912,7 +10912,7 @@
       "role: Nevím, jakou roli hraje „kyslíku“ (obl>conj>nmod+Gen), „využívají“ (obl>conj>nmod>acl+?), „jiné“ (obl>conj>nmod>acl>nsubj>amod+Nom), „organismy“ (obl>conj>nmod>acl>nsubj+Nom), „dýchání“ (obl>conj>nmod>acl>obl+Dat) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "role: Nevím, co znamená „k+Dat:arg“, „v+Loc“ — je to tvar, ne význam. Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
       "přívlastek: Co ten přívlastek v genitivu tvrdí — „rozklad voda“?",
-      "přívlastek: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „k+Dat:arg“ — „uvolnění“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „k+Dat:arg“ — „uvolnění“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -11135,7 +11135,7 @@
       "role: Nevím, jakou roli hraje „nichž“ (acl>obl+Loc), „průběh“ (acl>nsubj+Nom), „fotosyntézy“ (acl>nsubj>nmod+Gen), „závisí“ (acl+?), „oxidu“ (nsubj>conj>nmod+Gen), „uhličitého“ (nsubj>conj>nmod>amod+Gen), „vzduchu“ (nsubj>conj>nmod>nmod+Loc) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "konstrukce: Co ta věta tvrdí o vztahu těch dvou?",
       "konstrukce: Tvar je cop:NOUN=NOUN — before, contains, disjoint, member, same_as, subset, within?",
-      "jiné: Věta jmenuje víc členů v roli „kdo“ — „teplota“, „voda“, „koncentrace“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „kdo“ — „teplota“, „voda“, „koncentrace“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -11188,7 +11188,7 @@
      "open_questions": 2,
      "questions": [
       "role: Nevím, jakou roli hraje „vzniká“ (obj>acl+?), „kyslík“ (obj>acl>nsubj+Nom), „zahájení“ (obj>acl>conj+Acc), „voda“ (obj>acl>conj>nsubj+Nom), „kyslík“ (obj>conj>parataxis>nsubj+Nom), „nevzniká“ (obj>conj>parataxis+?), „zahájení“ (obj>conj>parataxis>conj>obl+Gen), „nezasahuje“ (obj>conj>parataxis>conj+?), „voda“ (obj>conj>parataxis>conj>nsubj+Nom) — do čtení se nedostalo. Jak se ta role jmenuje?",
-      "jiné: Věta jmenuje víc členů v roli „co“ — „anoxygenní“, „rozeznáváme“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „co“ — „anoxygenní“, „rozeznáváme“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role"
@@ -11894,7 +11894,7 @@
      "open_questions": 2,
      "questions": [
       "role: Nevím, jakou roli hraje „3.“ (nsubj>dep>nummod+?), „října“ (nsubj>dep+Gen), „1901“ (nsubj>dep>nummod+?), „Brno“ (nsubj>parataxis+Nom), „27.“ (nsubj>dep>nummod+?), „října“ (nsubj>dep+Gen), „1949“ (nsubj>dep>nummod+?), „Praha“ (nsubj>parataxis+Nom) — do čtení se nedostalo. Jak se ta role jmenuje?",
-      "jiné: Věta jmenuje víc členů v roli „group“ — „překladatel“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „group“ — „překladatel“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role"
@@ -12002,7 +12002,7 @@
      "status": "",
      "open_questions": 1,
      "questions": [
-      "jiné: Věta jmenuje víc členů v roli „co“ — „mládí“, „bydlel“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „co“ — „mládí“, „bydlel“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "kvantifikace"
@@ -12045,7 +12045,7 @@
      "open_questions": 3,
      "questions": [
       "role: Nevím, jakou roli hraje „ztvárněná“ (nsubj>conj>amod+Nom), „díle“ (nsubj>conj>amod>obl+Loc) — do čtení se nedostalo. Jak se ta role jmenuje?",
-      "jiné: Věta jmenuje víc členů v roli „kdo“ — „atmosféra“, „babička“. Platí to o každém zvlášť, nebo o nich dohromady?",
+      "koordinace: Věta jmenuje víc členů v roli „kdo“ — „atmosféra“, „babička“. Platí to o každém zvlášť, nebo o nich dohromady?",
       "koreference: Z rozboru to poznat nejde: „Petr a Jana přišli.“ a „Petr a Jana zvedli klavír.“ mají touž stavbu. Na koho odkazuje „ho“?"
      ],
      "layers": [
@@ -12531,7 +12531,7 @@
       "role: Nevím, jakou roli hraje „husovické“ (obl>nmod>amod+Gen), „1916“ (obl>nmod>parataxis+?), „A“ (obl>nmod+?) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "role: Nevím, co znamená „Ins:arg“, „u+Gen“, „v+Loc/Geo“ — je to tvar, ne význam (to za lomítkem je SIGNÁL Z ROZBORU — `Geo` = `NameType=Geo` na filleru — takže „v Praze“ a „v roce 1935“ jsou DVA RŮZNÉ TVARY a odpověď na jeden neplatí pro druhý). Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
       "přívlastek: Co ten přívlastek v genitivu tvrdí — „ukončení měšťanka“?",
-      "přívlastek: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „kdo“ — „dělal“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „kdo“ — „dělal“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -12797,7 +12797,7 @@
      "questions": [
       "role: Nevím, jakou roli hraje „1923“ (parataxis+?), „1925“ (parataxis>conj+?) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "role: Nevím, co znamená „v+Loc/Geo“ — je to tvar, ne význam (to za lomítkem je SIGNÁL Z ROZBORU — `Geo` = `NameType=Geo` na filleru — takže „v Praze“ a „v roce 1935“ jsou DVA RŮZNÉ TVARY a odpověď na jeden neplatí pro druhý). Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
-      "jiné: Věta jmenuje víc členů v roli „kdo“ — „navštívil“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „kdo“ — „navštívil“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role"
@@ -12849,7 +12849,7 @@
      "status": "",
      "open_questions": 1,
      "questions": [
-      "jiné: Věta jmenuje víc členů v roli „kdo“ — „získal“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „kdo“ — „získal“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "kvantifikace"
@@ -12901,7 +12901,7 @@
      "questions": [
       "role: Nevím, jakou roli hraje „Itálie“ (obj>nmod+Gen), „jižní“ (obj>nmod>conj>amod+Gen), „Francie“ (obj>nmod>conj+Gen) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "role: Nevím, co znamená „v+Loc/rok“ — je to tvar, ne význam (to za lomítkem je SIGNÁL Z ROZBORU — `rok` = letopočet jako dítě filleru — takže „v Praze“ a „v roce 1935“ jsou DVA RŮZNÉ TVARY a odpověď na jeden neplatí pro druhý). Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
-      "jiné: Věta jmenuje víc členů v roli „kdo“ — „zúčastnil“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „kdo“ — „zúčastnil“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role"
@@ -13117,7 +13117,7 @@
       "role: Nevím, jakou roli hraje „českých“ (obl>nmod>nmod>amod+Gen), „spisovatelů“ (obl>nmod>nmod+Gen) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "role: Nevím, co znamená „Ins:arg“, „po+Loc/rok“ — je to tvar, ne význam (to za lomítkem je SIGNÁL Z ROZBORU — `rok` = letopočet jako dítě filleru — takže „v Praze“ a „v roce 1935“ jsou DVA RŮZNÉ TVARY a odpověď na jeden neplatí pro druhý). Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
       "přívlastek: Co ten přívlastek v genitivu tvrdí — „předseda syndikát“?",
-      "přívlastek: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „kdo“ — „pracoval“, „choval“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „kdo“ — „pracoval“, „choval“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -13175,7 +13175,7 @@
       "role: Nevím, jakou roli hraje „1949“ (obl>nummod>conj+?) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "role: Nevím, co znamená „Gen“, „v+Loc/rok“ — je to tvar, ne význam (to za lomítkem je SIGNÁL Z ROZBORU — `rok` = letopočet jako dítě filleru — takže „v Praze“ a „v roce 1935“ jsou DVA RŮZNÉ TVARY a odpověď na jeden neplatí pro druhý). Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
       "přívlastek: Co ten přívlastek v genitivu tvrdí — „3._odbor ministerstvo“?",
-      "přívlastek: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „co“ — „členem“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „co“ — „členem“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -13432,7 +13432,7 @@
       "role: Nevím, jakou roli hraje „Sovětský“ (obj>conj>amod+Acc) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "role: Nevím, co znamená „na+Acc/rok“, „v+Loc“ — je to tvar, ne význam (to za lomítkem je SIGNÁL Z ROZBORU — `rok` = letopočet jako dítě filleru — takže „v Praze“ a „v roce 1935“ jsou DVA RŮZNÉ TVARY a odpověď na jeden neplatí pro druhý). Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
       "přívlastek: Co ten přívlastek v genitivu tvrdí — „delegace spisovatel“?",
-      "přívlastek: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „co“ — „svaz“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „co“ — „svaz“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -13527,7 +13527,7 @@
      "questions": [
       "kvantifikace: Nevím, o kom to platí — Ins:arg (NOUN/Sing/Ins/obl:arg). O každém (∀), o některém (∃), nebo o tom konkrétním (·)?",
       "role: Nevím, co znamená „Ins:arg“ — je to tvar, ne význam. Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
-      "jiné: Věta jmenuje víc členů v roli „kdo“ — „podepsal“, „vydána“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „kdo“ — „podepsal“, „vydána“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -13758,7 +13758,7 @@
      "open_questions": 2,
      "questions": [
       "role: Nevím, jakou roli hraje „4.“ (nsubj>parataxis>nummod+?), „ledna“ (nsubj>parataxis+Gen), „1643“ (nsubj>parataxis>nummod+?), „Woolsthorpe“ (nsubj>parataxis+?), „31.“ (nsubj>parataxis>nmod>nummod+?), „března“ (nsubj>parataxis>nmod+Gen), „1727“ (nsubj>parataxis>nmod>nummod+?), „Londýn“ (nsubj>parataxis+Nom) — do čtení se nedostalo. Jak se ta role jmenuje?",
-      "jiné: Věta jmenuje víc členů v roli „group“ — „matematik“, „astronom“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „group“ — „matematik“, „astronom“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role"
@@ -14117,7 +14117,7 @@
      "status": "",
      "open_questions": 1,
      "questions": [
-      "jiné: Věta jmenuje víc členů v roli „co“ — „odliv“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „co“ — „odliv“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "rozbor"
@@ -14447,7 +14447,7 @@
      "open_questions": 2,
      "questions": [
       "role: Nevím, jakou roli hraje „30.“ (nsubj>parataxis>nummod+?), „dubna“ (nsubj>parataxis+Gen), „1883“ (nsubj>parataxis>nummod+?), „Praha“ (nsubj>parataxis+Nom), „Nové“ (nsubj>parataxis>nmod>amod+Nom), „Město“ (nsubj>parataxis>nmod+Nom), „3.“ (nsubj>parataxis>conj>nummod+?), „ledna“ (nsubj>parataxis>conj+Gen), „1923“ (nsubj>parataxis>conj>nummod+?), „Lipnice“ (nsubj>parataxis>nmod+Nom), „Sázavou“ (nsubj>parataxis>nmod>nmod+Ins), „druhé“ (conj>nmod>amod+Gen), „nejpřekládanější“ (conj>nmod>amod+Gen), „knihy“ (conj>nmod+Gen), „české“ (conj>nmod>nmod>amod+Gen), „literatury“ (conj>nmod>nmod+Gen), „58“ (conj>nmod>dep>nummod+?), „jazyků“ (conj>nmod>dep+Gen), „roce“ (conj>nmod>nmod+Loc), „2013“ (conj>nmod>nmod>nummod+?), „proslulých“ (conj>nmod>appos>amod+Gen), „Osudů“ (conj>nmod>appos+Gen), „dobrého“ (conj>nmod>appos>nmod>amod+Gen), „vojáka“ (conj>nmod>appos>nmod+Gen), „Švejka“ (conj>nmod>appos>nmod>flat+Gen), „světové“ (conj>nmod>appos>nmod>amod+Gen), „války“ (conj>nmod>appos>nmod+Gen) — do čtení se nedostalo. Jak se ta role jmenuje?",
-      "jiné: Věta jmenuje víc členů v roli „group“ — „publicista“, „novinář“, „autor“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „group“ — „publicista“, „novinář“, „autor“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role"
@@ -15038,7 +15038,7 @@
       "kvantifikace: Nevím, o kom to platí — v+Loc (NOUN/Plur/Loc/obl). O každém (∀), o některém (∃), nebo o tom konkrétním (·)?",
       "role: Nevím, jakou roli hraje „čtyřech“ (obl>nummod+Loc), „malého“ (obl>amod+Gen), „zakrnělou“ (obj>conj>amod+Acc), „štítnou“ (obj>conj>amod+Acc) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "role: Nevím, co znamená „u+Gen“, „v+Loc“ — je to tvar, ne význam. Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
-      "jiné: Věta jmenuje víc členů v roli „co“ — „žlázu“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „co“ — „žlázu“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -15217,7 +15217,7 @@
      "status": "",
      "open_questions": 1,
      "questions": [
-      "jiné: Věta jmenuje víc členů v roli „kdo“ — „cestovali“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „kdo“ — „cestovali“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "kvantifikace"
@@ -15297,7 +15297,7 @@
      "open_questions": 3,
      "questions": [
       "role: Nevím, jakou roli hraje „dobrodružstvími“ (conj>obl+Ins), „vrstevníky“ (conj>obl>nmod+Ins), „četbou“ (conj>obl>conj+Ins), „Karla“ (conj>obl>conj>nmod+Gen), „Maye“ (conj>obl>conj>nmod>flat+Gen), „Julese“ (conj>obl>conj>nmod>conj+Gen), „Verna“ (conj>obl>conj>nmod>conj>flat+Gen) — do čtení se nedostalo. Jak se ta role jmenuje?",
-      "jiné: Věta jmenuje víc členů v roli „co“ — „klukovské“, „prodchnuté“. Platí to o každém zvlášť, nebo o nich dohromady?",
+      "koordinace: Věta jmenuje víc členů v roli „co“ — „klukovské“, „prodchnuté“. Platí to o každém zvlášť, nebo o nich dohromady?",
       "koreference: Z rozboru to poznat nejde: „Petr a Jana přišli.“ a „Petr a Jana zvedli klavír.“ mají touž stavbu. O kterém „Dětství“ mluvíš?"
      ],
      "layers": [
@@ -15402,7 +15402,7 @@
       "kvantifikace: Nevím, o kom to platí — Dat (PRON/Dat/obl), kolem+Gen (NOUN/Sing/Gen/obl). O každém (∀), o některém (∃), nebo o tom konkrétním (·)?",
       "role: Nevím, jakou roli hraje „Dospívajícího“ (obj>amod+Acc) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "role: Nevím, co znamená „Dat“, „kolem+Gen“ — je to tvar, ne význam. Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
-      "jiné: Věta jmenuje víc členů v roli „kdo“ — „tahal“, „začal“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „kdo“ — „tahal“, „začal“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -15616,7 +15616,7 @@
      "questions": [
       "kvantifikace: Nevím, o kom to platí — Acc (NOUN/Sing/Acc/obl). O každém (∀), o některém (∃), nebo o tom konkrétním (·)?",
       "role: Nevím, co znamená „Acc“, „Dat:arg“ — je to tvar, ne význam. Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
-      "jiné: Věta jmenuje víc členů v roli „kdo“ — „nevěděl“, „pocítil“. Platí to o každém zvlášť, nebo o nich dohromady?",
+      "koordinace: Věta jmenuje víc členů v roli „kdo“ — „nevěděl“, „pocítil“. Platí to o každém zvlášť, nebo o nich dohromady?",
       "koreference: Z rozboru to poznat nejde: „Petr a Jana přišli.“ a „Petr a Jana zvedli klavír.“ mají touž stavbu. Na koho odkazuje „tomu“?"
      ],
      "layers": [
@@ -15979,7 +15979,7 @@
       "kvantifikace: Nevím, o kom to platí — Ins:arg (NOUN/Sing/Ins/obl:arg). O každém (∀), o některém (∃), nebo o tom konkrétním (·)?",
       "role: Nevím, jakou roli hraje „rohu“ (obl>nmod+Loc), „Perštýna“ (obl>nmod>nmod+Gen), „Martinské“ (obl>nmod>nmod>conj>amod+Gen), „ulice“ (obl>nmod>nmod>conj+Gen) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "role: Nevím, co znamená „Ins:arg“, „v+Loc“ — je to tvar, ne význam. Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
-      "jiné: Věta jmenuje víc členů v roli „kdo“ — „maturoval“. Platí to o každém zvlášť, nebo o nich dohromady?",
+      "koordinace: Věta jmenuje víc členů v roli „kdo“ — „maturoval“. Platí to o každém zvlášť, nebo o nich dohromady?",
       "koreference: Z rozboru to poznat nejde: „Petr a Jana přišli.“ a „Petr a Jana zvedli klavír.“ mají touž stavbu. Věta nemá podmět — „učil“ ho nevyslovil. V předchozí větě nikdo takový nestojí — a nabídnout uzel odjinud by znamenalo tvrdit, že text odkazuje tam, kde nic není. Řekni to prosím jménem. O kterém „drogerii“ mluvíš?"
      ],
      "layers": [
@@ -16038,7 +16038,7 @@
      "open_questions": 2,
      "questions": [
       "role: Nevím, co znamená „s+Ins:arg“ — je to tvar, ne význam. Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
-      "jiné: Věta jmenuje víc členů v roli „kdo“ — „napsali“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „kdo“ — „napsali“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role"
@@ -16104,7 +16104,7 @@
       "role: Nevím, jakou roli hraje „Slavia“ (obl>nmod>nmod+Nom) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "role: Nevím, co znamená „Ins:arg“ — je to tvar, ne význam. Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
       "přívlastek: Co ten přívlastek v genitivu tvrdí — „zaměstnanec banka“?",
-      "přívlastek: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „kdo“ — „začal“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „kdo“ — „začal“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -16231,7 +16231,7 @@
       "role: Nevím, jakou roli hraje „Uhersko“ (obj>conj>dep+Nom) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "role: Nevím, co znamená „společně+Ins“ — je to tvar, ne význam. Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
       "konstrukce: Ta věta tvrdí ještě tohle: „bratr Bohuslav“. Zapíšu to jako členství vedle věty, ale sám to neudělám a NEPTÁM SE JEN „ano/ne“ — potřebuju vědět, ČÍM ten titul je. POVOLÁNÍ („básník Josef Hora“) zapíšu; ÚŘAD DRŽENÝ V ČASE („prezident Masaryk“) nezapíšu, protože bezčasé členství by platilo šíř, než co ta věta říká — Masaryk byl prezident v nějakém období, ne pořád. Z rozboru se to rozeznat nedá: „prezident“ a „básník“ v něm vypadají stejně. Povolání, nebo úřad?",
-      "jiné: Věta jmenuje víc členů v roli „co“ — „Halič“, „Maďarsko“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „co“ — „Halič“, „Maďarsko“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -16321,7 +16321,7 @@
       "role: Nevím, jakou roli hraje „anarchistického“ (obl>nmod>amod+Gen), „Komuna“ (obl>nmod>nmod+Nom) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "role: Nevím, co znamená „Ins:arg“, „v+Loc/rok“ — je to tvar, ne význam (to za lomítkem je SIGNÁL Z ROZBORU — `rok` = letopočet jako dítě filleru — takže „v Praze“ a „v roce 1935“ jsou DVA RŮZNÉ TVARY a odpověď na jeden neplatí pro druhý). Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
       "přívlastek: Co ten přívlastek v genitivu tvrdí — „redaktor časopis“?",
-      "přívlastek: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „kdo“ — „vězněn“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „kdo“ — „vězněn“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -16378,7 +16378,7 @@
      "open_questions": 2,
      "questions": [
       "role: Nevím, jakou roli hraje „23.“ (nsubj>parataxis>nummod+?), „března“ (nsubj>parataxis+Gen), „1887“ (nsubj>parataxis>nummod+?), „Hronov“ (nsubj>parataxis>nmod+Nom), „13.“ (nsubj>parataxis>conj>nummod+?), „15.“ (nsubj>parataxis>conj>nummod>conj+?), „dubnem“ (nsubj>parataxis>conj+Ins), „1945“ (nsubj>parataxis>conj>nummod+?), „Bergen“ (nsubj>parataxis>conj>nmod>nmod+Nom), „Belsen“ (nsubj>parataxis>conj>nmod+Nom), „knižní“ (conj>amod+Nom) — do čtení se nedostalo. Jak se ta role jmenuje?",
-      "jiné: Věta jmenuje víc členů v roli „group“ — „grafik“, „ilustrátor“, „spisovatel“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „group“ — „grafik“, „ilustrátor“, „spisovatel“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role"
@@ -16613,7 +16613,7 @@
       "role: Nevím, jakou roli hraje „tří“ (obl>nummod+Gen), „Malých“ (obl>nmod>amod+Loc), „Svatoňovicích“ (obl>nmod+Loc), „Trutnova“ (obl>nmod>nmod+Gen), „1886“ (obl>parataxis+?), „1961“ (obl>parataxis>conj+?) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "role: Nevím, co znamená „spolu+Ins“, „v+Loc“ — je to tvar, ne význam. Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
       "konstrukce: Ta věta tvrdí ještě tohle: „sestra Helena“. Zapíšu to jako členství vedle věty, ale sám to neudělám a NEPTÁM SE JEN „ano/ne“ — potřebuju vědět, ČÍM ten titul je. POVOLÁNÍ („básník Josef Hora“) zapíšu; ÚŘAD DRŽENÝ V ČASE („prezident Masaryk“) nezapíšu, protože bezčasé členství by platilo šíř, než co ta věta říká — Masaryk byl prezident v nějakém období, ne pořád. Z rozboru se to rozeznat nedá: „prezident“ a „básník“ v něm vypadají stejně. Povolání, nebo úřad?",
-      "jiné: Věta jmenuje víc členů v roli „kdo“ — „narodil“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „kdo“ — „narodil“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role"
@@ -17046,7 +17046,7 @@
       "kvantifikace: Nevím, o kom to platí — na+Acc/rok (NOUN/Sing/Acc/obl). O každém (∀), o některém (∃), nebo o tom konkrétním (·)?",
       "role: Nevím, jakou roli hraje „Uměleckoprůmyslové“ (obl>nmod>amod+Loc), „škole“ (obl>nmod+Loc), „druhé“ (obl>conj>amod+Loc), „budoucí“ (obl>conj>nmod>amod+Ins), „manželkou“ (obl>conj>nmod+Ins), „ním“ (obl>acl>obl+Ins), „přijel“ (obl>acl+?), „bratr“ (obl>acl>nsubj+Nom), „Karel“ (obl>acl>nsubj>flat+Nom) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "role: Nevím, co znamená „na+Acc/rok“ — je to tvar, ne význam (to za lomítkem je SIGNÁL Z ROZBORU — `rok` = letopočet jako dítě filleru — takže „v Praze“ a „v roce 1935“ jsou DVA RŮZNÉ TVARY a odpověď na jeden neplatí pro druhý). Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
-      "jiné: Věta jmenuje víc členů v roli „kudy“ — „schůzce“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „kudy“ — „schůzce“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -17848,7 +17848,7 @@
      "questions": [
       "role: Nevím, jakou roli hraje „Povídání“ (obj>nmod+Nom), „pejskovi“ (obj>nmod>nmod+Loc), „kočičce“ (obj>nmod>nmod>conj+Loc) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "role: Nevím, co znamená „pro+Acc“ — je to tvar, ne význam. Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
-      "jiné: Věta jmenuje víc členů v roli „kdo“ — „ilustroval“, „vytvořil“. Platí to o každém zvlášť, nebo o nich dohromady?",
+      "koordinace: Věta jmenuje víc členů v roli „kdo“ — „ilustroval“, „vytvořil“. Platí to o každém zvlášť, nebo o nich dohromady?",
       "koreference: Z rozboru to poznat nejde: „Petr a Jana přišli.“ a „Petr a Jana zvedli klavír.“ mají touž stavbu. Věta nemá podmět — „napsal“ ho nevyslovil. V předchozí větě nikdo takový nestojí — a nabídnout uzel odjinud by znamenalo tvrdit, že text odkazuje tam, kde nic není. Řekni to prosím jménem. Na koho odkazuje „ni“?"
      ],
      "layers": [
@@ -17933,7 +17933,7 @@
       "kvantifikace: Nevím, o kom to platí — Gen (NOUN/Sing/Gen/obl), kdo (NOUN/Sing/Ins/obl:arg), v+Gen (NOUN/Sing/Gen/obl). O každém (∀), o některém (∃), nebo o tom konkrétním (·)?",
       "role: Nevím, jakou roli hraje „rámci“ (obl>case>fixed+Loc), „Albrecht“ (obl>nmod+Nom), „I“ (obl>nmod>nummod+?) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "role: Nevím, co znamená „Gen“, „v+Gen“, „v+Loc/Geo“ — je to tvar, ne význam (to za lomítkem je SIGNÁL Z ROZBORU — `Geo` = `NameType=Geo` na filleru — takže „v Praze“ a „v roce 1935“ jsou DVA RŮZNÉ TVARY a odpověď na jeden neplatí pro druhý). Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
-      "jiné: Věta jmenuje víc členů v roli „co“ — „uvězněn“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „co“ — „uvězněn“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -17987,7 +17987,7 @@
       "kvantifikace: Nevím, o kom to platí — Gen (NOUN/Sing/Gen/obl), spolu+Ins (NOUN/Plur/Ins/obl). O každém (∀), o některém (∃), nebo o tom konkrétním (·)?",
       "role: Nevím, jakou roli hraje „Dachau“ (obl>nmod+Nom), „Mnichova“ (obl>nmod+Gen), „26.“ (conj>orphan>nummod+?), „září“ (conj>orphan+Gen), „Buchenwaldu“ (conj>orphan+Gen), „vězněn“ (conj>orphan>acl+?), „dva“ (conj>orphan>acl>obl+Acc), „půl“ (conj>orphan>acl>obl>conj>nummod+?), „roku“ (conj>orphan>acl>obl>conj+Gen) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "role: Nevím, co znamená „Gen“, „spolu+Ins“ — je to tvar, ne význam. Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
-      "jiné: Věta jmenuje víc členů v roli „co“ — „odtud“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „co“ — „odtud“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -18315,7 +18315,7 @@
       "kvantifikace: Nevím, o kom to platí — v+Loc:arg (NOUN/Sing/Loc/obl:arg). O každém (∀), o některém (∃), nebo o tom konkrétním (·)?",
       "role: Nevím, co znamená „v+Loc“, „v+Loc:arg“ — je to tvar, ne význam. Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
       "přívlastek: Co ten přívlastek v genitivu tvrdí — „psaní poezie“?",
-      "přívlastek: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „kdo“ — „kolovaly“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „kdo“ — „kolovaly“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -18575,7 +18575,7 @@
      "questions": [
       "role: Nevím, jakou roli hraje „skutečný“ (obj>conj>amod+Acc) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "přívlastek: Co ten přívlastek v genitivu tvrdí — „datum smrt“?",
-      "přívlastek: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „co“ — „hrob“, „nachází“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „co“ — „hrob“, „nachází“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role"
@@ -18633,7 +18633,7 @@
      "open_questions": 2,
      "questions": [
       "role: Nevím, jakou roli hraje „27.“ (nsubj>dep>nummod+?), „září“ (nsubj>dep+Gen), „1924“ (nsubj>dep>nummod+?), „Náchod“ (nsubj>parataxis+Nom), „3.“ (nsubj>dep>conj>nummod+?), „ledna“ (nsubj>dep>conj+Gen), „2012“ (nsubj>dep>conj>nummod+?), „Toronto“ (nsubj>dep>conj+Nom), „česko“ (amod>amod+?), „prozaik“ (appos+Nom), „esejista“ (appos>conj+Nom), „překladatel“ (appos>conj+Nom), „exilový“ (appos>conj>amod+Nom), „nakladatel“ (appos>conj+Nom), „manželkou“ (conj>nmod+Ins), „Zdenou“ (conj>nmod>flat+Ins), „Salivarovou“ (conj>nmod>flat+Ins), „exilového“ (conj>nmod>amod+Gen), „nakladatelství“ (conj>nmod+Gen), „68“ (conj>nmod>nummod+?), „Publishers“ (conj>nmod>nmod+?), „Torontu“ (conj>nmod>nmod+Loc) — do čtení se nedostalo. Jak se ta role jmenuje?",
-      "jiné: Věta jmenuje víc členů v roli „group“ — „zakladatel“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „group“ — „zakladatel“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role"
@@ -18809,7 +18809,7 @@
      "questions": [
       "role: Nevím, jakou roli hraje „gymnáziu“ (obl>nmod+Loc), „Náchodě“ (obl>nmod>nmod+Loc), „1943“ (obl>nmod>nmod>nummod+?), „pomocný“ (advcl>amod+Nom), „dělník“ (advcl+Nom), „Novém“ (conj>orphan>amod+Loc), „Městě“ (conj>orphan+Loc), „Metují“ (conj>orphan>nmod+Ins), „války“ (conj>orphan+Gen), „přádelně“ (conj>orphan+Loc), „firmy“ (conj>orphan>nmod+Gen), „Bartoň“ (conj>orphan>nmod>nmod+Nom), „Náchodě“ (conj>orphan>nmod+Loc) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "role: Nevím, co znamená „v+Loc“ — je to tvar, ne význam. Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
-      "jiné: Věta jmenuje víc členů v roli „co“ — „později“, „pak“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „co“ — „později“, „pak“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -18979,7 +18979,7 @@
       "kvantifikace: Nevím, o kom to platí — na+Acc (NOUN/Sing/Acc/obl). O každém (∀), o některém (∃), nebo o tom konkrétním (·)?",
       "role: Nevím, jakou roli hraje „učitel“ (advcl+Nom), „Broumově“ (obl>nmod+Loc), „Polici“ (obl>nmod>conj+Loc), „Metují“ (obl>nmod>conj>nmod+Ins), „Vyšší“ (obl>conj>amod+Loc), „sociální“ (obl>conj>amod+Loc), „Hořicích“ (obl>conj>nmod+Loc), „Podkrkonoší“ (obl>conj>nmod>nmod+Loc) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "role: Nevím, co znamená „na+Acc“ — je to tvar, ne význam. Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
-      "jiné: Věta jmenuje víc členů v roli „kde“ — „škole“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „kde“ — „škole“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -19035,7 +19035,7 @@
       "kvantifikace: Nevím, o kom to platí — Gen (NOUN/Sing/Gen/obl). O každém (∀), o některém (∃), nebo o tom konkrétním (·)?",
       "role: Nevím, jakou roli hraje „prací“ (parataxis+Ins), „Thomas“ (parataxis>nmod+Nom), „Paine“ (parataxis>nmod>flat+Nom), „vztah“ (parataxis>nmod>conj+Nom), „dnešku“ (parataxis>nmod>conj>nmod+Dat) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "role: Nevím, co znamená „Gen“ — je to tvar, ne význam. Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
-      "jiné: Věta jmenuje víc členů v roli „kdo“ — „nastoupil“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „kdo“ — „nastoupil“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -19237,7 +19237,7 @@
      "open_questions": 2,
      "questions": [
       "role: Nevím, jakou roli hraje „vydání“ (obl>amod>obl+Loc), „prvního“ (obl>amod>obl>nmod>amod+Gen), „románu“ (obl>amod>obl>nmod+Gen), „Zbabělci“ (obl>amod>obl>nmod>nmod+Nom), „roku“ (obl>amod>obl>nmod+Gen), „1958“ (obl>amod>obl>nmod>nummod+?) — do čtení se nedostalo. Jak se ta role jmenuje?",
-      "jiné: Věta jmenuje víc členů v roli „kdo“ — „mohl“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „kdo“ — „mohl“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role"
@@ -19373,7 +19373,7 @@
       "kvantifikace: Nevím, o kom to platí — co (ADJ/Sing/root), s+Ins:arg (NOUN/Plur/Ins/obl:arg), vedle+Gen (NOUN/Plur/Gen/obl). O každém (∀), o některém (∃), nebo o tom konkrétním (·)?",
       "role: Nevím, co znamená „s+Ins:arg“, „vedle+Gen“ — je to tvar, ne význam. Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
       "přívlastek: Co ten přívlastek v genitivu tvrdí — „začátek cimrmanologie“?",
-      "přívlastek: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „co“ — „zmiňován“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „co“ — „zmiňován“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -19481,7 +19481,7 @@
      "questions": [
       "kvantifikace: Nevím, o kom to platí — v+Loc (DET/det). O každém (∀), o některém (∃), nebo o tom konkrétním (·)?",
       "role: Nevím, co znamená „do/Geo“, „v+Loc“ — je to tvar, ne význam (to za lomítkem je SIGNÁL Z ROZBORU — `Geo` = `NameType=Geo` na filleru — takže „v Praze“ a „v roce 1935“ jsou DVA RŮZNÉ TVARY a odpověď na jeden neplatí pro druhý). Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
-      "jiné: Věta jmenuje víc členů v roli „kdo“ — „přednášel“, „absolvoval“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „kdo“ — „přednášel“, „absolvoval“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -19547,7 +19547,7 @@
       "role: Nevím, co znamená „spolu+Ins“, „v+Loc“ — je to tvar, ne význam. Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
       "přívlastek: Co ten přívlastek v genitivu tvrdí — „zastavení příprava“?",
       "přívlastek: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Ta věta tvrdí ještě tohle: „manželka Zdena“. Zapíšu to jako členství vedle věty, ale sám to neudělám a NEPTÁM SE JEN „ano/ne“ — potřebuju vědět, ČÍM ten titul je. POVOLÁNÍ („básník Josef Hora“) zapíšu; ÚŘAD DRŽENÝ V ČASE („prezident Masaryk“) nezapíšu, protože bezčasé členství by platilo šíř, než co ta věta říká — Masaryk byl prezident v nějakém období, ne pořád. Z rozboru se to rozeznat nedá: „prezident“ a „básník“ v něm vypadají stejně. Povolání, nebo úřad?",
-      "jiné: Věta jmenuje víc členů v roli „kdo“ — „usadil“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „kdo“ — „usadil“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role"
@@ -19611,7 +19611,7 @@
       "kvantifikace: Nevím, o kom to platí — v+Loc/rok (NOUN/Plur/Loc/obl). O každém (∀), o některém (∃), nebo o tom konkrétním (·)?",
       "role: Nevím, jakou roli hraje „1990“ (obl>nummod>conj+?) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "role: Nevím, co znamená „v+Loc/rok“ — je to tvar, ne význam (to za lomítkem je SIGNÁL Z ROZBORU — `rok` = letopočet jako dítě filleru — takže „v Praze“ a „v roce 1935“ jsou DVA RŮZNÉ TVARY a odpověď na jeden neplatí pro druhý). Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
-      "jiné: Věta jmenuje víc členů v roli „kdo“ — „vedl“, „vyučoval“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „kdo“ — „vedl“, „vyučoval“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -19786,7 +19786,7 @@
      "questions": [
       "role: Nevím, jakou roli hraje „Československu“ (obj>conj>amod>obl+Loc), „zakázaná“ (obj>conj>amod+Acc), „roku“ (parataxis>obl+Gen), „1993“ (parataxis>obl>nummod+?), „vyšlo“ (parataxis+?), „227“ (parataxis>nsubj>nummod+?), „titulů“ (parataxis>nsubj+Gen) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "role: Nevím, co znamená „v+Loc“ — je to tvar, ne význam. Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
-      "jiné: Věta jmenuje víc členů v roli „co“ — „díla“. Platí to o každém zvlášť, nebo o nich dohromady?",
+      "koordinace: Věta jmenuje víc členů v roli „co“ — „díla“. Platí to o každém zvlášť, nebo o nich dohromady?",
       "koreference: Z rozboru to poznat nejde: „Petr a Jana přišli.“ a „Petr a Jana zvedli klavír.“ mají touž stavbu. Věta nemá podmět — „vydával“ ho nevyslovil. V předchozí větě nikdo takový nestojí — a nabídnout uzel odjinud by znamenalo tvrdit, že text odkazuje tam, kde nic není. Řekni to prosím jménem. Na koho odkazuje „něm“?"
      ],
      "layers": [
@@ -20366,7 +20366,7 @@
      "open_questions": 2,
      "questions": [
       "role: Nevím, jakou roli hraje „prvky“ (obl>nmod+Ins), „civilismu“ (obl>nmod>nmod+Gen) — do čtení se nedostalo. Jak se ta role jmenuje?",
-      "jiné: Věta jmenuje víc členů v roli „čím“ — „povídkami“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „čím“ — „povídkami“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role"
@@ -20602,7 +20602,7 @@
      "open_questions": 2,
      "questions": [
       "role: Nevím, jakou roli hraje „rodným“ (nsubj>nmod>amod+Ins), „jménem“ (nsubj>nmod+Ins), „Karel“ (nsubj>appos+Nom), „Antonín“ (nsubj>appos>flat+Nom), „Čapek“ (nsubj>appos>flat+Nom), „9.“ (nsubj>appos>parataxis>nummod+?), „ledna“ (nsubj>appos>parataxis+Gen), „1890“ (nsubj>appos>parataxis>nummod+?), „Malé“ (nsubj>appos>parataxis>amod+Nom), „Svatoňovice“ (nsubj>appos>parataxis+Nom), „25.“ (nsubj>nmod>dep>nummod+?), „prosince“ (nsubj>nmod>dep+Gen), „1938“ (nsubj>nmod>dep>nummod+?), „Praha“ (nsubj>appos>parataxis+Nom), „amatérský“ (conj>amod+Nom) — do čtení se nedostalo. Jak se ta role jmenuje?",
-      "jiné: Věta jmenuje víc členů v roli „group“ — „intelektuál“, „novinář“, „dramatik“, „překladatel“, „fotograf“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „group“ — „intelektuál“, „novinář“, „dramatik“, „překladatel“, „fotograf“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role"
@@ -20762,7 +20762,7 @@
      "status": "",
      "open_questions": 1,
      "questions": [
-      "jiné: Věta jmenuje víc členů v roli „kdo“ — „studium“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „kdo“ — „studium“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "kvantifikace"
@@ -21136,7 +21136,7 @@
       "role: Nevím, jakou roli hraje „filozofie“ (obj>nmod>conj+Gen), „Karlovy“ (obl>nmod>amod+Gen), „Praze“ (obl>nmod>nmod+Loc) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "role: Nevím, co znamená „Gen“ — je to tvar, ne význam. Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
       "přívlastek: Co ten přívlastek v genitivu tvrdí — „studium estetika“, „filosofický_fakulta univerzita“?",
-      "přívlastek: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „kdo“ — „získal“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „kdo“ — „získal“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -21341,7 +21341,7 @@
      "questions": [
       "kvantifikace: Nevím, o kom to platí — pro+Acc (DET/det). O každém (∀), o některém (∃), nebo o tom konkrétním (·)?",
       "role: Nevím, co znamená „pro+Acc“ — je to tvar, ne význam. Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
-      "jiné: Věta jmenuje víc členů v roli „co“ — „nemusel“, „ovlivněn“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „co“ — „nemusel“, „ovlivněn“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -21456,7 +21456,7 @@
       "kvantifikace: Nevím, o kom to platí — Gen (NOUN/Plur/Gen/obl). O každém (∀), o některém (∃), nebo o tom konkrétním (·)?",
       "role: Nevím, jakou roli hraje „vychovatel“ (advcl+Nom), „pět“ (obl>nummod+Acc) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "role: Nevím, co znamená „Gen“ — je to tvar, ne význam. Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
-      "jiné: Věta jmenuje víc členů v roli „kdo“ — „přešel“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „kdo“ — „přešel“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -21666,7 +21666,7 @@
       "role: Nevím, jakou roli hraje „1923“ (obl>nummod>conj+?), „Vinohradského“ (nmod>amod+Gen) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "role: Nevím, co znamená „v+Loc/rok“ — je to tvar, ne význam (to za lomítkem je SIGNÁL Z ROZBORU — `rok` = letopočet jako dítě filleru — takže „v Praze“ a „v roce 1935“ jsou DVA RŮZNÉ TVARY a odpověď na jeden neplatí pro druhý). Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
       "přívlastek: Co ten přívlastek v genitivu tvrdí — „dramaturg divadlo“?",
-      "přívlastek: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „co“ — „režisérem“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „co“ — „režisérem“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -21761,7 +21761,7 @@
       "konstrukce: Co ta věta tvrdí o vztahu těch dvou?",
       "konstrukce: Tvar je cop:aktér+Gen — before, contains, disjoint, member, same_as, subset, within?",
       "přívlastek: Co ten přívlastek v genitivu tvrdí — „pravidelný_páteční_setkávání osobnost“?",
-      "přívlastek: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „kdo“ — „bratr“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „kdo“ — „bratr“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -21896,7 +21896,7 @@
       "role: Nevím, jakou roli hraje „Čapků“ (obl>flat+Gen), „T“ (nsubj>nmod+?), „G“ (nsubj>nmod+?), „zahraničí“ (nsubj>conj>nmod+Gen), „Edvard“ (nsubj>conj>flat+Nom), „Beneš“ (nsubj>conj>flat+Nom), „Josef“ (nsubj>conj>flat+Nom), „Šusta“ (nsubj>conj>flat+Nom), „Ferdinand“ (nsubj>conj>flat+Nom), „Peroutka“ (nsubj>conj>flat+Nom) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "role: Nevím, co znamená „kromě+Gen“, „mezi+Acc“ — je to tvar, ne význam. Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
       "konstrukce: Ta věta tvrdí ještě tohle: „prezident Masaryk“. Zapíšu to jako členství vedle věty, ale sám to neudělám a NEPTÁM SE JEN „ano/ne“ — potřebuju vědět, ČÍM ten titul je. POVOLÁNÍ („básník Josef Hora“) zapíšu; ÚŘAD DRŽENÝ V ČASE („prezident Masaryk“) nezapíšu, protože bezčasé členství by platilo šíř, než co ta věta říká — Masaryk byl prezident v nějakém období, ne pořád. Z rozboru se to rozeznat nedá: „prezident“ a „básník“ v něm vypadají stejně. Povolání, nebo úřad?",
-      "jiné: Věta jmenuje víc členů v roli „kdo“ — „ministr“, „historik“, „novinář“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „kdo“ — „ministr“, „historik“, „novinář“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -21957,7 +21957,7 @@
       "kvantifikace: Nevím, o kom to platí — co (NOUN/Sing/Ins/root). O každém (∀), o některém (∃), nebo o tom konkrétním (·)?",
       "role: Nevím, jakou roli hraje „T“ (nsubj>nmod>nmod+?), „G“ (nsubj>nmod>nmod+?), „Masarykem“ (nsubj>nmod+Ins), „sepsány“ (nsubj>parataxis+?), „1928“ (nsubj>parataxis>obl+?), „1935“ (nsubj>parataxis>obl>conj+?), „3“ (nsubj>parataxis>conj>nummod+?), „svazcích“ (nsubj>parataxis>conj+Loc), „roce“ (nsubj>parataxis>conj>obl+Loc), „1938“ (nsubj>parataxis>conj>obl>nummod+?), „shrnuty“ (nsubj>parataxis>conj+?), „jednoho“ (nsubj>parataxis>conj>obl>nummod+Gen), „svazku“ (nsubj>parataxis>conj>obl+Gen), „T“ (nmod>nmod+?), „G“ (nmod>nmod+?), „politických“ (nmod>conj>amod+Loc), „filozofických“ (nmod>conj>amod>conj+Loc), „lidských“ (nmod>conj>amod>conj+Loc), „vzpomínek“ (nmod>conj+Gen) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "role: Nevím, co znamená „o+Loc“ — je to tvar, ne význam. Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
-      "jiné: Věta jmenuje víc členů v roli „o+Loc“ — „názorech“. Platí to o každém zvlášť, nebo o nich dohromady?",
+      "koordinace: Věta jmenuje víc členů v roli „o+Loc“ — „názorech“. Platí to o každém zvlášť, nebo o nich dohromady?",
       "koreference: Z rozboru to poznat nejde: „Petr a Jana přišli.“ a „Petr a Jana zvedli klavír.“ mají touž stavbu. O kterém „Hovory“ mluvíš?"
      ],
      "layers": [
@@ -22128,7 +22128,7 @@
       "role: Nevím, jakou roli hraje „ní“ (nsubj>conj>amod>obl+Loc), „následující“ (nsubj>conj>amod+Nom), „dosavadního“ (obj>nmod>amod+Gen), „osobní“ (obj>conj>amod+Acc) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "role: Nevím, co znamená „pro+Acc“ — je to tvar, ne význam. Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
       "přívlastek: Co ten přívlastek v genitivu tvrdí — „zhroucení svět“?",
-      "přívlastek: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „kdo“ — „kapitulace“, „tragédii“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „kdo“ — „kapitulace“, „tragédii“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role"
@@ -22278,7 +22278,7 @@
       "kvantifikace: Nevím, o kom to platí — Dat:arg (NOUN/Sing/Dat/obl:arg). O každém (∀), o některém (∃), nebo o tom konkrétním (·)?",
       "role: Nevím, co znamená „Dat:arg“ — je to tvar, ne význam. Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
       "přívlastek: Co ten přívlastek v genitivu tvrdí — „rozdělení národ“?",
-      "přívlastek: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „kdo“ — „usiloval“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „kdo“ — „usiloval“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -22324,7 +22324,7 @@
       "role: Nevím, jakou roli hraje „Beneše“ (obl>nmod>flat+Gen), „první“ (obl>nmod>amod+Gen) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "role: Nevím, co znamená „Ins:arg“ — je to tvar, ne význam. Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
       "přívlastek: Co ten přívlastek v genitivu tvrdí — „abdikace prezident“, „jediný_viditelný_symbol republika“?",
-      "přívlastek: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „kdo“ — „plnil“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „kdo“ — „plnil“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -22381,7 +22381,7 @@
       "role: Nevím, jakou roli hraje „oken“ (nsubj>conj>nmod+Gen), „Čapkova“ (nsubj>conj>nmod>nmod>amod+Gen), „domu“ (nsubj>conj>nmod>nmod+Gen) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "role: Nevím, co znamená „Ins:arg“ — je to tvar, ne význam. Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
       "přívlastek: Co ten přívlastek v genitivu tvrdí — „součást kampaň“?",
-      "přívlastek: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „kdo“ — „telefonáty“, „vytloukání“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „kdo“ — „telefonáty“, „vytloukání“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -22640,7 +22640,7 @@
      "open_questions": 2,
      "questions": [
       "role: Nevím, jakou roli hraje „svalnaté“ (obj>amod>conj+Acc), „lovu“ (obj>amod>obl+Dat), „ostré“ (obj>conj>amod+Acc), „zuby“ (obj>conj>conj+Acc), „vynikající“ (obj>conj>amod+Acc), „sluch“ (obj>conj>conj+Acc), „čich“ (obj>conj>conj+Acc) — do čtení se nedostalo. Jak se ta role jmenuje?",
-      "jiné: Věta jmenuje víc členů v roli „co“ — „drápy“, „zrak“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „co“ — „drápy“, „zrak“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role"
@@ -24238,7 +24238,7 @@
      "status": "",
      "open_questions": 1,
      "questions": [
-      "jiné: Věta jmenuje víc členů v roli „kdo“ — „brali“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „kdo“ — „brali“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "kvantifikace"
@@ -24299,7 +24299,7 @@
       "role: Nevím, jakou roli hraje „ochrany“ (obl>nmod+Gen), „štěstí“ (obl>conj>obj+Acc) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "role: Nevím, co znamená „za+Acc:arg“ — je to tvar, ne význam. Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
       "přívlastek: Co ten přívlastek v genitivu tvrdí — „10._století letopočet“?",
-      "přívlastek: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „za+Acc:arg“ — „přinášející“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „za+Acc:arg“ — „přinášející“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -24439,7 +24439,7 @@
       "kvantifikace: Nevím, o kom to platí — Dat:arg (NOUN/Plur/Dat/obl:arg). O každém (∀), o některém (∃), nebo o tom konkrétním (·)?",
       "role: Nevím, jakou roli hraje „chtěly“ (obl>acl+?), „vdát“ (obl>acl>xcomp+?), „pečovaly“ (csubj+?), „kočku“ (csubj>obl+Acc), „Freyno“ (csubj>obl>appos>amod+?), „zvíře“ (csubj>obl>appos+Acc) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "role: Nevím, co znamená „Dat:arg“, „v+Loc“, „v+Loc/Geo“ — je to tvar, ne význam (to za lomítkem je SIGNÁL Z ROZBORU — `Geo` = `NameType=Geo` na filleru — takže „v Praze“ a „v roce 1935“ jsou DVA RŮZNÉ TVARY a odpověď na jeden neplatí pro druhý). Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
-      "jiné: Věta jmenuje víc členů v roli „v+Loc/Geo“ — „Dánsku“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „v+Loc/Geo“ — „Dánsku“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -24703,7 +24703,7 @@
       "role: Nevím, jakou roli hraje „lichokopytníky“ (amod>obl+Acc) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "konstrukce: Co ta věta tvrdí o vztahu těch dvou?",
       "konstrukce: Tvar je cop:NOUN=NOUN — before, contains, disjoint, member, same_as, subset, within?",
-      "jiné: Věta jmenuje víc členů v roli „kdo“ — „kůň“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „kdo“ — „kůň“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -24889,7 +24889,7 @@
       "kvantifikace: Nevím, o kom to platí — pro+Acc (NOUN/Sing/Acc/nmod). O každém (∀), o některém (∃), nebo o tom konkrétním (·)?",
       "role: Nevím, jakou roli hraje „hříbě“ (nmod>acl>obj+Acc), „neměla“ (nmod>acl+?) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "role: Nevím, co znamená „pro+Acc“ — je to tvar, ne význam. Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
-      "jiné: Věta jmenuje víc členů v roli „co“ — „kobyla“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „co“ — „kobyla“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -25084,7 +25084,7 @@
      "open_questions": 2,
      "questions": [
       "role: Nevím, jakou roli hraje „synonymní“ (advcl>amod+Acc), „výrazy“ (advcl+Acc) — do čtení se nedostalo. Jak se ta role jmenuje?",
-      "jiné: Věta jmenuje víc členů v roli „co“ — „hřebici“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „co“ — „hřebici“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role"
@@ -25174,7 +25174,7 @@
       "role: Nevím, jakou roli hraje „valach“ (conj>orphan+Nom), „jirčák“ (conj>orphan+Nom), „klepec“ (conj>orphan>conj+Nom) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "konstrukce: Co ta věta tvrdí o vztahu těch dvou?",
       "konstrukce: Tvar je cop:NOUN=NOUN — before, contains, disjoint, member, same_as, subset, within?",
-      "jiné: Věta jmenuje víc členů v roli „co“ — „vykastrovaný“, „vykleštěný“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „co“ — „vykastrovaný“, „vykleštěný“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -25454,7 +25454,7 @@
      "open_questions": 2,
      "questions": [
       "přívlastek: Co ten přívlastek v genitivu tvrdí — „vzhled tělo“?",
-      "přívlastek: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „kdo“ — „stavba“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „kdo“ — „stavba“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "kvantifikace"
@@ -25536,7 +25536,7 @@
       "kvantifikace: Nevím, o kom to platí — o+Acc:arg (NOUN/Sing/Acc/obl:arg). O každém (∀), o některém (∃), nebo o tom konkrétním (·)?",
       "role: Nevím, jakou roli hraje „pastevnímu“ (obl>nmod>amod+Dat), „životu“ (obl>nmod+Dat), „stepích“ (obl>nmod>nmod+Loc) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "role: Nevím, co znamená „o+Acc:arg“ — je to tvar, ne význam. Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
-      "jiné: Věta jmenuje víc členů v roli „kdo“ — „umožňuje“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „kdo“ — „umožňuje“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -26121,7 +26121,7 @@
      "questions": [
       "role: Nevím, jakou roli hraje „optimální“ (obj>conj>amod+Acc), „pohybového“ (obj>conj>nmod>amod+Gen), „aparátu“ (obj>conj>nmod+Gen) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "přívlastek: Co ten přívlastek v genitivu tvrdí — „správný_postoj končetina“, „rovnoměrný_rozložení hmotnost“?",
-      "přívlastek: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „co“ — „funkci“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „co“ — „funkci“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role"
@@ -26255,7 +26255,7 @@
      "open_questions": 2,
      "questions": [
       "kvantifikace: Nevím, o kom to platí — co (ADJ/Plur/Nom/root). O každém (∀), o některém (∃), nebo o tom konkrétním (·)?",
-      "jiné: Věta jmenuje víc členů v roli „co“ — „široké“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „co“ — „široké“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "kvantifikace"
@@ -26290,7 +26290,7 @@
       "kvantifikace: Nevím, o kom to platí — co (NOUN/Sing/Nom/nsubj:pass), podle+Gen (NOUN/Sing/Gen/obl). O každém (∀), o některém (∃), nebo o tom konkrétním (·)?",
       "role: Nevím, jakou roli hraje „klabonosá“ (nsubj>amod>conj+Nom), „starokladrubských“ (nsubj>amod>obl>amod+Gen), „koní“ (nsubj>amod>obl+Gen), „konkávní“ (nsubj>conj>dep+Nom), „miskovitým“ (nsubj>conj>dep>conj>amod+Ins), „profilem“ (nsubj>conj>dep>conj+Ins), „arabských“ (nsubj>conj>dep>conj>conj>amod+Gen), „koní“ (nsubj>conj>dep>conj>conj+Gen), „volská“ (nsubj>amod>conj+Nom), „babská“ (nsubj>amod>conj>conj+Nom), „klínovitá“ (nsubj>amod>conj+Nom) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "role: Nevím, co znamená „podle+Gen“ — je to tvar, ne význam. Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
-      "jiné: Věta jmenuje víc členů v roli „co“ — „štičí“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „co“ — „štičí“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -26445,7 +26445,7 @@
      "open_questions": 2,
      "questions": [
       "kvantifikace: Nevím, o kom to platí — co (ADJ/Plur/Nom/root). O každém (∀), o některém (∃), nebo o tom konkrétním (·)?",
-      "jiné: Věta jmenuje víc členů v roli „co“ — „jasné“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „co“ — „jasné“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "kvantifikace"
@@ -26649,7 +26649,7 @@
      "questions": [
       "role: Nevím, jakou roli hraje „pohyb“ (obj>nmod+Acc), „koně“ (obj>nmod>nmod+Gen) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "přívlastek: Co ten přívlastek v genitivu tvrdí — „délka krk“?",
-      "přívlastek: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „kdo“ — „tvar“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „kdo“ — „tvar“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role"
@@ -26698,7 +26698,7 @@
       "role: Nevím, jakou roli hraje „f“ (nsubj>appos>appos>nmod+?), „nejstarších“ (conj>nmod>amod+Gen), „domestikovaných“ (conj>nmod>amod+Gen), „zvířat“ (conj>nmod+Gen) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "konstrukce: Co ta věta tvrdí o vztahu těch dvou?",
       "konstrukce: Tvar je cop:NOUN=NOUN — before, contains, disjoint, member, same_as, subset, within?",
-      "jiné: Věta jmenuje víc členů v roli „co“ — „jedno“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „co“ — „jedno“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -27169,7 +27169,7 @@
       "role: Nevím, jakou roli hraje „dingo“ (nsubj>nmod+Nom) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "konstrukce: Co ta věta tvrdí o vztahu těch dvou?",
       "konstrukce: Tvar je cop:NOUN=NOUN — before, contains, disjoint, member, same_as, subset, within?",
-      "jiné: Věta jmenuje víc členů v roli „co“ — „možné“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „co“ — „možné“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -27429,7 +27429,7 @@
       "kvantifikace: Nevím, o kom to platí — co (NOUN/Sing/Nom/nsubj:pass), kdo (NOUN/Sing/Ins/obl:arg). O každém (∀), o některém (∃), nebo o tom konkrétním (·)?",
       "role: Nevím, jakou roli hraje „ochranu“ (obl>nmod+Acc), „zvířat“ (obl>nmod>nmod+Gen), „týrání“ (obl>nmod>nmod+Dat), „veterinárním“ (obl>conj>amod+Ins), „mysliveckým“ (obl>conj>amod>conj+Ins) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "přívlastek: Co ten přívlastek v genitivu tvrdí — „chov pes“?",
-      "přívlastek: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „kdo“ — „zákonem“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „kdo“ — „zákonem“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -27758,7 +27758,7 @@
       "kvantifikace: Nevím, o kom to platí — co (NOUN/Sing/Nom/nsubj:pass), kdo (NOUN/Sing/Ins/obl:arg). O každém (∀), o některém (∃), nebo o tom konkrétním (·)?",
       "role: Nevím, jakou roli hraje „psů“ (nsubj>conj>nmod+Gen), „zastupuje“ (obl>acl+?), „Česko“ (obl>acl>obj+Acc), „Mezinárodní“ (obl>acl>obl>amod+Loc), „kynologické“ (obl>acl>obl>amod+Loc), „federaci“ (obl>acl>obl+Loc), „FCI“ (obl>acl>obl>nmod+?), „Českomoravskou“ (conj>orphan>amod+Ins), „kynologickou“ (conj>orphan>amod+Ins), „federací“ (conj>orphan+Ins), „spadá“ (conj>orphan>acl+?), „UCI“ (conj>orphan>acl>obl>appos+?) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "role: Nevím, co znamená „v+Loc/Geo“ — je to tvar, ne význam (to za lomítkem je SIGNÁL Z ROZBORU — `Geo` = `NameType=Geo` na filleru — takže „v Praze“ a „v roce 1935“ jsou DVA RŮZNÉ TVARY a odpověď na jeden neplatí pro druhý). Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
-      "jiné: Věta jmenuje víc členů v roli „co“ — „chov“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „co“ — „chov“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -28005,7 +28005,7 @@
       "kvantifikace: Nevím, o kom to platí — Dat:arg (NOUN/Plur/Dat/obl:arg), co (ADJ/Plur/Nom/root). O každém (∀), o některém (∃), nebo o tom konkrétním (·)?",
       "role: Nevím, jakou roli hraje „psa“ (nsubj>amod>obl+Acc), „povrchové“ (nsubj>nmod>amod+Gen), „struktury“ (nsubj>nmod+Gen), „mozku“ (nsubj>nmod>nmod+Gen) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "role: Nevím, co znamená „Dat:arg“ — je to tvar, ne význam. Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
-      "jiné: Věta jmenuje víc členů v roli „Dat:arg“ — „kojotům“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „Dat:arg“ — „kojotům“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -28209,7 +28209,7 @@
      "questions": [
       "role: Nevím, jakou roli hraje „Východní“ (obl>amod+Loc), „výzkumy“ (obl>acl>nsubj+Nom), „odhalily“ (obl>acl+?), „velkou“ (obl>acl>obj>amod+Acc), „různorodost“ (obl>acl>obj+Acc), „genů“ (obl>acl>obj>nmod+Gen), „místních“ (obl>acl>obj>nmod>nmod>amod+Gen), „psů“ (obl>acl>obj>nmod>nmod+Gen), „což“ (obl>acl>conj>nsubj+Nom), „ukazovalo“ (obl>acl>conj+?), „centrum“ (obl>acl>conj>obl+Acc), „domestikace“ (obl>acl>conj>obl>nmod+Gen) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "role: Nevím, co znamená „advmod“, „advmod:emph“, „v+Loc/Geo“ — je to tvar, ne význam (to za lomítkem je SIGNÁL Z ROZBORU — `Geo` = `NameType=Geo` na filleru — takže „v Praze“ a „v roce 1935“ jsou DVA RŮZNÉ TVARY a odpověď na jeden neplatí pro druhý). Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
-      "jiné: Věta jmenuje víc členů v roli „kdo“ — „nepotvrdila“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „kdo“ — „nepotvrdila“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -28959,7 +28959,7 @@
      "open_questions": 2,
      "questions": [
       "role: Nevím, jakou roli hraje „současných“ (obj>acl>obl>amod+Gen), „psů“ (obj>acl>obl+Gen), „nevyskytuje“ (obj>acl+?), „velké“ (obj>conj>amod+Acc), „haplotypu“ (obj>conj>nmod+Gen), „C“ (obj>conj>nmod>nmod+?), „současných“ (obj>conj>nmod>acl>obl>amod+Gen), „evropských“ (obj>conj>nmod>acl>obl>amod+Gen), „psů“ (obj>conj>nmod>acl>obl+Gen), „přítomen“ (obj>conj>nmod>acl+?), „5“ (obj>conj>nmod>acl>advmod>nummod+?), „populace“ (obj>conj>nmod>acl>advmod>nmod+Gen) — do čtení se nedostalo. Jak se ta role jmenuje?",
-      "jiné: Věta jmenuje víc členů v roli „co“ — „zastoupení“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „co“ — „zastoupení“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role"
@@ -29973,7 +29973,7 @@
      "open_questions": 2,
      "questions": [
       "role: Nevím, jakou roli hraje „Českým“ (obl>amod+Ins) — do čtení se nedostalo. Jak se ta role jmenuje?",
-      "jiné: Věta jmenuje víc členů v roli „čím“ — „Prahou“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „čím“ — „Prahou“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role"
@@ -30260,7 +30260,7 @@
      "status": "",
      "open_questions": 1,
      "questions": [
-      "jiné: Věta jmenuje víc členů v roli „kde“ — „Beskydech“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „kde“ — „Beskydech“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "rozbor"
@@ -30293,7 +30293,7 @@
      "status": "",
      "open_questions": 1,
      "questions": [
-      "jiné: Věta jmenuje víc členů v roli „co“ — „zajíce“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „co“ — „zajíce“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "rozbor"
@@ -30886,7 +30886,7 @@
       "role: Nevím, jakou roli hraje „zkratka“ (nsubj>parataxis+Nom), „Rossumovi“ (nsubj>parataxis>nmod>amod+Nom), „univerzální“ (nsubj>parataxis>nmod>amod+Nom), „roboti“ (nsubj>parataxis>nmod+Nom), „třech“ (nmod>conj>nummod+Loc), „Čapka“ (nmod>nmod>flat+Gen) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "role: Nevím, co znamená „o+Loc“ — je to tvar, ne význam. Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
       "přívlastek: Co ten přívlastek v genitivu tvrdí — „komedie_rok_1920 Karel“?",
-      "přívlastek: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „o+Loc“ — „dějstvích“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „o+Loc“ — „dějstvích“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -30985,7 +30985,7 @@
      "questions": [
       "kvantifikace: Nevím, o kom to platí — kdo (DET/det). O každém (∀), o některém (∃), nebo o tom konkrétním (·)?",
       "role: Nevím, jakou roli hraje „techniku“ (obl>nmod+Acc), „budoucnost“ (obl>conj>nmod+Acc), „lidstva“ (obl>conj>nmod>nmod+Gen), „destrukce“ (obl>conj>parataxis+Nom), „první“ (obl>conj>parataxis>nmod>amod+Gen), „světové“ (obl>conj>parataxis>nmod>amod+Gen), „války“ (obl>conj>parataxis>nmod+Gen) — do čtení se nedostalo. Jak se ta role jmenuje?",
-      "jiné: Věta jmenuje víc členů v roli „kdo“ — „obavami“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „kdo“ — „obavami“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -31511,7 +31511,7 @@
      "questions": [
       "kvantifikace: Nevím, o kom to platí — na+Acc (NOUN/Sing/Acc/obl). O každém (∀), o některém (∃), nebo o tom konkrétním (·)?",
       "role: Nevím, co znamená „na+Acc“ — je to tvar, ne význam. Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
-      "jiné: Věta jmenuje víc členů v roli „kdo“ — „pozabíjeli“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „kdo“ — „pozabíjeli“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -31603,7 +31603,7 @@
      "questions": [
       "role: Nevím, jakou roli hraje „původní“ (ccomp>obj>amod+Acc), „Rossumův“ (ccomp>obj>amod+Acc), „výrobní“ (ccomp>obj>amod+Acc), „postup“ (ccomp>obj+Acc) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "role: Nevím, co znamená „ccomp“, „po+Loc:arg“ — je to tvar, ne význam. Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
-      "jiné: Věta jmenuje víc členů v roli „kdo“ — „spálila“. Platí to o každém zvlášť, nebo o nich dohromady?",
+      "koordinace: Věta jmenuje víc členů v roli „kdo“ — „spálila“. Platí to o každém zvlášť, nebo o nich dohromady?",
       "koreference: Z rozboru to poznat nejde: „Petr a Jana přišli.“ a „Petr a Jana zvedli klavír.“ mají touž stavbu. Věta nemá podmět — „Chtěli“ ho nevyslovil. V předchozí větě nikdo takový nestojí — a nabídnout uzel odjinud by znamenalo tvrdit, že text odkazuje tam, kde nic není. Řekni to prosím jménem. Na koho odkazuje „něm“?"
      ],
      "layers": [
@@ -31664,7 +31664,7 @@
       "role: Nevím, jakou roli hraje „Jedné“ (obl>nummod+Gen), „Helena“ (nsubj>conj>flat+Nom) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "role: Nevím, co znamená „Gen“ — je to tvar, ne význam. Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
       "konstrukce: Ta věta tvrdí ještě tohle: „robot Primus“. Zapíšu to jako členství vedle věty, ale sám to neudělám a NEPTÁM SE JEN „ano/ne“ — potřebuju vědět, ČÍM ten titul je. POVOLÁNÍ („básník Josef Hora“) zapíšu; ÚŘAD DRŽENÝ V ČASE („prezident Masaryk“) nezapíšu, protože bezčasé členství by platilo šíř, než co ta věta říká — Masaryk byl prezident v nějakém období, ne pořád. Z rozboru se to rozeznat nedá: „prezident“ a „básník“ v něm vypadají stejně. Povolání, nebo úřad?",
-      "jiné: Věta jmenuje víc členů v roli „kdo“ — „robotka“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „kdo“ — „robotka“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -31707,7 +31707,7 @@
      "questions": [
       "role: Nevím, jakou roli hraje „jednoho“ (advcl>xcomp>obj+Acc), „nich“ (advcl>xcomp>obj>nmod+Gen), „pitvat“ (advcl>xcomp+?), „výzkum“ (advcl>xcomp>obl+Acc), „druhý“ (dep+Nom) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "role: Nevím, co znamená „advcl:když“, „místo+Gen“ — je to tvar, ne význam. Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
-      "jiné: Věta jmenuje víc členů v roli „kdo“ — „nechovali“. Platí to o každém zvlášť, nebo o nich dohromady?",
+      "koordinace: Věta jmenuje víc členů v roli „kdo“ — „nechovali“. Platí to o každém zvlášť, nebo o nich dohromady?",
       "koreference: Z rozboru to poznat nejde: „Petr a Jana přišli.“ a „Petr a Jana zvedli klavír.“ mají touž stavbu. Věta nemá podmět — „nabízel“ ho nevyslovil. V předchozí větě nikdo takový nestojí — a nabídnout uzel odjinud by znamenalo tvrdit, že text odkazuje tam, kde nic není. Řekni to prosím jménem. Na koho odkazuje „něj“?"
      ],
      "layers": [
@@ -32440,7 +32440,7 @@
       "konstrukce: Co ta věta tvrdí o vztahu těch dvou?",
       "konstrukce: Tvar je cop:porucha+Gen — before, contains, disjoint, member, same_as, subset, within?",
       "přívlastek: Co ten přívlastek v genitivu tvrdí — „povrch planeta“?",
-      "přívlastek: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „kdo“ — „vulkán“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „kdo“ — „vulkán“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -32568,7 +32568,7 @@
       "role: Nevím, jakou roli hraje „intenzitě“ (obl>conj>conj+Loc), „sopečné“ (obl>conj>nmod>amod+Gen), „erupce“ (obl>conj>nmod+Gen) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "role: Nevím, co znamená „na+Loc:arg“ — je to tvar, ne význam. Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
       "přívlastek: Co ten přívlastek v genitivu tvrdí — „složení magma“?",
-      "přívlastek: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „na+Loc:arg“ — „charakteru“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „na+Loc:arg“ — „charakteru“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -32677,7 +32677,7 @@
       "role: Nevím, jakou roli hraje „výjimek“ (nsubj>parataxis>obl>nmod+Gen), „nesouvisí“ (nsubj>parataxis+?), „sopečnou“ (nsubj>parataxis>obl>amod+Ins), „činností“ (nsubj>parataxis>obl+Ins), „vyskytující“ (nsubj>conj>amod+Nom), „měsících“ (nsubj>conj>amod>obl+Loc), „sluneční“ (nsubj>conj>amod>obl>nmod>amod+Gen), „soustavy“ (nsubj>conj>amod>obl>nmod+Gen), „Europa“ (nsubj>conj>appos+Nom), „Enceladus“ (nsubj>conj>appos>conj+Nom), „Triton“ (nsubj>conj>appos>conj+Nom), „Titan“ (nsubj>conj>appos>conj+Nom) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "konstrukce: Co ta věta tvrdí o vztahu těch dvou?",
       "konstrukce: Tvar je cop:NOUN=NOUN — before, contains, disjoint, member, same_as, subset, within?",
-      "jiné: Věta jmenuje víc členů v roli „kdo“ — „kryovulkány“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „kdo“ — „kryovulkány“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -32966,7 +32966,7 @@
      "status": "",
      "open_questions": 1,
      "questions": [
-      "jiné: Věta jmenuje víc členů v roli „kdo“ — „umožňují“, „používají“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „kdo“ — „umožňují“, „používají“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "rozbor"
@@ -33301,7 +33301,7 @@
      "open_questions": 2,
      "questions": [
       "přívlastek: Co ten přívlastek v genitivu tvrdí — „vznik sopka“?",
-      "přívlastek: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „kdo“ — „rozšíření“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „kdo“ — „rozšíření“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "kvantifikace"
@@ -33508,7 +33508,7 @@
      "questions": [
       "kvantifikace: Nevím, o kom to platí — co (NOUN/Sing/Nom/nsubj:pass), kdo (NOUN/Plur/Ins/obl:arg), od+Gen (DET/det). O každém (∀), o některém (∃), nebo o tom konkrétním (·)?",
       "role: Nevím, co znamená „od+Gen“ — je to tvar, ne význam. Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
-      "jiné: Věta jmenuje víc členů v roli „kdo“ — „kometami“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „kdo“ — „kometami“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -34577,7 +34577,7 @@
       "kvantifikace: Nevím, o kom to platí — na+Acc (NOUN/Sing/Acc/obl), čím (NOUN/Plur/Ins/obl). O každém (∀), o některém (∃), nebo o tom konkrétním (·)?",
       "role: Nevím, jakou roli hraje „viskózní“ (advcl>amod+Nom), „čedičová“ (advcl>amod+Nom), „láva“ (advcl+Nom), „středooceánských“ (conj>orphan>amod+Loc), „hřbetech“ (conj>orphan+Loc) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "role: Nevím, co znamená „na+Acc“ — je to tvar, ne význam. Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
-      "jiné: Věta jmenuje víc členů v roli „kdo“ — „zpravidla“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „kdo“ — „zpravidla“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -34864,7 +34864,7 @@
      "questions": [
       "role: Nevím, jakou roli hraje „původního“ (nsubj>nmod>amod+Gen), „Blízký“ (obj>conj>amod+Acc) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "přívlastek: Co ten přívlastek v genitivu tvrdí — „oblast rozšíření“?",
-      "přívlastek: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „co“ — „východ“, „Evropu“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „co“ — „východ“, „Evropu“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role"
@@ -34905,7 +34905,7 @@
      "questions": [
       "role: Nevím, jakou roli hraje „Nový“ (obl>conj>amod+Acc), „Zéland“ (obl>conj+Acc), „Dálný“ (conj>amod+Acc), „východ“ (conj+Acc), „20.“ (conj>orphan>nummod+?), „století“ (conj>orphan+Gen) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "role: Nevím, co znamená „v+Loc“ — je to tvar, ne význam. Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
-      "jiné: Věta jmenuje víc členů v roli „kam“ — „Austrálie“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „kam“ — „Austrálie“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role"
@@ -34957,7 +34957,7 @@
      "open_questions": 2,
      "questions": [
       "kvantifikace: Nevím, o kom to platí — co (DET/det). O každém (∀), o některém (∃), nebo o tom konkrétním (·)?",
-      "jiné: Věta jmenuje víc členů v roli „kdo“ — „umístěny“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „kdo“ — „umístěny“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "kvantifikace"
@@ -35860,7 +35860,7 @@
       "kvantifikace: Nevím, o kom to platí — kdo (DET/det). O každém (∀), o některém (∃), nebo o tom konkrétním (·)?",
       "role: Nevím, jakou roli hraje „vnější“ (nsubj>amod>conj+Nom), „mohutné“ (nsubj>conj>amod+Nom) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "role: Nevím, co znamená „Dat:arg“ — je to tvar, ne význam. Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
-      "jiné: Věta jmenuje víc členů v roli „kdo“ — „svalstvo“. Platí to o každém zvlášť, nebo o nich dohromady?",
+      "koordinace: Věta jmenuje víc členů v roli „kdo“ — „svalstvo“. Platí to o každém zvlášť, nebo o nich dohromady?",
       "koreference: Z rozboru to poznat nejde: „Petr a Jana přišli.“ a „Petr a Jana zvedli klavír.“ mají touž stavbu. Na koho odkazuje „Tomu“?"
      ],
      "layers": [
@@ -36092,7 +36092,7 @@
       "kvantifikace: Nevím, o kom to platí — k+Dat (NOUN/Sing/Dat/obl). O každém (∀), o některém (∃), nebo o tom konkrétním (·)?",
       "role: Nevím, jakou roli hraje „řetízků“ (obl>conj>nmod+Gen), „ostatními“ (obl>conj>nmod>nmod>amod+Ins), „včelami“ (obl>conj>nmod>nmod+Ins), „voskových“ (obl>conj>nmod>amod+Gen), „šupinek“ (obl>conj>nmod+Gen), „ukládání“ (obl>conj>conj+Dat), „pylu“ (obl>conj>nmod+Gen), „tykadel“ (obl>conj>nmod+Gen) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "role: Nevím, co znamená „k+Dat“ — je to tvar, ne význam. Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
-      "jiné: Věta jmenuje víc členů v roli „k+Dat“ — „vytváření“, „předávání“, „sběru“, „čištění“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „k+Dat“ — „vytváření“, „předávání“, „sběru“, „čištění“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -36393,7 +36393,7 @@
      "questions": [
       "kvantifikace: Nevím, o kom to platí — co (NOUN/Plur/Nom/root). O každém (∀), o některém (∃), nebo o tom konkrétním (·)?",
       "role: Nevím, jakou roli hraje „pokožky“ (conj>nmod+Gen), „nichž“ (conj>acl>obl+Gen), „stadiu“ (conj>acl>obl+Loc), „kukly“ (conj>acl>obl>nmod+Gen), „pronikly“ (conj>acl+?), „vzdušnice“ (conj>acl>nsubj+Nom), „nervy“ (conj>acl>nsubj>conj+Nom), „nichž“ (conj>acl>conj>obl+Gen), „proudí“ (conj>acl>conj+?), „křídel“ (conj>acl>conj>obl+Gen), „hemolymfa“ (conj>acl>conj>nsubj+Nom) — do čtení se nedostalo. Jak se ta role jmenuje?",
-      "jiné: Věta jmenuje víc členů v roli „co“ — „vychlípeniny“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „co“ — „vychlípeniny“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -36630,7 +36630,7 @@
       "role: Nevím, jakou roli hraje „náklad“ (advcl>obj+Acc), „pylu“ (advcl>obj>nmod+Gen), „nektaru“ (advcl>obj>nmod>conj+Gen) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "role: Nevím, co znamená „advcl:pokud“ — je to tvar, ne význam. Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
       "přívlastek: Co ten přívlastek v genitivu tvrdí — „úhel mávání“?",
-      "přívlastek: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „co“ — „frekvenci“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „co“ — „frekvenci“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -36776,7 +36776,7 @@
       "kvantifikace: Nevím, o kom to platí — co (NOUN/Plur/Nom/nsubj:pass). O každém (∀), o některém (∃), nebo o tom konkrétním (·)?",
       "role: Nevím, jakou roli hraje „křídel“ (obl>conj>nmod+Gen), „normální“ (obl>conj>nmod>amod+Gen), „polohy“ (obl>conj>nmod+Gen), „klidu“ (obl>conj>nmod>nmod+Loc), „předního“ (obl>nmod>amod+Gen), „zadní“ (obl>dep+Acc) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "přívlastek: Co ten přívlastek v genitivu tvrdí — „skončení let“, „posunutí křídlo“?",
-      "přívlastek: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „kudy“ — „návratu“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „kudy“ — „návratu“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -37329,7 +37329,7 @@
       "kvantifikace: Nevím, o kom to platí — co (NOUN/Sing/Nom/nsubj:pass). O každém (∀), o některém (∃), nebo o tom konkrétním (·)?",
       "role: Nevím, jakou roli hraje „způsob“ (advcl+Nom), „zlepšit“ (advcl>acl+?), „kvalitu“ (advcl>acl>obj+Acc), „myšlení“ (advcl>acl>obj>nmod+Gen), „rozvinout“ (advcl>acl>conj+?), „příznivé“ (advcl>acl>conj>obj>amod+Acc), „charakterové“ (advcl>acl>conj>obj>amod+Acc), „vlastnosti“ (advcl>acl>conj>obj+Acc) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "přívlastek: Co ten přívlastek v genitivu tvrdí — „výuka šach“?",
-      "přívlastek: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „co“ — „hraní“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „co“ — „hraní“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -37420,7 +37420,7 @@
       "kvantifikace: Nevím, o kom to platí — co (NOUN/Plur/Nom/nsubj:pass), od+Gen (NOUN/Plur/Gen/obl). O každém (∀), o některém (∃), nebo o tom konkrétním (·)?",
       "role: Nevím, co znamená „od+Gen“ — je to tvar, ne význam. Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
       "přívlastek: Co ten přívlastek v genitivu tvrdí — „počátek hra“?",
-      "přívlastek: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „co“ — „turnaje“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „co“ — „turnaje“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -37629,7 +37629,7 @@
       "role: Nevím, co znamená „Gen“, „k+Dat/rok“ — je to tvar, ne význam (to za lomítkem je SIGNÁL Z ROZBORU — `rok` = letopočet jako dítě filleru — takže „v Praze“ a „v roce 1935“ jsou DVA RŮZNÉ TVARY a odpověď na jeden neplatí pro druhý). Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
       "konstrukce: Co ta věta tvrdí o vztahu těch dvou?",
       "konstrukce: Tvar je cop:mistr+Gen — before, contains, disjoint, member, same_as, subset, within?",
-      "jiné: Věta jmenuje víc členů v roli „co“ — „šachistou“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „co“ — „šachistou“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -37785,7 +37785,7 @@
      "questions": [
       "role: Nevím, jakou roli hraje „roli“ (nsubj>nmod+Loc), „sekundantů“ (nsubj>nmod>nmod+Gen), „rozsáhlé“ (nsubj>conj>amod+Nom), „partií“ (nsubj>conj>nmod+Gen), „pozic“ (nsubj>conj>nmod>conj+Gen), „šachistů“ (obj>nmod>nmod+Gen) — do čtení se nedostalo. Jak se ta role jmenuje?",
       "přívlastek: Co ten přívlastek v genitivu tvrdí — „zlepšení příprava“?",
-      "přívlastek: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „kdo“ — „databáze“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „kdo“ — „databáze“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role"
@@ -37913,7 +37913,7 @@
      "open_questions": 2,
      "questions": [
       "role: Nevím, jakou roli hraje „dvě“ (nsubj>conj>nummod+Nom), „kamenů“ (nsubj>conj>nmod+Gen), „světlých“ (nsubj>conj>nmod>appos+Gen), „nazývaných“ (nsubj>conj>nmod>appos>amod+Gen), „bílé“ (nsubj>conj>nmod>appos>amod>dep+Nom), „tmavých“ (nsubj>conj>nmod>appos>conj+Gen), „černé“ (nsubj>conj>nmod>appos>conj>dep+Nom) — do čtení se nedostalo. Jak se ta role jmenuje?",
-      "jiné: Věta jmenuje víc členů v roli „kdo“ — „sady“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Věta jmenuje víc členů v roli „kdo“ — „sady“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role"
@@ -38793,7 +38793,7 @@
       "kvantifikace: Nevím, o kom to platí — o+Acc (NOUN/Sing/Acc/obl). O každém (∀), o některém (∃), nebo o tom konkrétním (·)?",
       "role: Nevím, co znamená „o+Acc“ — je to tvar, ne význam. Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
       "přívlastek: Co ten přívlastek v genitivu tvrdí — „libovolný_počet pole“?",
-      "přívlastek: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „kudy“ — „řadách“, „diagonálách“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „kudy“ — „řadách“, „diagonálách“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -38839,7 +38839,7 @@
       "kvantifikace: Nevím, o kom to platí — o+Acc (NOUN/Sing/Acc/obl). O každém (∀), o některém (∃), nebo o tom konkrétním (·)?",
       "role: Nevím, co znamená „o+Acc“ — je to tvar, ne význam. Jak se ta role jmenuje (kde, kdy, kudy, odkud, …)?",
       "přívlastek: Co ten přívlastek v genitivu tvrdí — „libovolný_počet pole“?",
-      "přívlastek: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „kudy“ — „sloupcích“. Platí to o každém zvlášť, nebo o nich dohromady?"
+      "koordinace: Zapíšu to jako vztah vedle věty; řekni, jakou roli v něm ten genitiv hraje (co, kdo, whole, …). Ptám se u každé věty znovu: „chov zvířat“ a „péče majitele“ mají týž tvar a opačný směr. Věta jmenuje víc členů v roli „kudy“ — „sloupcích“. Platí to o každém zvlášť, nebo o nich dohromady?"
      ],
      "layers": [
       "role",
@@ -41477,7 +41477,7 @@
   "CHYBA": 5
  },
  "unmeasured": 3045,
- "core_na_konci": "1009036 2026-08-16 09:25 Rozklad přívlastku ve jmenné frázi — a doložené zúžení B-27 (+3 nesledovaných souborů)",
+ "core_na_konci": "1009036 2026-08-16 09:25 Rozklad přívlastku ve jmenné frázi — a doložené zúžení B-27 (+7 nesledovaných souborů)",
  "determinismus": {
   "shoda": true,
   "beh1": {

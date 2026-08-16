@@ -84,6 +84,44 @@ jako pokles by bylo tvrzení, které nikde neplatí. Srovnatelný je rozklad
 výš a druhá polovina protipříkladu: **žádná** tázaná věta už nemá prázdný
 seznam.
 
+### A jak to dopadlo — předpověď proti měření
+
+Přeměřeno nad `1009036` (`mereni/korpus-2026-08-16.json`), měřicí vrstva
+**zakomitovaná** (`40bfc8c`, W‑69 vyřízené):
+
+```
+                    předpověď (nad 056dc61)   měřeno (nad 1009036)
+součet otevřených              1782                   1917
+```
+
+**Rozdíl +135 nedělá měření, dělá ho jádro mezi těmi dvěma revizemi.**
+Ukáže to rozklad po druzích, ne součet:
+
+```
+druh            předpověď   měřeno    rozdíl
+role                  976      956       −20
+kvantifikace          375      375         0
+přívlastek            244      230       −14
+koordinace              0      167      +167   ← nový tah jádra
+konstrukce            128      130        +2
+koreference            52       52         0
+dvojznačnost            7        7         0
+```
+
+Commit `1009036` („Rozklad přívlastku ve jmenné frázi") přinesl tah
+*„Věta jmenuje víc členů v roli »kdo« — platí to o každém zvlášť, nebo
+o nich dohromady?"*. Měření pro něj nemělo jméno a 122 položek spadlo do
+`jiné`; po doplnění druhu `koordinace` je `jiné` **nula**.
+
+`jiné` proto **není odpadní koš, ale signál**: znamená, že jádro umí
+otázku, kterou měření neumí pojmenovat. Tabulka druhů po každém kole
+jádra zestárne a počet `jiné` je způsob, jak to poznat z běhu — ne až
+z reportu, kde by se to schovalo pod „ostatní".
+
+Stavy se nezměnily (`ZAPSÁNO 31 · PTÁ SE 669 · DVOJZNAČNÉ 7 ·
+NEPŘEČTENO 124 · CHYBA 5`), determinismus drží a protipříklad prochází
+v obou směrech: **0 porušení** na 836 větách.
+
 ---
 
 ## N‑8 · Otázka počítaná jako nula — OPRAVENO, a přibyl šestý stav
@@ -151,8 +189,16 @@ vrátily shodné počty ve stavech i ve všech vrstvách.
 » Babička bydlí v Táboře.            » Josef bydlí v Písku.
 » Klíče od chaty visí v předsíni.    » Marie slaví narozeniny v květnu.
 » Rodina Novákových bydlí v Kolíně.  » Vltava se vlévá do Labe u Mělníka.
+```
 
-  důvod: Nevím, co znamená „v+Loc/Geo“ — je to tvar, ne význam
+**Rodina důvodů je táž, věta ne** — opraveno po Reviewerově kontrole
+(W‑70), protože „u všech týž" bylo tvrzení, ne shrnutí:
+
+```
+3×  v+Loc/Geo      Babička v Táboře · Josef v Písku · Rodina v Kolíně
+1×  u+Gen/Geo      Vltava … u Mělníka
+1×  v+Loc          Marie slaví narozeniny v květnu
+1×  přívlastek     Klíče od chaty — otázka vede na genitiv, ne na v+Loc
 ```
 
 Je to **vědomé zpřísnění, ne regrese**: W‑62 zakázalo zapsat fakt s rolí
