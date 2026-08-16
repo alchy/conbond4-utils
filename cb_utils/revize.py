@@ -63,6 +63,13 @@ def revision(repo: Path) -> str:
     liší, ale spolehlivě rozezná dva různé rozdělané stromy — a to je
     přesně to, co se od identity běhu chce.
 
+    **Rozdělaný a neuklizený není totéž.** První verze brala `git status
+    --porcelain`, takže stačil jeden nesledovaný soubor vedle a běh se
+    označil za nereprodukovatelný, ačkoli sledovaný kód byl přesně na
+    revizi (otisk vycházel `da39a3ee`, což je sha1 prázdného řetězce —
+    poznávací znamení téhle situace). Planý poplach se přestane číst,
+    a to je horší než žádný.
+
     Nikdy nevyhazuje výjimku: záznam měření se nemá neuložit proto, že
     jádro není v gitu. Neznámá revize je vlastní hodnota, ne chyba —
     jen se pod ní nesmí tvrdit reprodukovatelnost.
@@ -70,9 +77,16 @@ def revision(repo: Path) -> str:
     if not (repo / ".git").exists():
         return f"{repo.name}: mimo git — revize neznámá"
     head = _git(repo, "log", "-1", "--format=%h %ad %s", "--date=format:%Y-%m-%d %H:%M")
-    status = _git(repo, "status", "--porcelain")
-    if not status or status.startswith("<git"):
-        return head
     diff = _git(repo, "diff", "HEAD")
+    if diff.startswith("<git"):
+        return f"{head} +stav neznámý"
+    if not diff:
+        # SLEDOVANÉ soubory se od revize neliší. Neuklizené soubory
+        # navíc (poznámky, výstupy) běh neovlivní, takže z běhu dělat
+        # „nereprodukovatelný" by bylo planý poplach — a planý poplach
+        # se přestane číst. Zmíní se, ale revize zůstává revizí.
+        untracked = _git(repo, "ls-files", "--others", "--exclude-standard")
+        kolik = len([r for r in untracked.splitlines() if r.strip()])
+        return f"{head}" + (f" (+{kolik} nesledovaných souborů)" if kolik else "")
     otisk = hashlib.sha1(diff.encode("utf-8", "replace")).hexdigest()[:8]
     return f"{head} +dirty:{otisk}"
