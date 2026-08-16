@@ -23,6 +23,54 @@ Reprodukovat ho podle `d6782cb` nejde a záznam to přiznává příznakem
 
 ---
 
+## N‑12 · Měřit nad rozdělaným jádrem už nejde — hlídá to nástroj
+
+Reviewer vrátil FAIL na věc, kterou moje vlastní pole ohlásilo: záznam
+`korpus-2026-08-16-1050.json` vznikl nad **rozdělaným** jádrem, které se
+navíc během běhu změnilo (`+dirty:bb2a6d72` → `21360955`). Detektor
+zafungoval, ale ta pravda zní: **ten běh se nedá zopakovat.** Čísla
+nepatří commitu `27c6a62`, patří něčemu mezi dvěma rozdělanými stavy,
+které v žádném commitu nejsou — a mapa z něj se kreslila taky.
+
+Je to moje vlastní pravidlo z W‑69, jen obrácené na jádro: *měř nad
+commitnutým stromem.* Dokud to hlídala kázeň, procházelo to.
+
+**Teď to hlídá nástroj:**
+
+```
+python cb-korpus.py … --nad-cistym 120
+```
+
+Počká, až bude jádro na commitu bez rozdělané práce, a **když se strom
+během měření změní, záznam se neuloží**. Neuložit je záměr: uložit
+a připsat varování už jsme zkusili — soubor pak leží v repu, kreslí se
+z něj mapa a varování si nikdo nepřečte.
+
+A pro případ, že záznam přece jen vznikne jinudy, má mapa **červený pruh
+přímo v hlavičce**: *„Tenhle běh nejde zopakovat"* + důvod (rozdělané
+jádro / změna během běhu / rozdělaná měřicí vrstva). Mapa se ukazuje
+a cituje; kdo si ji otevře za měsíc, musí z ní poznat, čeho je obrazem.
+
+### Přeměřeno, tentokrát nad čistým
+
+Záznam `mereni/korpus-2026-08-16-1052.json`, **obě strany bez `+dirty`**:
+
+| | |
+|---|---|
+| korpus | `github.com/alchy/conBond2@418d7f7` |
+| jádro | `6be9329` — a `core_na_konci` **totéž** |
+| měřicí vrstva | `7c27dcd` |
+| stavy | `PTÁ SE 666 · NEPŘEČTENO 124 · ZAPSÁNO 34 · DVOJZNAČNÉ 7 · CHYBA 5` = 836 |
+| determinismus | dva běhy shodné ve stavech i vrstvách |
+| N‑10 | 0 porušení (ptá se 679 → prázdný seznam 0; mlčí 157 → neprázdný 0) |
+| otevřených věcí | 1904 · role 943 · kvantifikace 375 · přívlastek 230 · koordinace 167 · konstrukce 130 · koreference 52 · dvojznačnost 7 |
+
+Stavy vyšly stejně jako v neplatném běhu, takže se závěry nemění — ale
+to se **dalo zjistit jedině přeměřením**, ne úvahou, že se asi nic
+nezměnilo.
+
+---
+
 ## N‑11 · HTML baseline — a co v ní není náhodou
 
 Krok 5 (`cb-html.py`, `mereni/baseline.html`). Mapa, ne log: u každé
