@@ -23,6 +23,66 @@ Reprodukovat ho podle `d6782cb` nejde a záznam to přiznává příznakem
 
 ---
 
+## N‑15 · Dokumentový běh: předpověď vyvrácena, a vyšlo z toho něco jiného
+
+Reviewer zapsal předpověď a dal ji k vyvrácení: *„při běhu jednou relací
+na dokument má klesnout počet odkazů s prázdnou nabídkou."* Změřeno
+oběma režimy **nad touž revizí jádra** (`3b16fd1`), týmž korpusem, týmiž
+větami — jediné, co se liší, je sezení:
+
+| | věta na sezení | dokument na sezení |
+|---|---|---|
+| ZAPSÁNO celkem | **74** (20 úplně + 54 s otázkami) | **12** (8 + 4) |
+| PTÁ SE | 622 | 684 |
+| odkazů | 367 | 367 |
+| **prázdná nabídka** | **308** | **308** |
+| odkaz s nabídkou | 59 | 59 |
+
+**Tři čísla, která byla zadaná:**
+
+1. **kolik vět se zapíše** — 12 místo 74, tedy o **62 méně**;
+2. **o kolik klesnou prázdné nabídky** — o **nula**. Předpověď je tímhle
+   **vyvrácena**, ne potvrzena;
+3. **kolikrát se odkaz naváže špatně** — **nulakrát**, protože se
+   nenaváže vůbec. Odkazy s nabídkou jsou v obou režimech tytéž a všech
+   59 je vztažné zájmeno uvnitř jedné věty („které", „němž"), ne odkaz
+   přes hranici vět. Obava ze dvou různých Petrů se tedy zatím naplnit
+   nemá jak — a to je zjištění, ne uklidnění.
+
+### Proč to dopadlo obráceně
+
+Ne proto, že by kontext škodil. **Otevřené otázky jsou v sezení
+společné.** Jedna nepojmenovaná role kdekoli v dokumentu zůstane viset
+a blokuje zápis i větám, které s ní nemají nic společného:
+
+```
+» Antarktida leží na jižním pólu.
+  věta na sezení    : ZAPSÁNO · úplně   ležet(kde:jižní_pól, kdo:·Antarktida)
+  dokument na sezení: PTÁ SE
+     „Nevím, jakou roli hraje »Antarktida« (nsubj>nmod+Nom) — do čtení
+      se nedostalo."
+
+  rozbor té věty:  Antarktida/PROPN/nsubj → leží/VERB/root → …
+                   žádné `nsubj>nmod` v ní není
+```
+
+Z 62 vět, které o zápis přišly, jich **60 dostalo otázku na slovo, které
+v té větě vůbec nestojí** — „Božena", „1880", „1951" u věty *„V roce
+1888 Jirásek přesídlil do Prahy."* Zbylé dvě mají otázku na vlastní
+slovo, ale s cestou v rozboru, která v nich neexistuje.
+
+**Co z toho plyne pro jádro** (rozhodnutí není moje): dokud čekající role
+patří sezení, a ne tahu, je dokumentový kontext **nedostupný** — ne proto,
+že by chyběl, ale protože první nedopovězená otázka zavře zápis pro celý
+zbytek dokumentu. Prázdné nabídky se proto nemají o co opřít: nic nového
+se nezapíše, takže není co nabízet.
+
+**Co z toho plyne pro měření:** režim sezení je součást identity běhu
+(`rezim_sezeni` v záznamu) a `cb-diff.py` hlásí, když se dva porovnávané
+běhy liší režimem. Bez toho by tenhle rozdíl vypadal jako změna jádra.
+
+---
+
 ## N‑14 · Na čem visí těch 626 tázaných vět
 
 Největší skupina, a do teď se z ní poznala jen velikost. Rozpad je
