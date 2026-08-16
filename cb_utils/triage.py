@@ -163,6 +163,21 @@ def _first(lines: tuple[str, ...], *prefixes: str) -> str:
 #: jmenuje?", což je půlka věty, ne otevřená věc.
 _HRANICE = re.compile(r"\?(?=\s+[A-ZÁ-ŽČĎĚŇŘŠŤŮÚÝŽ]|\s*$)")
 
+#: **Jádro se ptá i bez otazníku.** „Věta nemá podmět — … Řekni to
+#: prosím jménem." je výzva, ne vysvětlení: dá se na ni odpovědět, a to
+#: je celý rozdíl proti „Tuhle větu přečíst neumím: …". Dokud se
+#: rozhodovalo jen podle otazníku, měly dvě věty z 836 prázdný seznam,
+#: přestože po nich jádro něco chtělo — zbytek N‑10 o dvě věty dál.
+_VYZVY: tuple[str, ...] = (
+    "Řekni to prosím jménem",
+    "Věta nemá podmět",
+)
+
+
+def je_otazka(text: str) -> bool:
+    """Ptá se jádro tímhle textem? Otazník, nebo známá výzva."""
+    return "?" in text or any(v in text for v in _VYZVY)
+
 #: Druh otevřené věci podle toho, ČÍM ZAČÍNÁ otázka jádra. Slouží ke
 #: strojovému porovnání dvou běhů — text otázky nese jména konkrétních
 #: slov, takže sám o sobě se mezi větami neporovná.
@@ -178,8 +193,15 @@ _DRUHY: tuple[tuple[str, str], ...] = (
     ("prohlásit za UZAVŘENOU", "uzavření"),
     ("Věta nemá podmět", "podmět"),
     ("Řekni to prosím jménem", "zakotvení"),
+    # Pořadí rozhoduje: v jednom tahu jádra může stát koordinační
+    # výklad („Z rozboru to poznat nejde…") a teprve za ním skutečná
+    # otázka na vztažnou větu. Ptá se to poslední, tak se podle toho
+    # položka jmenuje.
+    ("A koho se týká ta vztažná věta", "vztažná_věta"),
     ("Věta jmenuje víc členů v roli", "koordinace"),
+    ("Z rozboru to poznat nejde", "koordinace"),
     ("Co ten přívlastek v genitivu tvrdí", "přívlastek"),
+    ("Co ten přívlastek tvrdí", "přívlastek"),
     ("Zapíšu to jako vztah vedle věty", "přívlastek"),
     ("Ta věta tvrdí ještě tohle", "konstrukce"),
     ("Tvar je ", "konstrukce"),
@@ -246,6 +268,12 @@ def open_items(lines: tuple[str, ...], question: str) -> tuple[str, ...]:
     for hranice in _HRANICE.finditer(zdroj):
         kusy.append(zdroj[zacatek : hranice.end()])
         zacatek = hranice.end()
+    # Zbytek za posledním otazníkem je položka jen tehdy, když je to
+    # VÝZVA („Řekni to prosím jménem."). Vysvětlení bez otazníku
+    # položka není — na „Tuhle větu přečíst neumím" se odpovědět nedá.
+    zbytek = zdroj[zacatek:].strip()
+    if zbytek and any(v in zbytek for v in _VYZVY):
+        kusy.append(zbytek)
     for kus in kusy:
         text = kus.strip()
         if not text:

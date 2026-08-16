@@ -201,33 +201,72 @@ def tabulka(results: list[Result], titulek: str) -> None:
                 print(f"  {'':18} {'':13} {how_many:5}  · {kind}")
 
 
-def tabulka_castecnych(results: list[Result]) -> None:
-    """Co chybí částečným zápisům — **podle druhu, ne počtem**.
+#: Značka jádra pro **ztracený člen** — člen věty, který se do čtení
+#: vůbec nedostal. Podle měření z kola #8 je to hranice zápisu: otevřená
+#: otázka zápis neblokuje, ztracený člen ano (zapsaných se ztrátou 0,
+#: tázaných 499).
+ZTRATA = "do čtení se nedostalo"
 
-    Číslo „44 částečných" neřekne, jestli je to jedna rodina, nebo
-    čtyřicet čtyři různých. Bez tohohle rozpadu se z fasety dá poznat
-    jen KOLIK, a řídit se dá jedině podle CO.
+
+def _druhy(result: Result) -> set[str]:
+    return {q.split(":", 1)[0] for q in result.questions}
+
+
+def _rozpad(results: list[Result], odsazeni: str = "  ") -> None:
+    """Podle druhu · na větu · **kolik visí jen na jedné věci**.
+
+    To poslední číslo je to podstatné: říká, co je jedna oprava a co
+    rodina. Bez něj se z „44 částečných" ani z „636 tázaných" nepozná,
+    jestli je to jedna věc, nebo tolik různých, kolik je vět.
     """
-    castecne = [
-        r for r in results
-        if r.verdict is Verdict.WRITTEN and r.questions
-    ]
-    if not castecne:
-        return
     druhy: Counter[str] = Counter(
-        q.split(":", 1)[0] for r in castecne for q in r.questions
+        q.split(":", 1)[0] for r in results for q in r.questions
     )
     kombinace: Counter[str] = Counter(
-        " + ".join(sorted({q.split(":", 1)[0] for q in r.questions}))
-        for r in castecne
+        " + ".join(sorted(_druhy(r))) or "(jádro nic neřeklo)" for r in results
     )
-    print(f"\nCO CHYBÍ ČÁSTEČNÝM ZÁPISŮM   (vět {len(castecne)})")
-    print("  podle druhu (věta jich může mít víc):")
+    sam: Counter[str] = Counter(
+        next(iter(_druhy(r))) for r in results if len(_druhy(r)) == 1
+    )
+    print(f"{odsazeni}podle druhu (věta jich může mít víc):")
     for druh, kolik in druhy.most_common():
-        print(f"    {kolik:5}  {druh}")
-    print("  na větu:")
-    for kombo, kolik in kombinace.most_common():
-        print(f"    {kolik:5}  {kombo}")
+        print(f"{odsazeni}  {kolik:5}  {druh}")
+    print(f"{odsazeni}jen na jedné věci: {sum(sam.values())} z {len(results)}"
+          f"  —  " + " · ".join(f"{k} {v}" for k, v in sam.most_common()))
+    print(f"{odsazeni}na větu:")
+    for kombo, kolik in kombinace.most_common(8):
+        print(f"{odsazeni}  {kolik:5}  {kombo}")
+    if len(kombinace) > 8:
+        print(f"{odsazeni}  … a {len(kombinace) - 8} dalších kombinací")
+
+
+def tabulka_otevrenych(results: list[Result]) -> None:
+    """Na čem visí věty, které se nezapsaly celé.
+
+    Dvě skupiny zvlášť, protože jsou od zápisu **různě daleko**:
+    částečný zápis už v bázi je a chybí mu doplnění; `PTÁ SE` v bázi
+    není. A uvnitř `PTÁ SE` ještě jednou zvlášť podle ztraceného členu —
+    věta bez ztráty je od zápisu nejblíž, protože tu hranici drží
+    ztracený člen, ne otevřená otázka.
+    """
+    castecne = [r for r in results if r.verdict is Verdict.WRITTEN and r.questions]
+    if castecne:
+        print(f"\nCO CHYBÍ ČÁSTEČNÝM ZÁPISŮM   (vět {len(castecne)})")
+        _rozpad(castecne)
+
+    ptaji = [r for r in results if r.verdict is Verdict.ASKS]
+    if not ptaji:
+        return
+    se_ztratou = [r for r in ptaji if any(ZTRATA in q for q in r.questions)]
+    bez_ztraty = [r for r in ptaji if r not in se_ztratou]
+    print(f"\nNA ČEM VISÍ „PTÁ SE“   (vět {len(ptaji)})")
+    _rozpad(ptaji)
+    print(f"\n  ze ztraceným členem   {len(se_ztratou):5}"
+          f"   — hranice zápisu, tu drží ztráta, ne otázka")
+    print(f"  jen otevřená otázka   {len(bez_ztraty):5}"
+          f"   — OD ZÁPISU NEJBLÍŽ")
+    if bez_ztraty:
+        _rozpad(bez_ztraty, odsazeni="    ")
 
 
 def tabulka_tvaru(zaznamy: list[dict]) -> None:
@@ -451,7 +490,7 @@ def main() -> None:
                   f" na dokument — strop je stejný pro všechny dokumenty"
                   f" a bere se od začátku, nevybírá podle obtížnosti")
         tabulka(everything, "ROZKLAD PŘES VŠECHNY DOKUMENTY")
-        tabulka_castecnych(everything)
+        tabulka_otevrenych(everything)
         tabulka_tvaru(vsechny_zaznamy)
         print("=" * 72)
 

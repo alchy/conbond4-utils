@@ -33,7 +33,7 @@ sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="repla
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parent))
 
-from cb_utils.triage import open_items  # noqa: E402
+from cb_utils.triage import je_otazka, open_items  # noqa: E402
 
 from cb_utils.zaznamy import vyber  # noqa: E402
 
@@ -43,8 +43,16 @@ def vety_zaznamu(zaznam: dict) -> list[dict]:
 
 
 def pta_se(veta: dict) -> bool:
-    """Ptá se jádro? Rozhoduje **otazník v otázce jádra**, ne stav."""
-    return "?" in (veta.get("question") or "")
+    """Ptá se jádro? Rozhoduje **to, co jádro řeklo**, ne stav věty.
+
+    Otazník **nebo výzva**. Dokud tu stálo jen `"?" in question`,
+    prošly zkouškou dvě věty, po kterých jádro něco chtělo
+    (*„Věta nemá podmět … Řekni to prosím jménem."*) a seznam u nich
+    byl prázdný — zkouška je nepočítala mezi tázané, takže je ani
+    nehlídala. Kontrola, která si sama zúží definici, přestane chytat
+    přesně tu vadu, kvůli které vznikla.
+    """
+    return je_otazka(veta.get("question") or "")
 
 
 def kontrola(vety: list[dict], klic: str) -> int:

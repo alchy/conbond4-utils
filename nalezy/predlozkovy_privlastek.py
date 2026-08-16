@@ -7,9 +7,11 @@ Zadání kola znělo POSTAVIT. Zrcadlo je šest řádků v `genitive_attributes`
 (přijmout `nmod`, které má dítě s `deprel=case`, a do dvojice psát
 předložku); postavené bylo a tahle sonda měří, co dělá a co bere.
 
-**Necommitovalo se, protože přepisuje čtyři akceptační testy I‑16 na
-větě „Petr má alergii na penicilin." — a ty o TÉŽE STRUKTUŘE tvrdí pravý
-opak: že `obj>nmod+Acc` je role věty, na kterou se systém ptá.**
+**POSTAVENO V KOLE #147.** Reviewer rozhodl ve prospěch W‑39 a akceptační
+sada I‑16 se překotvila z „Petr má alergii na penicilin." na `advcl+Nom`
+(„působil jako vychovatel"), kde ztracený člen účastníkem děje SKUTEČNĚ
+je. Tahle sonda tedy měří UŽ POSTAVENÝ stav; čísla dole jsou předpověď
+z #146, kterou běh #147 potvrdil přesně.
 
 Kořen je vidět z výpisu níž: rozbor „alergii na penicilin" a „pobytu
 v Berlíně" NEROZLIŠÍ. Obojí je `nmod` s `case` pod jménem, které je ve
