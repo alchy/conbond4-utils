@@ -40,7 +40,7 @@ sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="repla
 from cb_utils import tvar as tvar_mod
 from cb_utils.triage import OracleError  # noqa: E402  (nastavuje cestu k jádru)
 from cb_utils.korpus import Korpus, klic, odstavce, porid
-from cb_utils.revize import revision, tracked
+from cb_utils.revize import identity
 from cb_utils.triage import CONBOND4, Result, Verdict, sentences_of, triage
 
 HERE = Path(__file__).resolve().parent
@@ -308,18 +308,25 @@ def main() -> None:
     ze_zlate, nespojene = _dokumenty_zlate_sady(korpus)
     jmena = tuple(args.dokument) or ze_zlate
 
+    # Hodnota, která se porovnává, a poznámka pro člověka jsou DVĚ POLE.
+    # Dokud se počet nesledovaných souborů držel uvnitř revize, hlásil
+    # `core_na_konci` změnu jádra kvůli jednomu `__pycache__` (W‑78).
+    jadro, jadro_pozn = identity(CONBOND4)
+    mereni, mereni_pozn = identity(HERE)
     record: dict = {
         "korpus": korpus.provenance,
         "oracle": zdroj.provenance,
-        "core": revision(CONBOND4),
-        "utils": revision(HERE),
+        "core": jadro,
+        "core_poznamka": jadro_pozn,
+        "utils": mereni,
+        "utils_poznamka": mereni_pozn,
         "strop_vet_na_dokument": args.vet,
         "documents": [],
     }
     print(f"korpus:   {record['korpus']}")
     print(f"orákulum: {record['oracle']}")
-    print(f"jádro:    {record['core']}")
-    print(f"měření:   {record['utils']}")
+    print(f"jádro:    {record['core']} {jadro_pozn}".rstrip())
+    print(f"měření:   {record['utils']} {mereni_pozn}".rstrip())
     print(f"dokumentů: {len(jmena)}   strop {args.vet or 'bez stropu'}")
     if nespojene and not args.dokument:
         # Nespojený odkaz se NEZAMLČUJE. Zlatá sada odkazuje na text,
@@ -372,8 +379,8 @@ def main() -> None:
     # pracovní strom se během běhu mění; záznam, který stampuje jen
     # začátek, by pak tvrdil identitu, kterou půlka měření neměla.
     # Poznat to jde jen tak, že se stav zjistí dvakrát.
-    record["core_na_konci"] = revision(CONBOND4)
-    if tracked(record["core_na_konci"]) != tracked(record["core"]):
+    record["core_na_konci"], record["core_poznamka_na_konci"] = identity(CONBOND4)
+    if record["core_na_konci"] != record["core"]:
         print("\n  POZOR: jádro se BĚHEM měření změnilo —"
               " záznam není nad jedním stavem kódu")
         print(f"    začátek: {record['core']}")

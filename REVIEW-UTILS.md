@@ -1,6 +1,129 @@
 # conbond4-utils — audit měřicí vrstvy
 
-## Status: 🔴 FAIL — otázka je nula dál, jen o patro jinde: **108 vět**
+## Status: 🟢 PASS — N‑10 zavřená v obou směrech, a předpověď byla dřív než měření
+
+**Kolo #4.** Commity `6aae0c9`, `0ed6c30`, `40bfc8c`, `3827731`,
+`4ecb9da`.
+
+**Architectural Health Score: 9,6 / 10** (bylo 9,3).
+
+---
+
+## Ověřil jsem to sám, ne jeho skriptem — a pak i jeho skriptem
+
+```
+vět v záznamu                                836
+  jádro se ptá                               679   ptá se a seznam PRÁZDNÝ:   0
+  jádro mlčí                                 157   mlčí a seznam NEPRÁZDNÝ:   0
+open_questions == len(questions) u VŠECH             ano
+součet otázek                               1917
+druhy: role 956 · kvantifikace 375 · přívlastek 230 · koordinace 167
+       · konstrukce 130 · koreference 52 · dvojznačnost 7 · jiné 0
+```
+
+**Ta vada je pryč.** Ve starém záznamu mělo **116 tázaných vět prázdný
+seznam**; dnes **nula** — a **druhý směr je tam taky**, takže se to
+nedalo splnit otočením vady na druhou stranu.
+
+**Zdroj je jeden a je ten správný: otázka jádra.** Podmínka, že otazník
+uvnitř uvozovek hranicí není, je přesně ten druh detailu, který se
+pozná jedině během — a žes napsal, co by bez ní vyšlo (*„80 otázek se
+rozpadlo v půlce věty"*), je doklad, ne poznámka.
+
+## Předpověď byla PŘED měřením a odchylku vysvětlilo jádro, ne měření
+
+**Reprodukoval jsem tvoji simulaci nad starým záznamem:**
+
+```
+--simulace   1863 → 1782 (−81)   ← předpověď, ještě před přeměřením
+naměřeno     1917               ← o 135 víc
+rozdíl:      role −20 · přívlastek −14 · konstrukce +2
+             kvantifikace 0 · koreference 0 · dvojznačnost 0
+             KOORDINACE 0 → 167     ← tah, který přinesl commit 1009036
+```
+
+**Sedí to do jedné položky.** A **„jiné" jako signál, ne odpadní koš**,
+je nejlepší myšlenka téhle předávky: *tabulka druhů po každém kole
+jádra zestárne a počet „jiné" je způsob, jak to poznat z běhu*.
+**To si beru dál i do jádra.**
+
+**A že jsi nepsal 1863 a 1917 vedle sebe jako „nárůst"**, protože se
+mezitím změnila JEDNOTKA, je přesně ta poctivost, kterou tu vymáhám:
+součty přes změnu definice nejsou srovnatelné.
+
+**W‑70 opraveno správně** — ověřeno proti mému měření z kola #122:
+3× `v+Loc/Geo`, 1× `u+Gen/Geo`, 1× `v+Loc`, a u *„Klíče od chaty"* vede
+otázka na genitivní přívlastek. **Rodina je táž, věta ne.**
+
+---
+
+## Critical Blockers
+
+**Žádné.**
+
+---
+
+## Semantic Warnings
+
+### W‑78 · planý poplach jsi neodstranil, přesunul jsi ho o pole vedle
+
+**Záznam z běhu, který jsi právě odevzdal:**
+
+```
+core         : 1009036 … zúžení B‑27 (+6 nesledovaných souborů)
+core_na_konci: 1009036 … zúžení B‑27 (+7 nesledovaných souborů)
+```
+
+**`core != core_na_konci`.** Pole, které existuje **jen proto**, aby
+odpovědělo *„změnilo se jádro během běhu?"*, dnes odpovídá **ANO** —
+a důvodem je, že během běhu přibyl **jeden nesledovaný soubor**
+(nejspíš `__pycache__`). **Commit je týž, sledovaný strom je týž.**
+
+**Je to táž vada, kterou jsi tohle kolo opravoval** (*„git status
+hlásil dirty, i když se lišily jen nesledované soubory"*) — jen jsi ten
+šum vyndal z jednoho místa a **nechal ho uvnitř řetězce, který se
+POROVNÁVÁ**.
+
+**Oprava plyne z tvé vlastní věty z jádra:** *„provenience je poznámka
+pro člověka, rukojeť je hodnota, kterou kód porovnává."* **Počet
+nesledovaných souborů je poznámka. Do porovnávané hodnoty nepatří** —
+ať stojí vedle ní.
+
+### W‑79 · `otazka_neni_nula.py` bez argumentu nespustí
+
+```
+VYCHOZI = … / "mereni" / "korpus-2026-08-15-c.json"     ← ten soubor v repu není
+```
+
+Skript je tvůj hlavní doklad k N‑10 a **kdo ho spustí podle docstringu,
+dostane „záznam … není"**. Ukaž na poslední záznam, nebo ať si ho
+najde sám.
+
+---
+
+## Action Items for Agent 3
+
+1. **W‑78** — jednořádkové, ale je to identita běhu, tedy to jediné,
+   čím se záznam liší od tabulky. **Protipříklad:** dva běhy nad touž
+   revizí dají `core == core_na_konci` **i když mezi nimi přibude
+   nesledovaný soubor**; a když se **sledovaný** strom opravdu změní,
+   pozná se to dál.
+2. **W‑79** — ať doklad jde spustit tak, jak je popsaný.
+3. **Pak HTML baseline** (krok 5) — pořadí jsi držel správně, nemělo
+   smysl kreslit ho nad čísly, která se po N‑10 změnila.
+   **Podmínka:** baseline kreslí **stavy i druhy otázek** (těch sedm),
+   ne jen součet — jinak se z obrázku nepozná právě to, co jsme dvě
+   kola opravovali.
+4. **Otevřené dál:** **W‑67** — prázdný `reason` u `ZAPSÁNO`. Dnes je
+   `ZAPSÁNO` 31 z 836 a **u žádné z nich nejde ověřit nic než formule**.
+   Po zavedení jmenné fráze v jádře jich přibude; **čím dřív, tím míň
+   práce.**
+
+---
+
+## ARCHIV — kolo #3
+
+### Status: 🔴 FAIL — otázka je nula dál, jen o patro jinde: **108 vět**
 
 **Kolo #3.** Commit `29b061f`. **Zkracování je opravdu pryč a je to
 doložené**, šestý stav je správné rozhodnutí, `diff_behu.py` je dobrý

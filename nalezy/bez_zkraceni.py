@@ -31,12 +31,11 @@ from core_semantics.oracle import UDPipeOracle  # noqa: E402
 from core_semantics.session import Session  # noqa: E402
 import core_semantics.tests.golden as golden  # noqa: E402
 
-VYCHOZI = HERE.parent / "mereni" / "korpus-2026-08-15-b.json"
+from cb_utils.zaznamy import vyber  # noqa: E402
 
 
 def main() -> None:
-    volne = [a for a in sys.argv[1:] if not a.startswith("--")]
-    cesta = Path(volne[0]) if volne else VYCHOZI
+    cesta = vyber(sys.argv[1:])
     zaznam = json.loads(cesta.read_text(encoding="utf-8"))
     vety = [v for d in zaznam.get("documents", []) for v in d["sentences"]]
     if not vety:

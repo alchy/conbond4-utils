@@ -40,7 +40,9 @@ from pathlib import Path
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
 
 HERE = Path(__file__).resolve().parent
-VYCHOZI = HERE.parent / "mereni" / "korpus-2026-08-15.json"
+sys.path.insert(0, str(HERE.parent))
+
+from cb_utils.zaznamy import vyber  # noqa: E402
 
 #: „◐ přečteno, neúplné  pohřbený(kde:vyšehradský_hřbitov, kdo:on)"
 _ROLE = re.compile(r"(\w+):([^,()]+)")
@@ -111,9 +113,18 @@ def zarad(veta: dict) -> tuple[str, str]:
     # jméno v roli `co` na kořeni je správně. conBond2 na tomhle doplatil
     # obráceně — koreference se na jmenný přísudek vůbec nepodívala.
     spona = any(d == "cop" for _, _, d in tokeny)
+    # TRPNÝ ROD: „Ledové šelfy byly spatřeny" — konatel chybí a `co`
+    # (patiens) nese `nsubj:pass`. Bez téhle výjimky vypadala každá
+    # trpná věta jako špatné čtení a kandidátů skočilo z 12 na 78,
+    # ačkoli se změnilo jádro, ne správnost těch čtení.
+    trpny = any(d in ("nsubj:pass", "aux:pass", "expl:pass") for _, _, d in tokeny)
     for jmeno, ocekavane in _OCEKAVANE.items():
         if spona:
             ocekavane = (*ocekavane, "root")
+        if trpny and jmeno == "co":
+            ocekavane = (*ocekavane, "nsubj:pass")
+        if trpny and jmeno == "kdo":
+            ocekavane = (*ocekavane, "obl:agent")
         hodnota = role.get(jmeno)
         if not hodnota:
             continue
@@ -136,10 +147,7 @@ def zarad(veta: dict) -> tuple[str, str]:
 
 
 def main() -> None:
-    volne = [a for a in sys.argv[1:] if not a.startswith("--")]
-    cesta = Path(volne[0]) if volne else VYCHOZI
-    if not cesta.exists():
-        raise SystemExit(f"záznam {cesta} není — pusť napřed cb-korpus.py --json")
+    cesta = vyber(sys.argv[1:])
     zaznam = json.loads(cesta.read_text(encoding="utf-8"))
     print(f"záznam:   {cesta.name}")
     print(f"korpus:   {zaznam.get('korpus', '?')}")

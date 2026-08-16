@@ -60,6 +60,30 @@ def tracked(revize: str) -> str:
     return revize.split(" (+", 1)[0]
 
 
+def note(revize: str) -> str:
+    """Ta poznámka samotná — `(+3 nesledovaných souborů)`, nebo prázdno."""
+    zbytek = revize[len(tracked(revize)) :].strip()
+    return zbytek
+
+
+def identity(repo: Path) -> tuple[str, str]:
+    """(porovnávaná hodnota, poznámka pro člověka).
+
+    Rozdělené schválně, a je to poučení z W‑78: **poznámka nesmí ležet
+    uvnitř hodnoty, kterou kód porovnává.** Když se počet nesledovaných
+    souborů držel v témž řetězci jako revize, pole `core_na_konci`, které
+    existuje jen proto, aby odpovědělo „změnilo se jádro během běhu?",
+    odpovědělo ANO kvůli jednomu `__pycache__` navíc. Šum se tím
+    neodstranil, jen přesunul o pole vedle.
+
+    Je to táž zásada jako v jádře: provenience je poznámka pro člověka,
+    **rukojeť je hodnota, kterou kód porovnává** — a smíchat je znamená
+    porovnávat poznámky.
+    """
+    cele = revision(repo)
+    return tracked(cele), note(cele)
+
+
 def revision(repo: Path) -> str:
     """`<sha> <datum> <předmět>`, s `+dirty:<otisk>`, když strom není čistý.
 

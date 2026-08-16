@@ -35,7 +35,7 @@ sys.path.insert(0, str(HERE.parent))
 
 from cb_utils.triage import open_items  # noqa: E402
 
-VYCHOZI = HERE.parent / "mereni" / "korpus-2026-08-15-c.json"
+from cb_utils.zaznamy import vyber  # noqa: E402
 
 
 def vety_zaznamu(zaznam: dict) -> list[dict]:
@@ -94,10 +94,7 @@ def simulace(vety: list[dict]) -> None:
 
 
 def main() -> None:
-    volne = [a for a in sys.argv[1:] if not a.startswith("--")]
-    cesta = Path(volne[0]) if volne else VYCHOZI
-    if not cesta.exists():
-        raise SystemExit(f"záznam {cesta} není")
+    cesta = vyber(sys.argv[1:])
     zaznam = json.loads(cesta.read_text(encoding="utf-8"))
     vety = vety_zaznamu(zaznam)
     print(f"záznam: {cesta.name}")
