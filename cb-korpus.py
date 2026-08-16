@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+﻿#!/usr/bin/env python
 """Historický korpus conBondu2 → KDE PŘESNĚ conBond4 uvázl.
 
     python cb-korpus.py                       # dokumenty zlaté sady
@@ -38,6 +38,7 @@ from pathlib import Path
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
 
 from cb_utils import tvar as tvar_mod
+from cb_utils.atribuce import zapis as zapis_atribuci
 from cb_utils.triage import OracleError  # noqa: E402  (nastavuje cestu k jádru)
 from cb_utils.korpus import Korpus, klic, odstavce, porid
 from cb_utils.revize import identity
@@ -93,6 +94,12 @@ def _zaznam_vety(result: Result, radek: str, tvar: str) -> dict:
         "radek": radek if radek != result.sentence else "",
         "tvar": tvar,
         "verdict": result.verdict.value,
+        # Faseta zvlášť: `ZAPSÁNO · s otázkami` je pořád ZAPSÁNO, ale
+        # holé `ZAPSÁNO 46` by u částečných zápisů tvrdilo víc, než platí.
+        "stav": result.stav,
+        "written_id": result.written_id,
+        "program": list(result.program),
+        "zapis": list(result.zapis),
         "status": result.status,
         "open_questions": result.open_questions,
         # Seznam, ne jen číslo: dva běhy se pak porovnají položkou po
@@ -199,9 +206,16 @@ def tabulka_tvaru(zaznamy: list[dict]) -> None:
     není mezera schopnosti; věta, která se nepřečetla, ano."""
     krizem: Counter[tuple[str, str]] = Counter()
     for z in zaznamy:
-        krizem[(z["tvar"], z["verdict"])] += 1
+        krizem[(z["tvar"], z["stav"])] += 1
     tvary = sorted({t for t, _ in krizem})
-    stavy = [v.value for v in Verdict if any(s == v.value for _, s in krizem)]
+    # I tady stav S FASETOU: kdyby se křížová tabulka počítala z holého
+    # verdiktu, částečné zápisy by v ní splynuly s úplnými — a je to
+    # jedna z mála tabulek, do které se člověk dívá jako první.
+    poradi = [
+        "ZAPSÁNO · úplně", "ZAPSÁNO · s otázkami",
+        *(v.value for v in Verdict if v is not Verdict.WRITTEN),
+    ]
+    stavy = [s for s in poradi if any(x == s for _, x in krizem)]
     print(f"\nTVAR VSTUPU × STAV   (vět {len(zaznamy)})")
     print(f"  {'tvar':14}" + "".join(f"{s:>13}" for s in stavy) + f"{'celkem':>9}")
     for t in tvary:
@@ -385,7 +399,7 @@ def main() -> None:
             everything.extend(results)
             vsechny_zaznamy.extend(zaznamy)
             neizmereno += zbylo
-            counts = Counter(r.verdict.value for r in results)
+            counts = Counter(r.stav for r in results)
             total.update(counts)
             konec = time.perf_counter() - zacatek
             zbytek = f" · NEMĚŘENO {zbylo} řádků" if zbylo else ""
@@ -436,7 +450,7 @@ def main() -> None:
         druhe_vrstvy: Counter[str] = Counter()
         for jmeno in jmena:
             results, _, _ = zmer_dokument(korpus, jmeno, oracle, zdroj, args.vet)
-            druhy.update(r.verdict.value for r in results)
+            druhy.update(r.stav for r in results)
             for r in results:
                 for layer in r.layers:
                     druhe_vrstvy[layer] += 1
@@ -463,6 +477,12 @@ def main() -> None:
             json.dumps(record, ensure_ascii=False, indent=1), encoding="utf-8"
         )
         print(f"\nzáznam: {cil}")
+        # ATRIBUCE SE PŘEPÍŠE HNED TEĎ, ne někdy potom. Záznam nese cizí
+        # text pod CC BY-SA a povinnost uvést zdroj vzniká zápisem, ne
+        # rozhodnutím ji doplnit. Generuje se ze VŠECH záznamů ve složce,
+        # takže nemůže zestárnout tím, že někdo přidá dokument.
+        licence = zapis_atribuci(cil.parent, korpus.provenance)
+        print(f"atribuce: {licence}")
 
 
 if __name__ == "__main__":

@@ -48,13 +48,26 @@ from cb_utils.zaznamy import vyber  # noqa: E402
 #: Pořadí stavů. Není abecední ani podle četnosti — jde od „systém to
 #: umí" k „systém selhal", protože v tomhle pořadí se čte hranice
 #: schopnosti.
-STAVY = ("ZAPSÁNO", "PTÁ SE", "DVOJZNAČNÉ", "NEPŘEČTENO", "ODMÍTNUTO", "CHYBA")
+STAVY = (
+    "ZAPSÁNO · úplně",
+    "ZAPSÁNO · s otázkami",
+    "PTÁ SE",
+    "DVOJZNAČNÉ",
+    "NEPŘEČTENO",
+    "ODMÍTNUTO",
+    "CHYBA",
+)
 
 #: Barva nese VÝZNAM, ne náladu: co systém zvládl, co se ptá, co nezvládl.
 #: Šest stavů má tři barvy — sytost uvnitř skupiny odlišuje stav, ale
 #: skupina zůstane čitelná i pro toho, kdo barvy nerozlišuje, protože
 #: stav je vždycky napsaný slovem.
 BARVY = {
+    "ZAPSÁNO · úplně": "var(--ok)",
+    # Částečný zápis má vlastní barvu i vlastní číslo: je to pořád
+    # zápis, ale s otevřenou otázkou — a holé „ZAPSÁNO 46" by o dvanácti
+    # z nich tvrdilo víc, než platí.
+    "ZAPSÁNO · s otázkami": "var(--ok2)",
     "ZAPSÁNO": "var(--ok)",
     "PTÁ SE": "var(--ask)",
     "DVOJZNAČNÉ": "var(--ask2)",
@@ -115,7 +128,7 @@ def tabulka_krizem(vety: list[dict], klic: str, nadpis: str) -> str:
     není totéž co věta, která se nepřečetla."""
     krizem: Counter[tuple[str, str]] = Counter()
     for veta in vety:
-        krizem[(veta.get(klic) or "—", veta["verdict"])] += 1
+        krizem[(veta.get(klic) or "—", veta["stav"])] += 1
     radky = sorted({r for r, _ in krizem})
     stavy = [s for s in STAVY if any(x == s for _, x in krizem)]
     hlava = "".join(f"<th>{html.escape(s)}</th>" for s in stavy)
@@ -165,12 +178,17 @@ def tabulka_vrstev(vety: list[dict]) -> str:
 
 def postav(zaznam: dict, zdroj: Path) -> str:
     vety = vety_zaznamu(zaznam)
-    stavy: Counter[str] = Counter(v["verdict"] for v in vety)
+    for veta in vety:
+        veta["zarazeni"] = zarad(veta)
+        # Stav s fasetou. Starší záznamy pole `stav` nemají a bere se
+        # verdikt: dopočítávat fasetu zpětně z `open_questions` by
+        # znamenalo tvrdit o starém běhu něco, co v něm nestálo.
+        if not veta.get("stav"):
+            veta["stav"] = veta["verdict"]
+    stavy: Counter[str] = Counter(v["stav"] for v in vety)
     druhy: Counter[str] = Counter(
         q.split(":", 1)[0] for v in vety for q in (v.get("questions") or [])
     )
-    for veta in vety:
-        veta["zarazeni"] = zarad(veta)
 
     # Data pro stránku: co je v tabulkách, je i v seznamu — ať jde
     # z čísla nahoře doklikat na věty, ze kterých vzniklo.
@@ -179,7 +197,7 @@ def postav(zaznam: dict, zdroj: Path) -> str:
             "t": v["text"],
             "r": v.get("radek") or "",
             "d": v["dokument"],
-            "s": v["verdict"],
+            "s": v["stav"],
             "tv": v.get("tvar") or "",
             "z": v["zarazeni"],
             "c": v.get("reading") or "",
@@ -190,6 +208,11 @@ def postav(zaznam: dict, zdroj: Path) -> str:
             "p": v.get("parse") or [],
             "st": v.get("trace") or [],
             "du": v.get("reason") or "",
+            # Co se u zapsané věty doopravdy zapsalo (W‑67): id tvrzení,
+            # program včetně reifikací a celý výstup jádra.
+            "wid": v.get("written_id") or "",
+            "pg": v.get("program") or [],
+            "zp": v.get("zapis") or [],
         }
         for v in vety
     ]
@@ -288,14 +311,14 @@ _SABLONA = """<!doctype html>
   :root {{
     --plane:#f8f8f6; --surface:#fff; --ink:#111; --ink2:#555; --sede:#8a8a85;
     --ring:rgba(0,0,0,.12); --grid:#e6e5df;
-    --ok:#1b9e63; --ask:#3b7dd8; --ask2:#7c5cd6; --no:#c8641c; --no2:#a03b3b;
+    --ok:#1b9e63; --ok2:#6a9e1b; --ask:#3b7dd8; --ask2:#7c5cd6; --no:#c8641c; --no2:#a03b3b;
     --err:#8b1a1a; --druh:#6b7a8f;
   }}
   @media (prefers-color-scheme: dark) {{
     :root:not([data-theme="light"]) {{
       --plane:#0e0e0e; --surface:#171716; --ink:#f2f2f0; --ink2:#c2c2bc;
       --sede:#8a8a85; --ring:rgba(255,255,255,.14); --grid:#2b2b28;
-      --ok:#35b97c; --ask:#5b95e6; --ask2:#9a7cf0; --no:#e0803a; --no2:#c25c5c;
+      --ok:#35b97c; --ok2:#93c34a; --ask:#5b95e6; --ask2:#9a7cf0; --no:#e0803a; --no2:#c25c5c;
       --err:#e05555; --druh:#8ea0b5;
     }}
   }}
@@ -392,7 +415,7 @@ vět — jedna věta má otevřených věcí víc.</p>
 <script type="application/json" id="data">{data}</script>
 <script>
 const VETY = JSON.parse(document.getElementById("data").textContent);
-const BARVA = {{"ZAPSÁNO":"var(--ok)","PTÁ SE":"var(--ask)","DVOJZNAČNÉ":"var(--ask2)",
+const BARVA = {{"ZAPSÁNO":"var(--ok)","ZAPSÁNO · úplně":"var(--ok)","ZAPSÁNO · s otázkami":"var(--ok2)","PTÁ SE":"var(--ask)","DVOJZNAČNÉ":"var(--ask2)",
   "NEPŘEČTENO":"var(--no)","ODMÍTNUTO":"var(--no2)","CHYBA":"var(--err)"}};
 const esc = s => String(s).replace(/[&<>]/g, c => ({{"&":"&amp;","<":"&lt;",">":"&gt;"}}[c]));
 
@@ -416,6 +439,8 @@ function detail(v) {{
   return '<div class="detail">'
     + (v.r && v.r !== v.t ? kus("původní řádek ze zdroje", pre(v.r)) : '')
     + kus("čtení", v.c ? pre(v.c) : '')
+    + (v.wid ? kus("zapsáno jako " + esc(v.wid), pre(v.zp.join("\\n"))) : '')
+    + (v.pg.length ? kus("co přibylo v bázi — " + v.pg.length, seznam(v.pg)) : '')
     + (v.q.length ? kus("otevřené věci — " + v.q.length, seznam(v.q)) : '')
     + (!v.q.length && v.du ? kus("důvod", pre(v.du)) : '')
     + (v.st.length ? kus("stopa kaskády", pre(v.st.join("\\n"))) : '')

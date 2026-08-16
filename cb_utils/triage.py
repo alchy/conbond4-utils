@@ -91,11 +91,51 @@ class Result:
     #: Prázdné u oznamovací: **stav dotazu a stav čtení jsou dvě různé
     #: osy** a slít je do jednoho čísla by znamenalo ztratit obojí.
     status: str = ""
+    #: Co se u ZAPSANÉ věty **doopravdy zapsalo** — W‑67. Do kola #6
+    #: nesla zapsaná věta jen formuli čtení a nešlo ověřit nic dalšího:
+    #: ani pod jakým id to leží, ani co se z toho odvodilo, ani jak se
+    #: zmínky zakotvily. „Zapsáno" bez toho, CO se zapsalo, je jediný
+    #: stav, u kterého report mlčí — a přitom je to ten, kvůli kterému
+    #: se celá vrstva měří.
+    written_id: str = ""
+    #: Věty programu, které tahle promluva do báze přidala, i s
+    #: reifikacemi (`role(...)`, `member(...)`) — tedy včetně toho, co
+    #: jádro odvodilo samo.
+    program: tuple[str, ...] = ()
+    #: Celý výstup jádra u zapsané věty: zakotvení zmínek i řádek zápisu.
+    #: Jen u zapsaných — u 800 tázaných vět by to záznam nafouklo o věci,
+    #: které už nese `trace` a `questions`.
+    zapis: tuple[str, ...] = ()
     #: Rozbor v podobě `tvar/UPOS/deprel`, aby šlo z reportu porovnat
     #: čtení s větou, aniž se rozbor pouští znovu. Tady se pozná
     #: „rozbor vyrobil špatné čtení" od „rozbor rozuměl, jádro to
     #: neumělo použít".
     parse: tuple[str, ...] = ()
+
+    @property
+    def stav(self) -> str:
+        """Stav pro agregace — se **fasetou u zapsané věty**.
+
+        Rozhodnuto **dřív, než přišel první částečný zápis** (jádro ho
+        chystá): „zapsáno, a přesto se ptá" **není sedmý stav**, jsou to
+        **dvě osy**, které se ale nikde nesčítají do jednoho čísla.
+
+        Proč ne nový stav: osa stavů odpovídá na *co se s větou stalo*,
+        a částečný zápis JE zápis — báze se změnila a to je fakt, který
+        ta osa nese. Kolik ještě chybí, je otázka druhé osy, kterou jsme
+        dvě kola čistili (`questions`); pojmenovat ji zpátky do stavu by
+        znamenalo slít je znovu.
+
+        Proč to přesto nestačí nechat na `questions`: holé `ZAPSÁNO 46`,
+        kde je dvanáct vět zapsaných jen zčásti, tvrdí víc, než platí.
+        Proto se `ZAPSÁNO` v **každé** agregaci štěpí na dvě fasety —
+        jeden stav, dvě čísla, nikdy jedno.
+        """
+        if self.verdict is Verdict.WRITTEN and self.open_questions:
+            return "ZAPSÁNO · s otázkami"
+        if self.verdict is Verdict.WRITTEN:
+            return "ZAPSÁNO · úplně"
+        return self.verdict.value
 
     def render(self) -> str:
         gap = f" ({self.open_questions}×?)" if self.open_questions else ""
@@ -275,8 +315,21 @@ def triage(sentence: str, oracle: UDPipeOracle) -> Result:
         "parse": parse_of(sentence, oracle),
     }
     if result.statement_id:
-        return Result(sentence, Verdict.WRITTEN, reading, "",
-                      **{**common, "layers": (), "sole": "", "kind": ""})
+        return Result(
+            sentence, Verdict.WRITTEN, reading, "",
+            **{
+                **common,
+                "layers": (),
+                "sole": "",
+                "kind": "",
+                "written_id": result.statement_id,
+                # Sezení je čerstvé na každou větu, takže `program()` je
+                # přesně to, co přidala TAHLE promluva — ne co se
+                # nasbíralo za běh.
+                "program": tuple(session.program()),
+                "zapis": lines,
+            },
+        )
     if _first(lines, "✗"):
         return Result(sentence, Verdict.REFUSED, reading, d.reason, **common)
     if result.predication is None:
